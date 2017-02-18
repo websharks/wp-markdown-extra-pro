@@ -1,0 +1,24 @@
+project_title                               = WP Markdown Extra Pro
+
+project_owner                               = websharks
+project_slug                                = wp-markdown-extra-pro
+
+project_text_domain                         = wp-markdown-extra
+project_slack_channel                       = wp-markdown-extra
+
+project_namespace                           = WebSharks\\WpSharks\\WpMarkdownExtra\\Pro
+project_sub_namespace                       = WpSharksWpMarkdownExtraPro
+
+project_version                             = %y%m%d.%now
+
+project_php_required_version                = 7.0.4
+project_php_tested_up_to_version            = ${php.version}
+project_php_required_bits                   = 64
+project_php_required_functions              =
+project_php_required_extensions             =
+
+project_wp_required_version                 = 4.7
+project_wp_tested_up_to_version             = 4.8-alpha
+
+project_wp_sharks_core_required_version     = 170211
+project_wp_sharks_core_tested_up_to_version = 170211

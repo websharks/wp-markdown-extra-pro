@@ -1,0 +1,8 @@
+#!/usr/local/bin/bash
+
+if [[ -x /usr/libexec/path_helper ]]; then
+  export PATH=''; export MANPATH='';
+  eval "$(/usr/libexec/path_helper -s)";
+fi; # Reset `PATH` and `MANPATH` on macOS.
+
+uglifyjs ../editor.js --output ../editor.min.js;

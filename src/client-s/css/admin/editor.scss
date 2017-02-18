@@ -1,0 +1,575 @@
+/*
+ * Requires a local copy of the WP Sharks Core.
+ */
+@import '../../../../../wp-sharks-core/src/client-s/css/env';
+
+/*
+ * Brand configuration.
+ */
+$brand-var: 'wp_markdown_extra';
+$brand-slug: 'wp-markdown-extra';
+$brand-cns: '#{$brand-slug}-editor';
+
+/*
+ * Loading styles.
+ */
+#post:not(.#{$brand-cns}-form) {
+  // Hide while initializing.
+
+  #wp-content-editor-tools,
+  #wp-content-editor-container,
+  #post-status-info {
+    visibility:               hidden;
+  }
+
+  #wp-content-wrap {
+    position:                 relative;
+  }
+}
+
+.#{$brand-cns}-loading:not(#x) {
+  left:                       0;
+  top:                        32px;
+  position:                   absolute;
+
+  //
+  width:                      100%;
+  box-sizing:                 border-box;
+
+  //
+  padding:                    10em;
+  margin:                     0 auto;
+
+  //
+  font-size:                  24px;
+  text-align:                 center;
+
+  //
+  border:                     1px solid $mercury-color;
+
+  > svg {
+    display:                  block;
+
+    //
+    width:                    4em;
+    height:                   auto;
+
+    //
+    margin:                   0 auto;
+
+    //
+    animation:                a-#{$brand-cns}-loading 0.5s linear infinite;
+  }
+
+  &::after {
+    content:                  '';
+    display:                  block;
+
+    //
+    width:                    5em;
+    height:                  .25em;
+
+    //
+    margin:                   0 auto;
+
+    //
+    opacity:                  0.1;
+    filter:                   blur(0.075em);
+
+    //
+    border-radius:            50%;
+    animation:                a-#{$brand-cns}-loading-shadow 0.5s linear infinite;
+  }
+
+  @keyframes a-#{$brand-cns}-loading {
+    0% {
+      transform:              translateY(0) scale(1, 1);
+    }
+
+    25% {
+      transform:              translateY(0.25em) scale(1, 1);
+    }
+
+    50% {
+      transform:              translateY(1.5em) scale(1, 1);
+    }
+
+    55% {
+      transform:              translateY(1.5em) scale(1.1, 0.9);
+    }
+
+    75% {
+      transform:              translateY(0.25em) scale(1, 1);
+    }
+
+    100% {
+      transform:              translateY(0) scale(1, 1);
+    }
+  }
+
+  @keyframes a-#{$brand-cns}-loading-shadow {
+    0% {
+      transform:              translateY(1.25em) scale(0.75, 0.75);
+    }
+
+    25% {
+      transform:              translateY(1.25em) scale(0.75, 0.75);
+    }
+
+    50% {
+      transform:              translateY(1.25em) scale(0.95, 0.95);
+    }
+
+    55% {
+      transform:              translateY(1.25em) scale(1.25, 1.25);
+    }
+
+    75% {
+      transform:              translateY(1.25em) scale(0.85, 0.85);
+    }
+
+    100% {
+      transform:              translateY(1.25em) scale(0.75, 0.75);
+    }
+  }
+}
+
+/*
+ * Area styles.
+ */
+.#{$brand-cns}-area:not(#x) {
+  // Utility classes.
+
+  .-position-offscreen {
+    @include position-offscreen;
+  }
+}
+
+/*
+ * Wrapper styles.
+ */
+.#{$brand-cns}-wrapper:not(#x) {
+  display:                    block;
+  float:                      none;
+
+  //
+  top:                        0;
+  left:                       0;
+  position:                   relative;
+
+  //
+  width:                      100%;
+  height:                     auto;
+  box-sizing:                 border-box;
+
+  //
+  margin:                     0;
+  padding:                    0;
+
+  //
+  background:                 none;
+
+  ~ #post-status-info {
+    float:                    none;
+
+    //
+    top:                      0;
+    left:                     0;
+    position:                 relative;
+
+    //
+    width:                    100%;
+    height:                   auto;
+    box-sizing:               border-box;
+
+    //
+    margin:                   0;
+    padding:                  0;
+  }
+}
+
+/*
+ * Toolbar styles.
+ */
+.#{$brand-cns}-toolbar:not(#x) {
+  display:                    block;
+  float:                      none;
+
+  //
+  top:                        0;
+  left:                       0;
+  position:                   relative;
+
+  //
+  width:                      100%;
+  height:                     auto;
+  box-sizing:                 border-box;
+
+  //
+  padding:                    0;
+  margin:                     2em 0 .25em;
+
+  //
+  background:                 none;
+
+  > .wp-media-buttons {
+    display:                  block;
+    float:                    left;
+
+    //
+    top:                      0;
+    left:                     0;
+    position:                 relative;
+
+    //
+    width:                    auto;
+    height:                   auto;
+    box-sizing:               border-box;
+
+    //
+    margin:                   0;
+    padding:                  0;
+  }
+
+  .button,
+  .button:active,
+  .button:focus,
+  .button:hover {
+    display:                  block;
+    float:                    left;
+
+    //
+    top:                      0;
+    left:                     0;
+    position:                 relative;
+
+    //
+    margin:                   0;
+
+    @include transform(none);
+
+    //
+    color:                    $emperor-color;
+
+    > .-icon,
+    > .wp-media-buttons-icon {
+      &::before {
+        color:                $emperor-color;
+      }
+    }
+  }
+
+  > .#{$brand-cns}-toolbar-btns {
+    display:                  block;
+    float:                    right;
+
+    > .button {
+      margin-left:           .25em;
+
+      > .-icon {
+        width:                20px;
+        height:               20px;
+
+        //
+        font-size:            20px;
+        line-height:          26px;
+        vertical-align:       middle;
+      }
+    }
+  }
+}
+
+/*
+ * Container styles.
+ */
+.#{$brand-cns}-container:not(#x) {
+  display:                    flex;
+  align-items:                stretch;
+
+  //
+  top:                        0;
+  left:                       0;
+  position:                   relative;
+
+  // `min|max-height` set via JS.
+  width:                      100%;
+  height:                     auto;
+  box-sizing:                 border-box;
+
+  //
+  margin:                     0;
+  padding:                    0;
+
+  // Baseline font size.
+  font-size:                  14px;
+  line-height:                1.2;
+
+  @at-root .#{$brand-cns}-light-theme:not(#x) {
+    .#{$brand-cns}-container {
+      background:             darken($white-color, 1%);
+    }
+  }
+
+  @at-root .#{$brand-cns}-dark-theme:not(#x) {
+    .#{$brand-cns}-container {
+      background:             lighten($ws-dark-color, 1%);
+    }
+  }
+}
+
+.#{$brand-cns}-textarea:not(#x),
+.#{$brand-cns}-ide:not(#x) {
+  flex:                       1 1 auto;
+
+  //
+  width:                      100%;
+  height:                     auto;
+  min-height:                 calc(100vh - 275px);
+  box-sizing:                 border-box;
+
+  //
+  border:                     0;
+  margin:                     0;
+
+  //
+  font-size:                  inherit;
+  line-height:                inherit;
+
+  //
+  font-style:                 normal;
+  font-weight:                normal;
+  font-family:                $monospace;
+
+  //
+  -webkit-font-smoothing:     antialiased;
+  -moz-osx-font-smoothing:    grayscale;
+}
+
+.#{$brand-cns}-textarea:not(#x) {
+  overflow:                   auto;
+  white-space:                pre-wrap;
+  word-wrap:                  break-word;
+
+  // In case WP core sets `style='height:'`.
+  // It doesn't seem to do this, but let's be safe.
+  height:                     auto !important;
+
+  //
+  padding:                    1em;
+
+  //
+  resize:                     none;
+
+  &::-webkit-scrollbar {
+    width:                   .75rem;
+  }
+
+  &::-webkit-scrollbar-button {
+    display:                  none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height:               5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background:               none;
+  }
+
+  @at-root .#{$brand-cns}-light-theme:not(#x) {
+    .#{$brand-cns}-textarea {
+      color:                  $black-color;
+      background:             $white-color;
+      box-shadow:             inset 0 0 1px 0 transparentize($black-color, 0.75);
+
+      &::-webkit-scrollbar-thumb {
+        border-radius:       .25rem;
+        background:           darken($white-color, 12%);
+        border:               1px solid transparentize($black-color, 0.85);
+
+        &:active,
+        &:hover {
+          background:         darken($white-color, 10%);
+          border-color:       transparentize($black-color, 0.75);
+        }
+      }
+    }
+  }
+
+  @at-root .#{$brand-cns}-dark-theme:not(#x) {
+    .#{$brand-cns}-textarea {
+      color:                  $white-color;
+      background:             $ws-dark-color;
+      box-shadow:             inset 0 0 1px 0 transparentize($black-color, 0.25);
+
+      &::-webkit-scrollbar-thumb {
+        border-radius:       .25rem;
+        background:           lighten($ws-dark-color, 20%);
+        border:               1px solid transparentize($black-color, 0.5);
+
+        &:active,
+        &:hover {
+          background:         lighten($ws-dark-color, 25%);
+          border-color:       transparentize($black-color, 0.25);
+        }
+      }
+    }
+  }
+}
+
+.#{$brand-cns}-ide:not(#x) {
+  // Everything inside is absolute.
+}
+
+/*
+ * Preview styles (iframe).
+ */
+.#{$brand-cns}-preview:not(#x) {
+  display:                    none;
+  flex:                       1 1 auto;
+
+  //
+  border:                     0;
+  margin:                     0;
+  padding:                    0;
+
+  //
+  width:                      100%;
+  height:                     auto;
+  min-height:                 calc(100vh - 275px);
+  box-sizing:                 border-box;
+}
+
+/*
+ * Standard preview mode.
+ */
+@at-root .#{$brand-cns}-preview-mode:not(#x) {
+  .#{$brand-cns}-textarea {
+    @include position-offscreen;
+  }
+
+  .#{$brand-cns}-ide {
+    visibility:               hidden;
+  }
+
+  .#{$brand-cns}-preview {
+    flex:                     none;
+    display:                  block;
+
+    //
+    top:                      0;
+    left:                     0;
+    z-index:                  1;
+    position:                 absolute;
+
+    //
+    height:                   100%;
+  }
+}
+
+/*
+ * Common fullscreen styles.
+ */
+@at-root .#{$brand-cns}-fullscreen-mode:not(#x),
+.#{$brand-cns}-fullscreen-preview-mode:not(#x),
+.#{$brand-cns}-fullscreen-split-preview-mode:not(#x) {
+  .#{$brand-cns}-wrapper {
+    // Underneath media backdrop.
+    z-index:                  159899;
+    position:                 fixed;
+
+    //
+    height:                   100%;
+
+    // i.e., BG behind the toolbar.
+    background:               $seashell-color;
+  }
+
+  .#{$brand-cns}-toolbar {
+    margin:                   0;
+    padding:                 .5em;
+  }
+
+  .#{$brand-cns}-container {
+    height:                   100%;
+  }
+
+  .#{$brand-cns}-textarea,
+  .#{$brand-cns}-ide,
+  .#{$brand-cns}-preview {
+    min-height:               auto;
+  }
+}
+
+/*
+ * Fullscreen mode styles.
+ */
+@at-root .#{$brand-cns}-fullscreen-mode:not(#x) {
+  @include large-screen-only {
+    .#{$brand-cns}-toolbar {
+      width:                  60%;
+      margin-left:            20%;
+      margin-right:           20%;
+    }
+
+    .#{$brand-cns}-container {
+      font-size:              16px;
+    }
+
+    .#{$brand-cns}-textarea,
+    .#{$brand-cns}-ide {
+      flex:                   1 1 60%;
+      margin-left:            20%;
+      margin-right:           20%;
+    }
+  }
+}
+
+/*
+ * Fullscreen preview mode styles.
+ */
+@at-root .#{$brand-cns}-fullscreen-preview-mode:not(#x) {
+  .#{$brand-cns}-textarea {
+    @include position-offscreen;
+  }
+
+  .#{$brand-cns}-ide {
+    display:                  none;
+  }
+
+  .#{$brand-cns}-preview {
+    display:                  block;
+  }
+
+  @include large-screen-only {
+    .#{$brand-cns}-toolbar {
+      width:                  60%;
+      margin-left:            20%;
+      margin-right:           20%;
+    }
+
+    .#{$brand-cns}-preview {
+      flex:                   1 1 60%;
+      margin-left:            20%;
+      margin-right:           20%;
+    }
+  }
+}
+
+/*
+ * Fullscreen split preview styles.
+ */
+@at-root .#{$brand-cns}-fullscreen-split-preview-mode:not(#x) {
+  .#{$brand-cns}-textarea,
+  .#{$brand-cns}-ide,
+  .#{$brand-cns}-preview {
+    flex:                     1 1 50%;
+    display:                  block;
+  }
+
+  &.#{$brand-cns}-light-theme {
+    .#{$brand-cns}-preview {
+      border-left:            1px solid transparentize($black-color, 0.92);
+    }
+  }
+}

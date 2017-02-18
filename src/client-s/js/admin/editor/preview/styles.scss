@@ -1,0 +1,18 @@
+/*
+ * Requires a local copy of the WP Sharks Core.
+ */
+@import '../../../../../../../wp-sharks-core/src/client-s/css/base';
+
+/*
+ * Preview styles.
+ */
+#___div {
+  margin:                     1em;
+
+  @include hljs-pre-code;
+
+  abbr[title] {
+    cursor:                   help;
+    border-bottom:            1px dotted;
+  }
+}
