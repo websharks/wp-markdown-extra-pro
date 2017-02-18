@@ -65,8 +65,8 @@ $Form = $this->s::menuPageForm('§save-options');
             'name'    => 'editor_theme',
             'value'   => s::getOption('editor_theme'),
             'options' => [
-                'light' => __('Light'),
-                'dark'  => __('Dark'),
+                'light' => __('Light', 'wp-markdown-extra'),
+                'dark'  => __('Dark', 'wp-markdown-extra'),
             ],
         ]); ?>
 
@@ -104,8 +104,8 @@ $Form = $this->s::menuPageForm('§save-options');
             'name'    => 'editor_ide_enable',
             'value'   => s::getOption('editor_ide_enable'),
             'options' => [
-                '1'  => __('Yes'),
-                '0'  => __('No'),
+                '1'  => __('Yes', 'wp-markdown-extra'),
+                '0'  => __('No', 'wp-markdown-extra'),
             ],
         ]); ?>
 
@@ -119,8 +119,8 @@ $Form = $this->s::menuPageForm('§save-options');
             'name'    => 'editor_preview',
             'value'   => s::getOption('editor_preview'),
             'options' => [
-                'js'   => __('JavaScript (99% accurate, lightning fast)'),
-                'php'  => __('PHP via AJAX (100% accurate, slightly slower)'),
+                'js'   => __('JavaScript (99% accurate, lightning fast)', 'wp-markdown-extra'),
+                'php'  => __('PHP via AJAX (100% accurate, slightly slower)', 'wp-markdown-extra'),
             ],
         ]); ?>
 
@@ -134,8 +134,8 @@ $Form = $this->s::menuPageForm('§save-options');
             'name'    => 'editor_media_inserts',
             'value'   => s::getOption('editor_media_inserts'),
             'options' => [
-                'md'    => __('Markdown; e.g., ![alt](image.png)'),
-                'html'  => __('HTML; e.g., &lt;img src="image.png" /&gt;'),
+                'md'    => __('Markdown; e.g., ![alt](image.png)', 'wp-markdown-extra'),
+                'html'  => __('HTML; e.g., &lt;img src="image.png" /&gt;', 'wp-markdown-extra'),
             ],
         ]); ?>
 

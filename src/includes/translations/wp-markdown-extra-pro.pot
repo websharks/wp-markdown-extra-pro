@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Markdown Extra Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Markdown Extra Pro 170126.31035\n"
+"Project-Id-Version: WP Markdown Extra Pro 170218.32543\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-markdown-extra-pro\n"
-"POT-Creation-Date: 2017-01-26 08:37:19+00:00\n"
+"POT-Creation-Date: 2017-02-18 09:02:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,19 +12,57 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: src/includes/classes/App.php:98
-msgid "Jetpack Markdown"
+#: src/includes/classes/App.php:125
+msgid "Disable Jetpack Markdown"
 msgstr ""
 
-#: src/includes/classes/App.php:99
+#: src/includes/classes/App.php:126
 msgid "that Jetpack Markdown be disabled"
 msgstr ""
 
-#: src/includes/classes/App.php:104
+#: src/includes/classes/App.php:131
 msgid "<a href=\"%1$s\">change your Jetpack Settings</a> (disable Jetpack Markdown)"
 msgstr ""
 
-#: src/includes/classes/Utils/Markdown.php:301
+#: src/includes/classes/Utils/Editor.php:117
+msgid "Toggle"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:119
+#: src/includes/classes/Utils/MenuPage.php:54
+msgid "Preview"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:120
+msgid "Site Preview"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:121
+msgid "Fullscreen Split Preview"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:122
+msgid "Fullscreen"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:124
+msgid "Save Draft"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:125
+msgid "Update"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:126
+msgid "Publish"
+msgstr ""
+
+#: src/includes/classes/Utils/Editor.php:127
+msgid "Trash"
+msgstr ""
+
+#: src/includes/classes/Utils/Markdown.php:348
+#: src/includes/classes/Utils/MenuPage.php:47
 msgid "Markdown"
 msgstr ""
 
@@ -32,29 +70,41 @@ msgstr ""
 msgid "%1$s"
 msgstr ""
 
+#: src/includes/classes/Utils/MenuPage.php:53
+msgid "Editor"
+msgstr ""
+
+#: src/includes/classes/Utils/MenuPage.php:55
+msgid "Tweaks"
+msgstr ""
+
 #: src/includes/templates/admin/menu-pages/options/default.php:39
 msgid "General Options"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:40
+#: src/includes/templates/admin/menu-pages/options/editor.php:40
 msgid "You can browse our <a href=\"%1$s\" target=\"_blank\">knowledge base</a> to learn more about these options."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:45
+#: src/includes/templates/admin/menu-pages/options/default.php:44
 msgid "Enable for Posts?"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:46
+#: src/includes/templates/admin/menu-pages/options/default.php:45
 msgid "This allows you to publish content using Markdown."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:51
-#: src/includes/templates/admin/menu-pages/options/default.php:80
+#: src/includes/templates/admin/menu-pages/options/default.php:50
+#: src/includes/templates/admin/menu-pages/options/default.php:86
+#: src/includes/templates/admin/menu-pages/options/editor.php:107
 msgid "Yes"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:52
-#: src/includes/templates/admin/menu-pages/options/default.php:81
+#: src/includes/templates/admin/menu-pages/options/default.php:51
+#: src/includes/templates/admin/menu-pages/options/default.php:87
+#: src/includes/templates/admin/menu-pages/options/editor.php:53
+#: src/includes/templates/admin/menu-pages/options/editor.php:108
 msgid "No"
 msgstr ""
 
@@ -66,12 +116,259 @@ msgstr ""
 msgid "Select the Post Types that are written in Markdown."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:73
+#: src/includes/templates/admin/menu-pages/options/default.php:80
 msgid "Enable for Comments?"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/default.php:74
+#: src/includes/templates/admin/menu-pages/options/default.php:81
 msgid "This allows all users to comment in Markdown."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:39
+msgid "Editor Options"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:46
+msgid "Enable Mardown Editor?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:47
+msgid "This replaces the built-in WordPress editor with a simpler Markdown editor."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:52
+msgid "Yes, enable for Markdown Post Types"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:62
+msgid "Editor Theme"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:63
+msgid "This controls the editable content in the MD editor."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:68
+msgid "Light"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:69
+msgid "Dark"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:77
+msgid "Font Size"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:78
+msgid "Controls the CSS font size used while editing.<hr />The <code>em</code> unit is suggested. However, if you want to force a constant pixel size, just use <code>px</code> instead of <code>em</code>."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:79
+msgid "The <tt>em</tt> unit is suggested so it scales automatically in fullscreen mode. The baseline font size is <tt><strong>14px</strong></tt>. Therefore, <tt>0.857em = 12px</tt>, <tt>1em = <strong>14px</strong></tt>, <tt>1.143em = 16px</tt>. In fullscreen mode (if you're on a large screen) the baseline jumps from <tt>14px</tt> to <tt><strong>16px</strong></tt> automatically, which results in all calculations being slightly larger in fullscreen mode."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:89
+#: src/includes/templates/admin/menu-pages/options/preview.php:86
+msgid "Font Family"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:90
+msgid "Controls the font family used while editing."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:91
+#: src/includes/templates/admin/menu-pages/options/preview.php:88
+msgid "Comma-delimited monospace fonts used in CSS declaration."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:100
+msgid "Enable Enhanced IDE?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:101
+msgid "Enables highlighting, line numbers, auto-indent, auto-brackets, tabs, and more."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:102
+msgid "This enables a powerful IDE  that includes highlighting, line numbers, auto-indent, brackets, tabs, and more."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:115
+msgid "Quick Preview Method"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:116
+msgid "Go with JavaScript for instant feedback in split preview mode. It's a little inaccurate at times, but much faster!<hr />If you use a lot of advanced Markdown syntax and need accurate previews of the <em>actual</em> Markdown render, go with PHP/AJAX instead."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:117
+msgid "%1$s can do previews in pure JavaScript, giving you instant feedback in split preview mode. Or, it can do previews via PHP/AJAX for improved accuracy; i.e., giving you a preview of the <em>actual</em> Markdown render."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:122
+msgid "JavaScript (99% accurate, lightning fast)"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:123
+msgid "PHP via AJAX (100% accurate, slightly slower)"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:130
+msgid "Media Inserts"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:131
+msgid "Either way works just fine. This is simply a matter of personal preference."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:132
+msgid "Markdown image example: <code>![My Image](image.png){.alignright width=128}</code>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:137
+msgid "Markdown; e.g., ![alt](image.png)"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/editor.php:138
+msgid "HTML; e.g., &lt;img src=\"image.png\" /&gt;"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:40
+msgid "Editor Preview Options"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:41
+msgid "<em><strong>Note:</strong> Preview options are applicable only when you've enabled the Markdown Editor.</em>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:47
+msgid "Highlight.js Preview Options"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:48
+msgid "These control syntax highlighting for fenced coded blocks, when previewing Markdown."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:61
+msgid "Highlight.js Style"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:62
+msgid "Powered by Highlight.js.<hr />This option controls the Highlight.js colors used in fenced code blocks.<hr />Review CDN resources and enter a <code>[style]</code>.min.css file basename w/o extension.<hr />e.g., <code>github</code>, <code>atom-one-dark</code>, <code>ir-black</code>, <code>hybrid</code>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:63
+msgid "Review the list of <a href=\"%1$s\" target=\"_blank\">CDN resources</a> and choose a <code>[style]</code>.min.css. See also: <a href=\"%2$s\" target=\"_blank\">style demos</a>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:73
+msgid "e.g., #f8f8f8"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:74
+msgid "BG Color Override"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:75
+msgid "Hex color code; e.g., <code>#f8f8f8</code>, <code>#000</code>, <code>#ccc</code><hr />If empty, the background color is defined by the style you selected above."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:76
+msgid "If empty, the background color is simply defined by the Highlight.js style."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:87
+msgid "Controls the containing element font family."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:97
+#: src/includes/templates/admin/menu-pages/options/preview.php:104
+msgid "Custom Preview Styles"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:98
+msgid "This allows you to include CSS of your own that may override some defaults, or perhaps style elements in previews in a way that more closely resembles the final output in your WordPress theme. Keep in mind there are already a number of built-in preview styles, so this is completely optional."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:106
+msgid "Custom styles are injected into Markdown previews, right after all of the default styles."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:107
+msgid "<strong>Tip:</strong> You can choose to use a CSS <code>@import</code> rule if you'd like; i.e., so you can maintain custom styles in a separate file. For example: <code>@import url('/wp-content/my-theme/md-preview-styles.css');</code>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:39
+msgid "Subtle Tweaks"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:40
+msgid "You can browse our <a href=\"%1$s\" target=\"_blank\">knowledge base</a> to learn more."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:44
+msgid "Tweak Core Filters?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:45
+msgid "If you don't like surprises, enable this option.<hr />When publishing in Markdown mixed with raw HTML, some of the built-in WordPress filters get in your way. These tweaks help you avoid problems.<hr />However, enabling tweaks is not required. Markdown works just fine with these on."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:46
+msgid "A mixed set of helpful tweaks for the professional Markdowner. This disables <code>convert_chars</code>, <code>capital_P_dangit</code>, <code>convert_smilies</code>, and it enables Shortcodes in Text Widgets."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:51
+msgid "Yes, enable additional filter tweaks."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:52
+msgid "No, I don't want any additional filter tweaks."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:57
+msgid "Use PHP SmartyPants?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:58
+msgid "PHP SmartyPants and <code>wptexturize</code> both beautify &amp; enhance your content by automatically converting 'single' or \"double\" quotes into ‘fancy’ “quotes”. Among other subtleties, they also convert three consecutive dots (...) into an ellipsis entity."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:59
+msgid "%1$s suggests using <a href=\"%2$s\" target=\"_blank\">PHP SmartyPants</a> for texturization because it is Markdown-friendly, which leads to fewer surprises. However, the built-in <code>wptexturize</code> filter works just fine also.</em>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:64
+msgid "No, use wptexturize (WordPress default)."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:65
+msgid "Yes, use PHP SmartyPants for texturization."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:66
+msgid "No, I don't want to use either of these."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:71
+msgid "Forbid Visual Editing?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:72
+msgid "When you forbid use of the Visual Editor in WordPress, in each user's Profile page, the checkbox to disable rich editing will be forced on (i.e., checked already, and then disabled too). This is to help indicate that Visual Editing has been disabled entirely."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:73
+msgid "This completely disables all use of the Visual Editor in WordPress. For Post Types that don't use Markdown, editing occurs in the default WordPress textarea; i.e., there is no Visual Editing allowed when this is on."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:78
+msgid "Yes, prohibit use of the visual editor."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/tweaks.php:79
+msgid "No, I to disable visual editing entirely."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
