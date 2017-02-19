@@ -336,7 +336,7 @@ class Editor extends SCoreClasses\SCore\Base\Core
     /**
      * On `user_can_richedit` hook.
      *
-     * @since 16xxxx Initial release.
+     * @since 170219.18502 Initial release.
      *
      * @param bool|scalar $can Can?
      *
@@ -355,7 +355,7 @@ class Editor extends SCoreClasses\SCore\Base\Core
     /**
      * On `show_user_profile` hook.
      *
-     * @since 16xxxx Initial release.
+     * @since 170219.18502 Initial release.
      */
     public function onShowUserProfile()
     {
