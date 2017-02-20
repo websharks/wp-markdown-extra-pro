@@ -312,6 +312,9 @@ class Editor extends SCoreClasses\SCore\Base\Core
     {
         $markup = (string) $markup;
 
+        if (mb_strpos($markup, ' id="content"') === false) {
+            return $markup; // Not the `content`.
+        }
         if ($this->isApplicable()) {
             $theme    = s::getOption('editor_theme');
             $color    = $theme === 'dark' ? '#fff' : '#000';

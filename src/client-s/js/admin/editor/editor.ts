@@ -303,6 +303,9 @@ namespace WpMarkdownExtraEditor {
       let sendToEditor = window.send_to_editor;
 
       window.send_to_editor = (html: string) => {
+        if (window.wpActiveEditor && wpActiveEditor !== 'content') {
+          return sendToEditor(html);
+        }
         html = this.mediaHtml.format(html);
 
         if (this.ide) { // IDE enabled?
@@ -785,11 +788,16 @@ namespace WpMarkdownExtraEditor {
         this.scrollLockHandler = (e) => {
           let deltaY = e.originalEvent.deltaY,
             direction = deltaY < 0 ? 'up' : 'down',
+            scrollHeight = $sb.prop('scrollHeight'),
+            innerHeight = $sb.innerHeight(),
             scrollTop = $sb.scrollTop();
 
-          if ( // If up to the top, or down to the bottom.
+          if (scrollHeight - innerHeight <= 0) {
+            return; // No reason to lock.
+            //
+          } else if ( // Up to top or down to bottom.
             (direction === 'up' && scrollTop + deltaY <= 0) ||
-            (direction === 'down' && scrollTop + deltaY >= $sb.prop('scrollHeight') - $sb.innerHeight())
+            (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)
           ) {
             e.preventDefault(), e.stopImmediatePropagation();
             this.ide.session.setScrollTop(scrollTop + deltaY);
@@ -803,11 +811,16 @@ namespace WpMarkdownExtraEditor {
         this.scrollLockHandler = (e) => {
           let deltaY = e.originalEvent.deltaY,
             direction = deltaY < 0 ? 'up' : 'down',
+            scrollHeight = $ta.prop('scrollHeight'),
+            innerHeight = $ta.innerHeight(),
             scrollTop = $ta.scrollTop();
 
-          if ( // If up to the top, or down to the bottom.
+          if (scrollHeight - innerHeight <= 0) {
+            return; // No reason to lock.
+            //
+          } else if ( // If up to the top, or down to the bottom.
             (direction === 'up' && scrollTop + deltaY <= 0) ||
-            (direction === 'down' && scrollTop + deltaY >= $ta.prop('scrollHeight') - $ta.innerHeight())
+            (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)
           ) {
             e.preventDefault(), e.stopImmediatePropagation();
             $ta.scrollTop(scrollTop + deltaY);

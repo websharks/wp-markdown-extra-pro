@@ -297,6 +297,9 @@ var WpMarkdownExtraEditor;
             var _this = this;
             var sendToEditor = window.send_to_editor;
             window.send_to_editor = function (html) {
+                if (window.wpActiveEditor && wpActiveEditor !== 'content') {
+                    return sendToEditor(html);
+                }
                 html = _this.mediaHtml.format(html);
                 if (_this.ide) {
                     _this.ide.insert(html);
@@ -658,9 +661,12 @@ var WpMarkdownExtraEditor;
             if (this.ide) {
                 var $sb_1 = this.$ide.find('> .ace_scrollbar-v'), $ct = this.$ide.find('> .ace_scroller > .ace_content');
                 this.scrollLockHandler = function (e) {
-                    var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollTop = $sb_1.scrollTop();
-                    if ((direction === 'up' && scrollTop + deltaY <= 0) ||
-                        (direction === 'down' && scrollTop + deltaY >= $sb_1.prop('scrollHeight') - $sb_1.innerHeight())) {
+                    var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollHeight = $sb_1.prop('scrollHeight'), innerHeight = $sb_1.innerHeight(), scrollTop = $sb_1.scrollTop();
+                    if (scrollHeight - innerHeight <= 0) {
+                        return;
+                    }
+                    else if ((direction === 'up' && scrollTop + deltaY <= 0) ||
+                        (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)) {
                         e.preventDefault(), e.stopImmediatePropagation();
                         _this.ide.session.setScrollTop(scrollTop + deltaY);
                     }
@@ -670,9 +676,12 @@ var WpMarkdownExtraEditor;
             else {
                 var $ta_1 = this.$textarea;
                 this.scrollLockHandler = function (e) {
-                    var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollTop = $ta_1.scrollTop();
-                    if ((direction === 'up' && scrollTop + deltaY <= 0) ||
-                        (direction === 'down' && scrollTop + deltaY >= $ta_1.prop('scrollHeight') - $ta_1.innerHeight())) {
+                    var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollHeight = $ta_1.prop('scrollHeight'), innerHeight = $ta_1.innerHeight(), scrollTop = $ta_1.scrollTop();
+                    if (scrollHeight - innerHeight <= 0) {
+                        return;
+                    }
+                    else if ((direction === 'up' && scrollTop + deltaY <= 0) ||
+                        (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)) {
                         e.preventDefault(), e.stopImmediatePropagation();
                         $ta_1.scrollTop(scrollTop + deltaY);
                     }
