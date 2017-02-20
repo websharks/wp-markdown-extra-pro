@@ -398,8 +398,6 @@ class Markdown extends SCoreClasses\SCore\Base\Core
 
         if (!$description) {
             return $description;
-        } elseif (!$post_id) {
-            return $description; // No post ID.
         } elseif (!s::getOption('posts_enable')) {
             return $description; // Not applicable.
         } elseif (!in_array($post_type, s::getOption('post_types'), true)) {
