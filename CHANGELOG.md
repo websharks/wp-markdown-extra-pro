@@ -1,4 +1,4 @@
-## $v
+## v170221.4504
 
 - Adding compatibility with multiple editor instances in WP.
 - Enhanced scroll-locking whenever the Markdown editor is enabled.
