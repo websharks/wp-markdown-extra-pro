@@ -42,8 +42,8 @@ $Form = $this->s::menuPageForm('§save-options');
 
         <?= $Form->selectRow([
             'label' => __('Tweak Core Filters?', 'wp-markdown-extra'),
-            'tip'   => __('If you don\'t like surprises, enable this option.<hr />When publishing in Markdown mixed with raw HTML, some of the built-in WordPress filters get in your way. These tweaks help you avoid problems.<hr />However, enabling tweaks is not required. Markdown works just fine with these on.', 'wp-markdown-extra'),
-            'note'  => sprintf(__('A mixed set of helpful tweaks for the professional Markdowner. This disables <code>convert_chars</code>, <code>capital_P_dangit</code>, <code>convert_smilies</code>, and it enables Shortcodes in Text Widgets.', 'wp-markdown-extra'), esc_html($this->App->Config->©brand['©name']), esc_url(s::coreUrl('/r/php-smartypants'))),
+            'tip'   => __('If you don\'t like surprises, please enable this option.<hr />Why? Because when you publish in Markdown, mixed with raw HTML, these built-in WordPress filters have a tendency to get in your way.<hr /><strong>Note:</strong> Aside from the occassional unexpected formatting produced by these core filters, Markdown still works fine with them on; i.e., this setting is optional.', 'wp-markdown-extra'),
+            'note'  => __('A mixed set of helpful tweaks for the professional Markdowner. This disables the <code>convert_smilies</code>, <code>convert_chars</code>, <code>wpautop</code>, <code>shortcode_unautop</code>, and <code>capital_P_dangit</code> filters in WordPress core; i.e., filters that can lead to quirky surprises. It also enables Shortcodes in Text Widgets.<br /><br /><em><strong>Note:</strong> With this option enabled, the filters mentioned above are removed globally, for all content &amp; excerpts, whether they are written in Markdown or not. However, they are only removed if you have Markdown enabled for Posts. The filters are also removed globally for comments, but only if you have Markdown enabled for Comments.</em>', 'wp-markdown-extra'),
 
             'name'     => 'filter_tweaks_enable',
             'value'    => s::getOption('filter_tweaks_enable'),
@@ -55,8 +55,8 @@ $Form = $this->s::menuPageForm('§save-options');
 
         <?= $Form->selectRow([
             'label' => __('Use PHP SmartyPants?', 'wp-markdown-extra'),
-            'tip'   => __('PHP SmartyPants and <code>wptexturize</code> both beautify &amp; enhance your content by automatically converting \'single\' or "double" quotes into ‘fancy’ “quotes”. Among other subtleties, they also convert three consecutive dots (...) into an ellipsis entity.', 'wp-markdown-extra'),
-            'note'  => sprintf(__('%1$s suggests using <a href="%2$s" target="_blank">PHP SmartyPants</a> for texturization because it is Markdown-friendly, which leads to fewer surprises. However, the built-in <code>wptexturize</code> filter works just fine also.</em>', 'wp-markdown-extra'), esc_html($this->App->Config->©brand['©name']), esc_url(s::coreUrl('/r/php-smartypants'))),
+            'tip'   => __('PHP SmartyPants and <code>wptexturize</code> both beautify &amp; enhance your content by automatically converting \'single\' or "double" quotes into ‘fancy’ “quotes”.<hr />Among other subtleties, they also convert three dots (...) into an ellipsis entity.', 'wp-markdown-extra'),
+            'note'  => sprintf(__('%1$s suggests using <a href="%2$s" target="_blank">PHP SmartyPants</a> for texturization because it\'s a little more Markdown-friendly, which leads to fewer surprises. However, the built-in <code>wptexturize</code> filter works just fine also.</em>', 'wp-markdown-extra'), esc_html($this->App->Config->©brand['©name']), esc_url(s::coreUrl('/r/php-smartypants'))),
 
             'name'     => 'texturizer',
             'value'    => s::getOption('texturizer'),

@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170221.4504'; //v//
+    const VERSION = '170223.61815'; //v//
 
     /**
      * Constructor.
@@ -199,35 +199,49 @@ class App extends SCoreClasses\App
         /*
          * Content filter tweaks based on a multitude of configurable options.
          */
-        $options = $this->App->Config->§options; // Collect all options at once.
+        $options = $this->App->Config->§options; // Collect all options.
 
-        if ($options['filter_tweaks_enable']) { // Only if enabling tweaks.
+        if ($options['posts_enable']) {
+            if ($options['texturizer'] !== 'wptexturize') {
+                remove_filter('the_content', 'wptexturize');
+                remove_filter('the_excerpt', 'wptexturize');
+                remove_filter('woocommerce_short_description', 'wptexturize');
+            }
+        }
+        if ($options['comments_enable']) {
+            if ($options['texturizer'] !== 'wptexturize') {
+                remove_filter('comment_text', 'wptexturize');
+            }
+        }
+        if ($options['filter_tweaks_enable']) {
             if ($options['posts_enable']) {
-                remove_filter('the_content', 'convert_chars');
+                // `convert_chars` not on `the_content`.
+                // There is no need to remove that filter.
+                remove_filter('the_content', 'wpautop');
+                remove_filter('the_content', 'shortcode_unautop');
                 remove_filter('the_content', 'capital_P_dangit', 11);
                 remove_filter('the_content', 'convert_smilies', 20);
 
-                remove_filter('the_excerpt', 'convert_chars');
                 remove_filter('the_excerpt', 'convert_smilies');
+                remove_filter('the_excerpt', 'convert_chars');
+                remove_filter('the_excerpt', 'wpautop');
+                remove_filter('the_excerpt', 'shortcode_unautop');
+                remove_filter('the_excerpt', 'capital_P_dangit', 11);
 
-                remove_filter('woocommerce_short_description', 'convert_chars');
                 remove_filter('woocommerce_short_description', 'convert_smilies');
-
-                add_filter('widget_text', 'do_shortcode'); // Shortcodes in text widgets.
+                remove_filter('woocommerce_short_description', 'convert_chars');
+                remove_filter('woocommerce_short_description', 'wpautop');
+                remove_filter('woocommerce_short_description', 'shortcode_unautop');
             }
             if ($options['comments_enable']) {
                 remove_filter('comment_text', 'convert_chars');
-                remove_filter('comment_text', 'capital_P_dangit', 31);
                 remove_filter('comment_text', 'convert_smilies', 20);
+                remove_filter('comment_text', 'wpautop', 30);
+                remove_filter('comment_text', 'capital_P_dangit', 31);
+                // This filter in core can be removed also.
+                remove_filter('comment_excerpt', 'convert_chars');
             }
-        }
-        if ($options['posts_enable'] && $options['texturizer'] !== 'wptexturize') {
-            remove_filter('the_content', 'wptexturize');
-            remove_filter('the_excerpt', 'wptexturize');
-            remove_filter('woocommerce_short_description', 'wptexturize');
-        }
-        if ($options['comments_enable'] && $options['texturizer'] !== 'wptexturize') {
-            remove_filter('comment_text', 'wptexturize');
+            add_filter('widget_text', 'do_shortcode'); // Shortcodes in text widgets.
         }
     }
 }
