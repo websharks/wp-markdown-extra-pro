@@ -1,5 +1,6 @@
 ## $v
 
+- Bug fix. On bulk edit PHP warning.
 - Enhancing configurable filter tweaks.
 
 ## v170221.4504

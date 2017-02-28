@@ -258,7 +258,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     public function onSavePost($_, \WP_Post $WP_Post)
     {
         if ($this->isBulkOrInlineEdit()) {
-            return $data; // Not applicable.
+            return; // Not applicable.
         } elseif ($this->isRestoringPostRevision()) {
             return; // Not applicable.
         } // Revisions are already good-to-go.
