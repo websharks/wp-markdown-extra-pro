@@ -58,10 +58,11 @@ class Shortcode extends SCoreClasses\SCore\Base\Core
         $atts = array_map('strval', $atts); // Force strings.
 
         $html                = ''; // Initialize.
+        $url                 = $atts['url']; // Markdown file.
         $post_id             = (int) (is_singular() ? get_the_ID() : 0);
         $cache_expires_after = $atts['cache_expires_after'] ?: $default_atts['cache_expires_after'];
 
-        if ($atts['url'] && ($md = $this->urlContents($url, compact('cache_expires_after')))) {
+        if ($url && ($md = $this->urlContents($url, compact('cache_expires_after')))) {
             $html = a::transform($md, $post_id, ['cache' => true]);
         }
         return $html; // From markdown.
