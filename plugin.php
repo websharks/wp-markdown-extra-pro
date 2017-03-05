@@ -4,7 +4,7 @@
  *
  * @wp-plugin
  *
- * Version: 170228.82398
+ * Version: 170305.18919
  * Text Domain: wp-markdown-extra
  * Plugin Name: WP Markdown Extra Pro
  *

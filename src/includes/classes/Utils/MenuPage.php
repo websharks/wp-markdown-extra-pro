@@ -50,9 +50,9 @@ class MenuPage extends SCoreClasses\SCore\Base\Core
             'meta_links' => ['restore' => true],
             'tabs'       => [
                 'default' => sprintf(__('%1$s', 'wp-markdown-extra'), esc_html($this->App->Config->©brand['©name'])),
-                'editor'  => __('Editor', 'wp-syntax-highlight'),
-                'preview' => __('Preview', 'wp-syntax-highlight'),
-                'tweaks'  => __('Tweaks', 'wp-syntax-highlight'),
+                'editor'  => __('Editor', 'wp-markdown-extra'),
+                'preview' => __('Preview', 'wp-markdown-extra'),
+                'tweaks'  => __('Tweaks', 'wp-markdown-extra'),
             ],
         ]);
     }

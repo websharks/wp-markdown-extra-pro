@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170228.82398'; //v//
+    const VERSION = '170305.18919'; //v//
 
     /**
      * Constructor.
@@ -196,6 +196,8 @@ class App extends SCoreClasses\App
         add_filter('pre_comment_content', [$this->Utils->Markdown, 'onPreCommentContent'], -10000);
 
         s::registerRestAction('ajax.preview', 'Preview', 'onAjaxRestActionPreview');
+
+        add_shortcode('md', [$this->Utils->Shortcode, 'onShortcode']);
         /*
          * Content filter tweaks based on a multitude of configurable options.
          */

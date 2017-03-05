@@ -2,6 +2,7 @@
 
 - Bug fix. On bulk edit PHP warning.
 - Enhancing configurable filter tweaks.
+- Adding `[md url="" cache_expires_after="1 hour" /]` shortcode.
 
 ## v170221.4504
 
