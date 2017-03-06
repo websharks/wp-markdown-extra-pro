@@ -36,13 +36,37 @@ use function get_defined_vars as vars;
 class Markdown extends SCoreClasses\SCore\Base\Core
 {
     /**
-     * `content_save_pre` tokenizers.
+     * Marker.
      *
-     * @since 170126.30913 Initial release.
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $marker;
+
+    /**
+     * Tokenizers.
+     *
+     * @since 170126.30913
      *
      * @type array
      */
-    protected $csp_Tokenizers = [];
+    protected $csp_Tokenizers;
+
+    /**
+     * Class constructor.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param Classes\App $App Instance.
+     */
+    public function __construct(Classes\App $App)
+    {
+        parent::__construct($App);
+
+        $this->marker         = '<!--'.$this->App->Config->©brand['©slug'].'.html-->';
+        $this->csp_Tokenizers = []; // Initialize tokenizers.
+    }
 
     /**
      * Markdown transform.
@@ -222,6 +246,11 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         // The resulting raw HTML is stored in `post_content`, which is used by core/themes/plugins.
         // The original Markdown is preserved. It is stored in `post_content_filtered` (i.e., in the DB).
 
+        // An HTML comment marker is used to identify `post_content` that is transformed already.
+        // As an example, when `wp_update_post()` is used to update something other than `post_content`,
+        // the existing `post_content` and `post_content_filtered` are filled-in by `wp_update_post()`.
+        // In such a scenario, there's no need to swap again, which would also cause a loss of the MD.
+
         $data['post_content']          = (string) $data['post_content'];
         $data['post_content_filtered'] = (string) $data['post_content_filtered'];
         $data['post_content']          = $this->contentSavePreRestore($data['post_content']);
@@ -233,16 +262,25 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         } elseif ($post_type === 'revision' && $post_parent && ($parent_WP_Post = get_post($post_parent))) {
             if (in_array($parent_WP_Post->post_type, s::getOption('post_types'), true)) {
                 if (mb_stripos($post_name, $post_parent.'-autosave-') === 0) {
-                    $data['post_content_filtered'] = $data['post_content'];
-                    $data['post_content']          = wp_slash($this->__invoke(wp_unslash($data['post_content']), $post_id));
+                    if (mb_stripos($data['post_content'], $this->marker) === false) {
+                        $data['post_content_filtered'] = $data['post_content'];
+                        $data['post_content']          = wp_unslash($data['post_content']);
+                        $data['post_content']          = $this->__invoke($data['post_content'], $post_id);
+                        $data['post_content']          = wp_slash($data['post_content']);
+                        $data['post_content']          = $this->marker."\n\n".$data['post_content'];
+                    }
                 } // Else, it's simply a noop. Other revisions are already good-to-go.
             } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
                 $data['post_content_filtered'] = '';
             }
         } elseif ($post_type !== 'revision' && in_array($post_type, s::getOption('post_types'), true)) {
-            $data['post_content_filtered'] = $data['post_content'];
-            $data['post_content']          = wp_slash($this->__invoke(wp_unslash($data['post_content']), $post_id));
-            //
+            if (mb_stripos($data['post_content'], $this->marker) === false) {
+                $data['post_content_filtered'] = $data['post_content'];
+                $data['post_content']          = wp_unslash($data['post_content']);
+                $data['post_content']          = $this->__invoke($data['post_content'], $post_id);
+                $data['post_content']          = wp_slash($data['post_content']);
+                $data['post_content']          = $this->marker."\n\n".$data['post_content'];
+            }
         } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
             $data['post_content_filtered'] = '';
         }
@@ -314,6 +352,8 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         if (!s::getPostMeta($post_id, '_is')) {
             return $content; // Not applicable.
         } elseif (!($WP_Post = get_post($post_id))) {
+            return $content; // Not possible.
+        } elseif (!$WP_Post->post_content_filtered) {
             return $content; // Not possible.
         }
         // Note: This doesn't only do a swap on the filter.

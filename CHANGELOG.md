@@ -3,6 +3,7 @@
 - Bug fix. On bulk edit PHP warning.
 - Enhancing configurable filter tweaks.
 - Adding `[md url="" cache_expires_after="1 hour" /]` shortcode.
+- Adding HTML comment transform marker to `post_content` after filtering.
 
 ## v170221.4504
 
