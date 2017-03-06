@@ -47,8 +47,9 @@ class Preview extends SCoreClasses\SCore\Base\Core
         }
         $data    = s::restActionData();
         $post_id = (int) ($data['post_id'] ?? 0);
-        $binary  = (string) file_get_contents('php://input');
-        $md      = isset($binary[1]) ? gzinflate(substr($binary, 2)) : '';
+
+        $binary = (string) file_get_contents('php://input');
+        $md     = isset($binary[1]) ? gzinflate(substr($binary, 2)) : '';
 
         $html = a::transform($md, $post_id, ['cache' => false]);
 

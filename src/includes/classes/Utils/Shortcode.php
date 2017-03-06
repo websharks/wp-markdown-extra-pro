@@ -52,17 +52,19 @@ class Shortcode extends SCoreClasses\SCore\Base\Core
 
         $default_atts = [
             'url'                 => '',
+            'iv'                  => '',
             'cache_expires_after' => '1 hour',
         ];
         $atts = shortcode_atts($default_atts, $atts, $shortcode);
         $atts = array_map('strval', $atts); // Force strings.
 
         $html                = ''; // Initialize.
-        $url                 = $atts['url']; // Markdown file.
+        $url                 = $atts['url']; // Markdown.
+        $iv                  = $atts['iv']; // Incremented version.
         $post_id             = (int) (is_singular() ? get_the_ID() : 0);
         $cache_expires_after = $atts['cache_expires_after'] ?: $default_atts['cache_expires_after'];
 
-        if ($url && ($md = $this->urlContents($url, compact('cache_expires_after')))) {
+        if ($url && ($md = $this->urlContents($url, compact('iv', 'cache_expires_after')))) {
             $html = a::transform($md, $post_id, ['cache' => true]);
         }
         return $html; // From markdown.
@@ -81,9 +83,12 @@ class Shortcode extends SCoreClasses\SCore\Base\Core
     protected function urlContents(string $url, array $args = []): string
     {
         $default_args = [
+            'iv'                  => '',
             'cache_expires_after' => '1 hour',
         ];
         $args += $default_args; // Merge with defaults.
+        // Note: `iv` is an incremented version; allows cache busting.
+        // i.e., The site owner can force a cache update by altering the `iv`.
 
         $cache_sha1          = sha1($url.serialize($args));
         $cache_sha1_shard_id = c::sha1ModShardId($cache_sha1, true);
@@ -101,6 +106,14 @@ class Shortcode extends SCoreClasses\SCore\Base\Core
 
         $contents = wp_remote_retrieve_body(wp_remote_get($url));
         $contents = (string) $contents; // Force string.
+
+        if (!$contents && is_file($cache_file)) {
+            $contents = (string) file_get_contents($cache_file);
+        } // On failure to get *new* contents, use the old contents.
+        // i.e., Don't allow HTTP connection failures to nullify contents.
+
+        // At the same time, this should trigger an update to the cache file.
+        // i.e., To avoid repeat attempts by updating the cache file modified time.
 
         if (!is_dir($cache_dir)) {
             mkdir($cache_dir, $cache_dir_permissions, true);

@@ -49,36 +49,33 @@ class Markdown extends SCoreClasses\SCore\Base\Core
      *
      * @since 170126.30913 Initial release.
      *
-     * @param string $string  Markdown.
+     * @param string $md      Markdown.
      * @param int    $post_id Post ID.
      * @param array  $args    MD args.
      *
      * @return string HTML markup.
      */
-    public function __invoke(
-        string $string,
-        int $post_id = 0,
-        array $args = []
-    ): string {
-        $texturizer   = s::getOption('texturizer');
+    public function __invoke(string $md, int $post_id = 0, array $args = []): string
+    {
         $default_args = [
             'cache'               => false,
             'cache_expires_after' => '30 days',
             'fn_id_prefix'        => 'p-'.$post_id.'-',
-            'smartypants'         => $texturizer === 'smartypants',
-        ]; // The defaults can be filtered by other plugins.
+            'smartypants'         => s::getOption('texturizer') === 'smartypants',
+        ]; // The defaults can be filtered by other plugins, see below.
+
         $default_args = s::applyFilters('default_args', $default_args);
         $args += $default_args; // Merge with defaults.
 
         $cache               = (bool) $args['cache'];
         $cache_expires_after = (string) $args['cache_expires_after'];
-        unset($args['cache'], $args['cache_expires_after']);
+        $cache_expires_after = $cache_expires_after ?: $default_args['cache_expires_after'];
 
-        if (!($string = c::mbTrim($string))) {
-            return $string; // Nothing to do.
+        if (!($md = c::mbTrim($md))) {
+            return $md; // Nothing to do.
         }
         if ($cache) { // Cache markdown?
-            $cache_sha1          = sha1($string.$post_id.serialize($args));
+            $cache_sha1          = sha1($md.$post_id.serialize($args));
             $cache_sha1_shard_id = c::sha1ModShardId($cache_sha1, true);
 
             $cache_dir             = $this->App->Config->©fs_paths['©cache_dir'].'/markdown/'.$cache_sha1_shard_id;
@@ -86,22 +83,25 @@ class Markdown extends SCoreClasses\SCore\Base\Core
             $cache_file            = $cache_dir.'/'.$cache_sha1.'.html';
 
             if (is_file($cache_file) && filemtime($cache_file) >= strtotime('-'.$cache_expires_after)) {
-                return (string) file_get_contents($cache_file);
-            } // Use the already-cached markdown.
+                return $html = (string) file_get_contents($cache_file);
+            } // Use the already-cached HTML transform.
         }
-        $preserve  = ['shortcodes'];
-        $tk_args   = ['shortcode_unautop_compat' => true];
-        $Tokenizer = c::tokenize($string, $preserve, $tk_args);
+        $tk_preserve = ['shortcodes']; // Tokenize.
+        $tk_args     = ['shortcode_unautop_compat' => true];
 
-        $string = &$Tokenizer->getString();
-        $string = s::applyFilters('before', $string);
+        $md_args = $args; // Structure for `c::markdown()`.
+        unset($md_args['cache'], $md_args['cache_expires_after']);
 
-        $string = c::markdown($string, $args);
-        $string = $Tokenizer->restoreGetString();
-        $string = shortcode_unautop($string);
+        $md        = s::applyFilters('before', $md);
+        $Tokenizer = c::tokenize($md, $tk_preserve, $tk_args);
+        $md        = $Tokenizer->getString();
 
-        $string = s::applyFilters('after', $string);
-        $string = c::mbTrim($string);
+        $html = c::markdown($md, $md_args);
+        $html = shortcode_unautop($html);
+
+        $Tokenizer->setString($html);
+        $html = $Tokenizer->restoreGetString();
+        $html = c::mbTrim(s::applyFilters('after', $html));
 
         if ($cache && isset($cache_dir, $cache_dir_permissions, $cache_file)) {
             if (!is_dir($cache_dir)) {
@@ -109,12 +109,12 @@ class Markdown extends SCoreClasses\SCore\Base\Core
 
                 if (!is_dir($cache_dir)) {
                     debug(0, c::issue(vars(), 'Unable to create cache directory.'));
-                    return $string; // Soft failure.
+                    return $html; // Soft failure.
                 }
             } // Cache directory exists.
-            file_put_contents($cache_file, $string);
+            file_put_contents($cache_file, $html);
         }
-        return $string; // HTML markup now.
+        return $html; // HTML markup now.
     }
 
     /**
@@ -146,13 +146,15 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         // The point here is that we need to avoid KSES filters.
         // Anything inside these fences/tags becomes a code sample.
         // So stripping these from the equation is perfectly safe.
-        $preserve                  = ['md-fences', 'pre', 'code', 'samp'];
-        $Tokenizer                 = c::tokenize($content, $preserve);
-        $tk                        = c::uniqueId();
-        $this->csp_Tokenizers[$tk] = $Tokenizer;
+
+        $tk_key      = c::uniqueId(); // Tokenizer key.
+        $tk_preserve = ['md-fences', 'pre', 'code', 'samp'];
+
+        $Tokenizer                     = c::tokenize($content, $tk_preserve);
+        $this->csp_Tokenizers[$tk_key] = $Tokenizer;
 
         $content        = $Tokenizer->getString();
-        return $content = '⁅⁅⒯'.$tk.'⒯⁆⁆'.$content;
+        return $content = '⁅⁅⒯'.$tk_key.'⒯⁆⁆'.$content;
     }
 
     /**
@@ -175,18 +177,18 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         $content = c::mbLTrim($content);
 
         if (!$content) {
-            return $content; // Nothing to do.
-        } elseif (!preg_match('/^⁅⁅⒯(?<tk>[^⒯⁆]+)⒯⁆⁆/u', $content, $_m) || !($tk = $_m['tk'])) {
-            return $content; // Nothing to do.
-        } elseif (!($Tokenizer = $this->csp_Tokenizers[$tk] ?? null)) {
-            debug(0, c::issue($this->csp_Tokenizers, sprintf('Missing tokenizer[%1$s].', $tk)));
-            return $content; // Nothing to do.
+            return $content; // Nothing to do; empty.
+        } elseif (!preg_match('/^⁅⁅⒯(?<tk_key>[^⒯⁆]+)⒯⁆⁆/u', $content, $_m)) {
+            return $content; // Nothing to do; i.e., was not tokenized originally.
+        } elseif (!($tk_key = $_m['tk_key']) || !($Tokenizer = $this->csp_Tokenizers[$tk_key] ?? null)) {
+            debug(0, c::issue($this->csp_Tokenizers, sprintf('Missing tokenizer[%1$s].', $tk_key)));
+            return $content; // Not possible; debug this scenario if it occurs.
         }
         $content = preg_replace('/^⁅⁅⒯[^⒯⁆]+⒯⁆⁆/u', '', $content);
 
         $Tokenizer->setString($content);
         $content = $Tokenizer->restoreGetString();
-        unset($this->csp_Tokenizers[$tk]);
+        unset($this->csp_Tokenizers[$tk_key]);
 
         return $content;
     }
@@ -210,7 +212,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         } // Revisions are already good-to-go.
 
         $post_id = (int) ($post_data['ID'] ?? 0);
-        // Only available when updating and existing ID.
+        // Only available when updating an existing ID.
 
         $post_type   = $data['post_type'];
         $post_name   = $data['post_name'];
