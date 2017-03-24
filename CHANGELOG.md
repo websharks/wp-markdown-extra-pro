@@ -2,9 +2,12 @@
 
 - Bug fix. On bulk edit PHP warning.
 - Enhancing configurable filter tweaks.
+- Adding compatibility with Yoast SEO and Yoast SEO Premium.
 - Adding `[md url="" cache_expires_after="1 hour" /]` shortcode.
 - Adding HTML comment transform marker to `post_content` after filtering.
 - Bug fix. When disabling visual editor globally, that should impact profile edits also.
+- Adding new methods `addMarker()` and `stripMarker()` for consistent marker handling.
+- Bug fix. Improve handling of empty content and avoid showing a marker when editing empty content.
 
 ## v170221.4504
 

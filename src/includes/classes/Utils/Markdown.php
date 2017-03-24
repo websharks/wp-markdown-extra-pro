@@ -64,6 +64,10 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     {
         parent::__construct($App);
 
+        // NOTE: Very important for the marker NOT to contain anything that would be
+        // different when `wp_slash()` is applied. That would add unnecessary complexity.
+        // No single quote ('), double quote ("), backslash (\) or NUL (NULL byte).
+
         $this->marker         = '<!--'.$this->App->Config->©brand['©slug'].'.html-->';
         $this->csp_Tokenizers = []; // Initialize tokenizers.
     }
@@ -258,28 +262,30 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         if (!s::getOption('posts_enable')) {
             if ($post_id && s::getPostMeta($post_id, '_is')) {
                 $data['post_content_filtered'] = '';
-            } // In case MD was enabled previously.
+            }
         } elseif ($post_type === 'revision' && $post_parent && ($parent_WP_Post = get_post($post_parent))) {
             if (in_array($parent_WP_Post->post_type, s::getOption('post_types'), true)) {
                 if (mb_stripos($post_name, $post_parent.'-autosave-') === 0) {
                     if (mb_stripos($data['post_content'], $this->marker) === false) {
-                        $data['post_content_filtered'] = $data['post_content'];
+                        $data['post_content_filtered'] = $data['post_content']; // MD.
                         $data['post_content']          = wp_unslash($data['post_content']);
                         $data['post_content']          = $this->__invoke($data['post_content'], $post_id);
                         $data['post_content']          = wp_slash($data['post_content']);
-                        $data['post_content']          = $this->marker."\n\n".$data['post_content'];
+                        $data['post_content']          = $this->addMarker($data['post_content']);
                     }
-                } // Else, it's simply a noop. Other revisions are already good-to-go.
+                } else { // Other revision types.
+                    // Other revisions are already good-to-go.
+                }
             } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
                 $data['post_content_filtered'] = '';
             }
         } elseif ($post_type !== 'revision' && in_array($post_type, s::getOption('post_types'), true)) {
             if (mb_stripos($data['post_content'], $this->marker) === false) {
-                $data['post_content_filtered'] = $data['post_content'];
+                $data['post_content_filtered'] = $data['post_content']; // MD.
                 $data['post_content']          = wp_unslash($data['post_content']);
                 $data['post_content']          = $this->__invoke($data['post_content'], $post_id);
                 $data['post_content']          = wp_slash($data['post_content']);
-                $data['post_content']          = $this->marker."\n\n".$data['post_content'];
+                $data['post_content']          = $this->addMarker($data['post_content']);
             }
         } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
             $data['post_content_filtered'] = '';
@@ -318,17 +324,15 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         if (!s::getOption('posts_enable')) {
             if ($post_id && s::getPostMeta($post_id, '_is')) {
                 s::deletePostMeta($post_id, '_is');
-            } // In case MD was enabled previously.
+            }
         } elseif ($post_type === 'revision' && $post_parent && ($parent_WP_Post = get_post($post_parent))) {
             if (in_array($parent_WP_Post->post_type, s::getOption('post_types'), true)) {
                 s::updatePostMeta($post_id, '_is', '1');
-                //
             } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
                 s::deletePostMeta($post_id, '_is');
             }
         } elseif ($post_type !== 'revision' && in_array($post_type, s::getOption('post_types'), true)) {
             s::updatePostMeta($post_id, '_is', '1');
-            //
         } elseif ($post_id && s::getPostMeta($post_id, '_is')) {
             s::deletePostMeta($post_id, '_is');
         }
@@ -342,7 +346,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
      * @param string|scalar $content Post content.
      * @param int|scalar    $post_id Post ID.
      *
-     * @return string Swapped post content.
+     * @return string Swapped content; i.e., MD for editing.
      */
     public function onEditPostContent($content, $post_id): string
     {
@@ -353,24 +357,15 @@ class Markdown extends SCoreClasses\SCore\Base\Core
             return $content; // Not applicable.
         } elseif (!($WP_Post = get_post($post_id))) {
             return $content; // Not possible.
-        } elseif (!$WP_Post->post_content_filtered) {
-            return $content; // Not possible.
         }
         // Note: This doesn't only do a swap on the filter.
         // We're also altering the WP_Post object by reference.
 
-        $content                        = $WP_Post->post_content_filtered;
-        $WP_Post->post_content_filtered = $WP_Post->post_content;
-        $WP_Post->post_content          = $content;
+        $markup   = $WP_Post->post_content;
+        $markdown = $WP_Post->post_content_filtered;
 
-        if (!s::getOption('posts_enable')) {
-            $WP_Post->post_content_filtered = '';
-            //
-        } elseif ($WP_Post->post_type !== 'revision' // Sanity check.
-                && !in_array($WP_Post->post_type, s::getOption('post_types'), true)) {
-            $WP_Post->post_content_filtered = '';
-        }
-        return $content;
+        $WP_Post->post_content_filtered = $markup;
+        return $WP_Post->post_content   = $markdown;
     }
 
     /**
@@ -499,6 +494,36 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     protected function isRestoringPostRevision(): bool
     {
         return ($this->Wp->is_admin && s::isMenuPage('revision.php') && ($GLOBALS['action'] ?? '') === 'restore')
-            || c::hasBacktraceCaller(['wp_update_post', 'wp_restore_post_revision']);
+                || c::hasBacktraceCaller(['wp_update_post', 'wp_restore_post_revision']);
+    }
+
+    /**
+     * Add marker to string.
+     *
+     * @since 17xxxx Enhanced marker handling.
+     *
+     * @param string $string String to mark.
+     *
+     * @return string String w/ marker.
+     */
+    protected function addMarker(string $string): string
+    {
+        $string        = $this->stripMarker($string);
+        return $string = $this->marker."\n\n".$string;
+    }
+
+    /**
+     * Strip marker from string.
+     *
+     * @since 17xxxx Enhanced marker handling.
+     *
+     * @param string $string String to strip from.
+     *
+     * @return string String w/ marker stripped away.
+     */
+    protected function stripMarker(string $string): string
+    {
+        $string        = str_replace($this->marker."\n\n", '', $string);
+        return $string = str_replace($this->marker, '', $string);
     }
 }
