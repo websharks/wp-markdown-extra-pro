@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170324.39292'; //v//
+    const VERSION = '170324.39809'; //v//
 
     /**
      * Constructor.
@@ -185,6 +185,7 @@ class App extends SCoreClasses\App
         add_filter('edit_post_content', [$this->Utils->Markdown, 'onEditPostContent'], 10, 2);
         add_filter('_wp_post_revision_fields', [$this->Utils->Markdown, 'onWpPostRevisionFields']);
 
+        add_filter('the_content', [$this->Utils->Markdown, 'onTheContent'], -10001);
         add_filter('get_the_excerpt', [$this->Utils->Markdown, 'onGetTheExcerpt'], -10000);
 
         if (remove_filter('woocommerce_short_description', 'wc_format_product_short_description', 9999999)) {

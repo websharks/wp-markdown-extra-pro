@@ -146,7 +146,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `content_save_pre` hook.
+     * On `content_save_pre` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -222,7 +222,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `wp_insert_post_data` hook.
+     * On `wp_insert_post_data` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -339,7 +339,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `edit_post_content` hook.
+     * On `edit_post_content` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -369,7 +369,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `_wp_post_revision_fields` hook.
+     * On `_wp_post_revision_fields` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -388,7 +388,22 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `get_the_excerpt` hook.
+     * On `the_content` filter.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param string|scalar $content Markup.
+     *
+     * @return string Transformed content markup.
+     */
+    public function onTheContent($content): string
+    {
+        $content        = (string) $content;
+        return $content = $this->stripMarker($content);
+    }
+
+    /**
+     * On `get_the_excerpt` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -396,7 +411,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
      *
      * @return string Transformed excerpt markup.
      */
-    public function onGetTheExcerpt($excerpt)
+    public function onGetTheExcerpt($excerpt): string
     {
         $excerpt   = (string) $excerpt;
         $post_id   = (int) get_the_ID();
@@ -419,7 +434,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `woocommerce_short_description` hook.
+     * On `woocommerce_short_description` filter.
      *
      * @since 170126.30913 Initial release.
      *
@@ -427,7 +442,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
      *
      * @return string Transformed description markup.
      */
-    public function onWcShortDescription($description)
+    public function onWcShortDescription($description): string
     {
         $description = (string) $description;
         $post_id     = 0; // Not possible.
@@ -448,7 +463,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
-     * On `pre_comment_content` hook.
+     * On `pre_comment_content` filter.
      *
      * @since 170126.30913 Initial release.
      *

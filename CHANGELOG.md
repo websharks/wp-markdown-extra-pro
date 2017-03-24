@@ -8,6 +8,7 @@
 - Bug fix. When disabling visual editor globally, that should impact profile edits also.
 - Adding new methods `addMarker()` and `stripMarker()` for consistent marker handling.
 - Bug fix. Improve handling of empty content and avoid showing a marker when editing empty content.
+- Enhancing comment marker handling by automatically stripping the marker from raw HTML output by a theme.
 
 ## v170221.4504
 
