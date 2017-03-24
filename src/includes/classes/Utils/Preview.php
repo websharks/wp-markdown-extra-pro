@@ -53,9 +53,10 @@ class Preview extends SCoreClasses\SCore\Base\Core
 
         $html = a::transform($md, $post_id, ['cache' => false]);
 
-        if (has_filter('the_content', 'wptexturize')) {
-            $html = wptexturize($html);
-        }
+        // Now filter just like `the_content()` does.
+        // <https://developer.wordpress.org/reference/functions/the_content/>
+        $html = str_replace(']]>', ']]&gt;', apply_filters('the_content', $html));
+
         exit(json_encode(['success' => true, 'html' => $html]));
     }
 }
