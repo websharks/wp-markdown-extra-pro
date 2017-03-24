@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170306.56678'; //v//
+    const VERSION = '170324.33499'; //v//
 
     /**
      * Constructor.
@@ -172,6 +172,7 @@ class App extends SCoreClasses\App
             add_filter('the_editor', [$this->Utils->Editor, 'onTheEditor']);
 
             add_filter('user_can_richedit', [$this->Utils->Editor, 'onUserCanRichEdit']);
+            add_action('edit_user_profile', [$this->Utils->Editor, 'onEditUserProfile']);
             add_action('show_user_profile', [$this->Utils->Editor, 'onShowUserProfile']);
         }
         add_action('init', [$this->Utils->XmlRpc, 'onInit']);

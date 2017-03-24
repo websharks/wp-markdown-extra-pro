@@ -359,15 +359,36 @@ class Editor extends SCoreClasses\SCore\Base\Core
      * On `show_user_profile` hook.
      *
      * @since 170219.18502 Initial release.
+     *
+     * @param \WP_User User associated w/ profile.
      */
-    public function onShowUserProfile()
+    public function onShowUserProfile(\WP_User $WP_User)
     {
         if (!s::getOption('rich_editing_disable')) {
             return; // Not applicable.
         }
         echo '<script>';
         echo    '(function($){ ';
-        echo        "$('#rich_editing').attr('checked', 'checked').attr('disabled', 'disabled');";
+        echo        "$('#rich_editing').prop('checked', true).prop('disabled', true);";
+        echo    ' })(jQuery);';
+        echo '</script>';
+    }
+
+    /**
+     * On `edit_user_profile` hook.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param \WP_User User associated w/ profile.
+     */
+    public function onEditUserProfile(\WP_User $WP_User)
+    {
+        if (!s::getOption('rich_editing_disable')) {
+            return; // Not applicable.
+        }
+        echo '<script>';
+        echo    '(function($){ ';
+        echo        "$('#rich_editing').prop('checked', true).prop('disabled', true);";
         echo    ' })(jQuery);';
         echo '</script>';
     }
