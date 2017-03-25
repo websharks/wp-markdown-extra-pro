@@ -223,7 +223,7 @@ var WpMarkdownExtraEditor;
                     _this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
                     _this.$previewBody = _this.$previewDocument.find('body');
                     _this.$previewDiv = _this.$previewBody.find('#___div');
-                    var $body = _this.$previewBody; // Shorter reference.
+                    var $html = _this.$previewDocument, $body = _this.$previewBody; // Shorter.
                     if (_this.data.settings.hljsStyleUrl) {
                         var href = _this.data.settings.hljsStyleUrl, integrity = _this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(_this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';
                         $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
@@ -245,12 +245,13 @@ var WpMarkdownExtraEditor;
                         $body.append('<style>' + customPreviewStyles + '</style>');
                     }
                     if (_this.data.settings.previewTypekitId) {
-                        var previewTypekitId = _this.data.settings.previewTypekitId, $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
-                        $typekit.on('load', function (e) {
+                        var previewTypekitId = _this.data.settings.previewTypekitId, $typekit_1 = $('<scr' + 'ipt></scr' + 'ipt>');
+                        $html.addClass('wf-loading'); // Loading below.
+                        $typekit_1.on('load', function (e) {
+                            $body.append($typekit_1); // Executes Typekit JS so it's available for use.
                             $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
                         });
-                        $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
-                            $body.append($typekit); // Begin loading.
+                        $typekit_1.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
                     }
                     if (_this.data.settings.customPreviewScripts) {
                         var customPreviewScripts = _this.data.settings.customPreviewScripts;

@@ -199,7 +199,8 @@ namespace WpMarkdownExtraEditor {
           this.$previewBody = this.$previewDocument.find('body');
           this.$previewDiv = this.$previewBody.find('#___div');
 
-          let $body = this.$previewBody; // Shorter reference.
+          let $html = this.$previewDocument,
+            $body = this.$previewBody; // Shorter.
 
           if (this.data.settings.hljsStyleUrl) {
             let href = this.data.settings.hljsStyleUrl,
@@ -227,11 +228,13 @@ namespace WpMarkdownExtraEditor {
             let previewTypekitId = this.data.settings.previewTypekitId,
               $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
 
+            $html.addClass('wf-loading'); // Loading below.
+
             $typekit.on('load', (e) => { // When Typekit is ready.
+              $body.append($typekit); // Executes Typekit JS so it's available for use.
               $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
             });
-            $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
-              $body.append($typekit); // Begin loading.
+            $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
           }
           if (this.data.settings.customPreviewScripts) {
             let customPreviewScripts = this.data.settings.customPreviewScripts;
