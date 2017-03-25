@@ -701,7 +701,7 @@ namespace WpMarkdownExtraEditor {
 
       if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
         this.previewTypekitLoaded = true; // Only need to do this one time.
-        this.$previewWindow.Typekit.load({ async: true });
+        (<any>this.$previewWindow[ 0 ]).Typekit.load({ async: true });
       }
       if (this.data.settings.previewMethod === 'php') {
         if (this.previewXhr) {
