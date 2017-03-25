@@ -60,6 +60,7 @@ namespace WpMarkdownExtraEditor {
 
     public $previewWindow: JQuery;
     public $previewDocument: JQuery;
+    public $previewHtml: JQuery;
     public $previewBody: JQuery;
     public $previewDiv: JQuery;
 
@@ -196,10 +197,11 @@ namespace WpMarkdownExtraEditor {
 
           this.$previewWindow = $(iframe.contentWindow || document.defaultView);
           this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
+          this.$previewHtml = this.$previewDocument.find('html');
           this.$previewBody = this.$previewDocument.find('body');
           this.$previewDiv = this.$previewBody.find('#___div');
 
-          let $html = this.$previewDocument,
+          let $html = this.$previewHtml,
             $body = this.$previewBody; // Shorter.
 
           if (this.data.settings.hljsStyleUrl) {
@@ -233,8 +235,8 @@ namespace WpMarkdownExtraEditor {
             $typekit.on('load', (e) => { // When Typekit is ready.
               $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
             });
-            $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
-              $body.append($typekit); // Executes Typekit JS so it's available for use.
+            $body.append($typekit), // Executes Typekit JS so it's available for use.
+              $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
           }
           if (this.data.settings.customPreviewScripts) {
             let customPreviewScripts = this.data.settings.customPreviewScripts;
