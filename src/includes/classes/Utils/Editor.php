@@ -241,10 +241,15 @@ class Editor extends SCoreClasses\SCore\Base\Core
             'previewMethod'            => s::getOption('editor_preview'),
             'ajaxRestActionPreviewUrl' => s::restActionUrl('ajax.preview', ['post_id' => $post_id]),
 
-            'previewStylesUrl'    => $preview_styles_url,
-            'previewStylesSri'    => c::sri($preview_styles_url),
-            'customPreviewStyles' => s::getOption('editor_preview_styles'),
-            'previewUrl'          => c::appUrl('/client-s/js/admin/editor/preview/index.html?v='.urlencode($this->App::VERSION)),
+            'previewStylesUrl' => $preview_styles_url,
+            'previewStylesSri' => c::sri($preview_styles_url),
+
+            'previewTypekitId' => '', // Implemented for filters only.
+
+            'customPreviewStyles'  => s::getOption('editor_preview_styles'),
+            'customPreviewScripts' => s::getOption('editor_preview_scripts'),
+
+            'previewUrl' => c::appUrl('/client-s/js/admin/editor/preview/index.html?v='.urlencode($this->App::VERSION)),
         ]);
     }
 

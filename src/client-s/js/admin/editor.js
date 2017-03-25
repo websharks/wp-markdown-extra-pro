@@ -244,6 +244,16 @@ var WpMarkdownExtraEditor;
                         var customPreviewStyles = _this.data.settings.customPreviewStyles;
                         $body.append('<style>' + customPreviewStyles + '</style>');
                     }
+                    if (_this.data.settings.previewTypekitId) {
+                        var previewTypekitId = _this.data.settings.previewTypekitId, $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
+                        $body.append($typekit), $typekit.on('load', function (e) {
+                            $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
+                        }), $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
+                    }
+                    if (_this.data.settings.customPreviewScripts) {
+                        var customPreviewScripts = _this.data.settings.customPreviewScripts;
+                        $body.append('<scr' + 'ipt>' + customPreviewScripts + '</scr' + 'ipt>');
+                    }
                     deferred.resolve(); // Done here.
                 });
                 _this.$container.append(_this.$preview);

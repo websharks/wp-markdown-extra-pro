@@ -223,6 +223,17 @@ namespace WpMarkdownExtraEditor {
             let customPreviewStyles = this.data.settings.customPreviewStyles;
             $body.append('<style>' + customPreviewStyles + '</style>');
           }
+          if (this.data.settings.previewTypekitId) {
+            let previewTypekitId = this.data.settings.previewTypekitId,
+              $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
+            $body.append($typekit), $typekit.on('load', (e) => {
+              $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
+            }), $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
+          }
+          if (this.data.settings.customPreviewScripts) {
+            let customPreviewScripts = this.data.settings.customPreviewScripts;
+            $body.append('<scr' + 'ipt>' + customPreviewScripts + '</scr' + 'ipt>');
+          }
           deferred.resolve(); // Done here.
         });
         this.$container.append(this.$preview);

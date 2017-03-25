@@ -11,6 +11,7 @@
 - Enhancing comment marker handling by automatically stripping the marker from raw HTML output by a theme.
 - Enhancing PHP full preview option by applying all content filters after the Markdown transform.
 - Enhancing filter associated with theme integration, which allows a theme to set custom preview styles.
+- Adding compatibility with TypeKit for custom previews integrated by themes.
 
 ## v170221.4504
 
