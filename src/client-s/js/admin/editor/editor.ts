@@ -203,12 +203,12 @@ namespace WpMarkdownExtraEditor {
 
           if (this.data.settings.hljsStyleUrl) {
             let href = this.data.settings.hljsStyleUrl,
-              integrity = ' integrity="' + _.escape(this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"';
+              integrity = this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';
             $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
           }
           if (this.data.settings.previewStylesUrl) {
             let href = this.data.settings.previewStylesUrl,
-              integrity = ' integrity="' + _.escape(this.data.settings.previewStylesSri) + '" crossorigin="anonymous"';
+              integrity = this.data.settings.previewStylesSri ? ' integrity="' + _.escape(this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
             $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
           }
           if (this.data.settings.hljsBgColor) {

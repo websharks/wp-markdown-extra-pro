@@ -1,14 +1,13 @@
 /*
  * Requires a local copy of the WP Sharks Core.
  */
+@import url('//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css');
 @import '../../../../../../../wp-sharks-core/src/client-s/css/base';
 
 /*
  * Preview styles.
  */
 #___div {
-  margin:                     1em;
-
   @include hljs-pre-code;
 
   abbr[title] {

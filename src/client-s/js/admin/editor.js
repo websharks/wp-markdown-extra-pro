@@ -1,30 +1,26 @@
 "use strict";
 var WpMarkdownExtraEditor;
 (function (WpMarkdownExtraEditor) {
-    ;
-})(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));
-"use strict";
-var WpMarkdownExtraEditor;
-(function (WpMarkdownExtraEditor) {
     var $ = jQuery;
     var MediaHtml = (function () {
         function MediaHtml(ed) {
-            this.ed = ed;
+            this.ed = ed; // Parent class.
         }
         MediaHtml.prototype.format = function (html) {
             var _this = this;
             if (/\[gallery\s/i.test(html)) {
-                return html;
+                return html; // Use shortcode.
             }
             else if (!/<img\s.*?src=['"]([^'"]+)/i.test(html)) {
-                return html;
+                return html; // Unable to locate `src=""`.
             }
-            var r = '';
+            var r = ''; // Initialize response.
             $.each(html.split(/[\r\n]+/), function (i, html) {
                 var src, href, alt, cls, align, width;
                 if (!(src = /<img\s.*?src=['"]([^'"]+)/i.exec(html))) {
-                    return;
+                    return; // Unable to locate `src=""`.
                 }
+                // ---
                 href = /<a\s.*?href=['"]([^'"]+)/i.exec(html);
                 alt = /<img\s.*?alt=['"]([^'"]+)/i.exec(html);
                 cls = /<img\s.*?class=['"]([^'"]+)/i.exec(html);
@@ -36,10 +32,12 @@ var WpMarkdownExtraEditor;
                 src[1] = src[1].replace(/^https?:\/{2}/i, '//');
                 cls = !cls && align ? align : cls;
                 if (cls && /alignnone/i.test(cls[1])) {
-                    cls = null;
+                    cls = null; // Ignore `alignnone`.
                 }
-                r += '\n';
+                // ---
+                r += '\n'; // Initialize.
                 if (_this.ed.data.settings.mediaInserts === 'html') {
+                    // Pure HTML markup in this case.
                     if (href) {
                         r += '<a href="' + _.escape(href[1]) + '">';
                     }
@@ -117,13 +115,19 @@ var WpMarkdownExtraEditor;
     }());
     WpMarkdownExtraEditor.MediaHtml = MediaHtml;
 })(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));
+/// <reference path="./includes/media-html.ts" />
 "use strict";
 var WpMarkdownExtraEditor;
 (function (WpMarkdownExtraEditor) {
     var $ = jQuery;
     var Editor = (function () {
+        /*
+         * Constructor.
+         */
         function Editor() {
             var _this = this;
+            // This long global comes from PHP.
+            // It contains instance-specific config data.
             this.data = sxz4aq7w68twt86g8ye5m3np7nrtguw8EditorData;
             this.cns = this.data.brand.slug + '-editor',
                 this.ens = '.' + this.data.brand.slug + '-editor';
@@ -132,11 +136,17 @@ var WpMarkdownExtraEditor;
                 this.setupChain = $.Deferred().resolve().promise();
             $(document).ready(function () { return _this.onDomReady(); });
         }
+        /*
+         * On DOM ready.
+         */
         Editor.prototype.onDomReady = function () {
             this.$textarea = $('.' + this.cns + '-textarea');
             if (this.$textarea.length)
                 this.init();
         };
+        /*
+         * Init routines.
+         */
         Editor.prototype.init = function () {
             var _this = this;
             this.initChain
@@ -178,25 +188,25 @@ var WpMarkdownExtraEditor;
                 this.$container.addClass(this.cns + '-container');
             if (this.data.settings.ideEnable) {
                 this.$ide = $('<textarea class="' + _.escape(this.cns + '-ide') + '"></textarea>'),
-                    this.$textarea.before(this.$ide);
+                    this.$textarea.before(this.$ide); // Insert before editor.
             }
             this.$statusInfo = this.$area.find('#post-status-info'),
                 this.$statusInfo.css({ visibility: 'hidden' }),
                 this.$statusInfo.addClass(this.cns + '-status-info');
             this.$textareaResizeHandle = this.$area.find('#content-resize-handle'),
-                this.$textareaResizeHandle.hide();
+                this.$textareaResizeHandle.hide(); // Disallow use of this core resizer.
             this.$preview = $('<iframe class="' + _.escape(this.cns + '-preview') + '" src="' + _.escape(this.data.settings.previewUrl) + '"></iframe>');
             this.$loadingStyles = this.$area.find('.' + this.cns + '-loading-styles'),
                 this.$loading = this.$area.find('.' + this.cns + '-loading');
         };
         Editor.prototype.initIde = function () {
             if (!this.data.settings.ideEnable) {
-                return;
-            }
+                return; // IDE not enabled.
+            } // i.e., Disabled via options.
             this.ide = ace.edit(this.$ide[0]);
             if (this.data.settings.ide.maxLines === 'Infinity') {
                 this.data.settings.ide.maxLines = Infinity;
-            }
+            } // Set JavaScript `Infinity` value.
             this.ide.setOptions(this.data.settings.ide);
             this.ide.setStyle(this.cns + '-ide');
             this.ide.$blockScrolling = Infinity;
@@ -213,13 +223,13 @@ var WpMarkdownExtraEditor;
                     _this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
                     _this.$previewBody = _this.$previewDocument.find('body');
                     _this.$previewDiv = _this.$previewBody.find('#___div');
-                    var $body = _this.$previewBody;
+                    var $body = _this.$previewBody; // Shorter reference.
                     if (_this.data.settings.hljsStyleUrl) {
-                        var href = _this.data.settings.hljsStyleUrl, integrity = ' integrity="' + _.escape(_this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"';
+                        var href = _this.data.settings.hljsStyleUrl, integrity = _this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(_this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';
                         $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
                     }
                     if (_this.data.settings.previewStylesUrl) {
-                        var href = _this.data.settings.previewStylesUrl, integrity = ' integrity="' + _.escape(_this.data.settings.previewStylesSri) + '" crossorigin="anonymous"';
+                        var href = _this.data.settings.previewStylesUrl, integrity = _this.data.settings.previewStylesSri ? ' integrity="' + _.escape(_this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
                         $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
                     }
                     if (_this.data.settings.hljsBgColor) {
@@ -234,7 +244,7 @@ var WpMarkdownExtraEditor;
                         var customPreviewStyles = _this.data.settings.customPreviewStyles;
                         $body.append('<style>' + customPreviewStyles + '</style>');
                     }
-                    deferred.resolve();
+                    deferred.resolve(); // Done here.
                 });
                 _this.$container.append(_this.$preview);
             });
@@ -243,6 +253,9 @@ var WpMarkdownExtraEditor;
         Editor.prototype.initComplete = function () {
             this.$area.trigger('initComplete' + this.ens);
         };
+        /*
+         * Setup routines.
+         */
         Editor.prototype.setup = function () {
             var _this = this;
             this.setupChain
@@ -256,8 +269,8 @@ var WpMarkdownExtraEditor;
         Editor.prototype.setupTextarea = function () {
             var _this = this;
             if (this.data.settings.ideEnable) {
-                return;
-            }
+                return; // Using the IDE.
+            } // i.e., Enabled via options.
             this.scrollLockingEnable();
             this.$textarea.css({
                 'font-size': this.data.settings.fontSize,
@@ -270,13 +283,13 @@ var WpMarkdownExtraEditor;
         Editor.prototype.setupIde = function () {
             var _this = this;
             if (!this.data.settings.ideEnable) {
-                return;
-            }
+                return; // IDE not enabled.
+            } // i.e., Disabled via options.
             this.scrollLockingEnable();
             var updateDebounce = _.debounce(function () {
                 _this.$textarea.val(_this.docValue());
                 _this.$textarea.trigger('input', 'ide-update' + _this.ens);
-            }, 1000);
+            }, 1000); // `.trigger('input')` = compatibility w/ WP word-counter.
             var previewDelay = this.data.settings.previewMethod === 'php' ? 1000 : 250, previewDebounce = _.debounce(function () { return _this.previewRender(); }, previewDelay);
             this.ide.session.on('change', updateDebounce),
                 this.ide.session.on('change', previewDebounce);
@@ -284,13 +297,14 @@ var WpMarkdownExtraEditor;
                 if (via === 'ide-update' + _this.ens)
                     return;
                 _this.ide.focus(), _this.docValue(_this.$textarea.val());
-            });
+            }); // e.g., Restoration via `wp.autosave` `execCommand()`.
             $('#post-preview').on('click' + this.ens, function () { return _this.$textarea.val(_this.docValue()); }),
                 this.$form.on('submit' + this.ens, function () { return _this.$textarea.val(_this.docValue()); });
         };
         Editor.prototype.setupContainer = function () {
             var _this = this;
-            var delay = 250, debounce = _.debounce(function (e) { return _this.adjustContainer(e); }, delay);
+            var delay = 250, // Always the same for container resizes.
+            debounce = _.debounce(function (e) { return _this.adjustContainer(e); }, delay);
             $(window).on('resize' + this.ens, debounce);
         };
         Editor.prototype.setupMediaBtn = function () {
@@ -302,13 +316,14 @@ var WpMarkdownExtraEditor;
                 }
                 html = _this.mediaHtml.format(html);
                 if (_this.ide) {
-                    _this.ide.insert(html);
+                    _this.ide.insert(html); // Insert IDE markup.
                 }
                 else
-                    sendToEditor(html);
+                    sendToEditor(html); // Core handler.
             };
         };
         Editor.prototype.setupToolbar = function () {
+            // Generale all of the toolbar buttons.
             var _this = this;
             this.$previewBtn = $('<button type="button" class="-preview button" title="' + _.escape(this.data.i18n.preview + ' ' + this.data.i18n.toggle) + '"><span class="-icon sharkicon sharkicon-eye"></span></button>');
             this.$fullscreenSplitPreviewBtn = $('<button type="button" class="-fullscreen-split button" title="' + _.escape(this.data.i18n.fullscreenSplitPreview + ' ' + this.data.i18n.toggle) + '"><span class="-icon sharkicon sharkicon-columns"></span></button>');
@@ -318,7 +333,9 @@ var WpMarkdownExtraEditor;
             this.$publishBtn = $('<button type="button" class="-publish button" title="' + _.escape(this.data.i18n.publish) + '"><span class="-icon sharkicon sharkicon-thumb-tack"></span></button>');
             this.$updateBtn = $('<button type="button" class="-update button" title="' + _.escape(this.data.i18n.update) + '"><span class="-icon sharkicon sharkicon-thumb-tack"></span></button>');
             this.$trashBtn = $('<button type="button" class="-trash button" title="' + _.escape(this.data.i18n.trash) + '"><span class="-icon sharkicon sharkicon-trash"></span></button>');
+            // Build a list of visible targets.
             var $sitePreviewTarget = $('#preview-action:visible > #post-preview:visible'), $saveDraftTarget = $('#save-action:visible > #save-post:visible'), $publishTarget = $('#publishing-action:visible > #publish:visible'), $trashTarget = $('#delete-action:visible > a:visible');
+            // Append buttons conditionally.
             this.$toolbarBtns.append(this.$previewBtn);
             this.$toolbarBtns.append(this.$fullscreenSplitPreviewBtn);
             if ($sitePreviewTarget.length) {
@@ -333,12 +350,13 @@ var WpMarkdownExtraEditor;
                 }
                 else {
                     this.$toolbarBtns.append(this.$publishBtn);
-                }
+                } // Based on there being a post ID.
             }
             if ($trashTarget.length) {
                 this.$toolbarBtns.append(this.$trashBtn);
             }
             this.$toolbarBtns.append(this.$fullscreenBtn);
+            // Setup button click handlers.
             this.$previewBtn.on('click' + this.ens, function (e) {
                 e.stopImmediatePropagation(), e.preventDefault();
                 switch (_this.currentMode) {
@@ -434,10 +452,13 @@ var WpMarkdownExtraEditor;
                 _this.$toolbar.css({ visibility: '' }),
                     _this.$container.css({ visibility: '' }),
                     _this.$statusInfo.css({ visibility: '' });
-                _this.prepareDefaultMode();
+                _this.prepareDefaultMode(); // Let's rock.
                 _this.$area.trigger('setupComplete' + _this.ens);
             });
         };
+        /*
+         * Document routines.
+         */
         Editor.prototype.docValue = function (value) {
             if (value !== undefined) {
                 if (this.ide) {
@@ -454,9 +475,12 @@ var WpMarkdownExtraEditor;
                 else {
                     value = this.$textarea.val();
                 }
-            }
+            } // In either case, return normalized value.
             return $.trim(value.replace(/(?:\r\n|\r)/g, '\n'));
         };
+        /*
+         * Body overflow routines.
+         */
         Editor.prototype.fullscreenBodyOverflow = function (overflow) {
             if (overflow === false) {
                 this.$body.css({ overflow: 'hidden', width: 'calc(100% - ' + this.scrollbarWidth + 'px)' });
@@ -465,7 +489,12 @@ var WpMarkdownExtraEditor;
                 this.$body.css({ overflow: '', width: '' });
             }
         };
+        /*
+         * Adjust container.
+         */
         Editor.prototype.adjustContainer = function (e) {
+            // NOTE: Do not resize container, only constrain as necessary.
+            // i.e., The height, width, etc, should be handled via CSS.
             if (this.currentMode.indexOf('fullscreen') !== -1) {
                 var toolbarHeight = this.$toolbar.outerHeight();
                 this.$container.css({
@@ -474,13 +503,16 @@ var WpMarkdownExtraEditor;
             }
             else {
                 this.$container.css({
-                    'max-height': ''
+                    'max-height': '' // Remove.
                 });
-            }
+            } // And maybe handle IDE resize also.
             if (this.ide && (!e || e.type !== 'resize')) {
                 this.ide.resize(true);
-            }
+            } // Ace has its own resizer.
         };
+        /*
+         * Mode routines.
+         */
         Editor.prototype.prepareDefaultMode = function () {
             this.$html.removeClass(this.previewClass),
                 this.$html.removeClass(this.fullscreenClass),
@@ -576,12 +608,17 @@ var WpMarkdownExtraEditor;
             this.previewScrollSyncDisable();
             this.previewRender('');
         };
+        /*
+         * Markdown routines.
+         */
         Editor.prototype.previewRender = function (md) {
             var _this = this;
             if (md === '')
                 return this.$previewDiv.html('');
+            // Otherwise, only if visible.
             if (!this.$preview.is(':visible'))
-                return;
+                return; // Not applicable.
+            // If not passed in, detect automatically.
             if (md === undefined)
                 md = this.docValue();
             if (!md)
@@ -598,7 +635,7 @@ var WpMarkdownExtraEditor;
                     contentType: 'application/octet-stream',
                     url: this.data.settings.ajaxRestActionPreviewUrl,
                     success: function (r) {
-                        var html = r.html;
+                        var html = r.html; // Response.
                         var $div = $('<div>' + html + '</div>');
                         _this.hljsNode($div);
                         _this.$previewDiv.html($div.html());
@@ -612,8 +649,13 @@ var WpMarkdownExtraEditor;
                     xhtmlOut: true,
                     breaks: true,
                     linkify: false,
+                    // Do not auto linkify URLs.
+                    // This is off by default in PHP also.
                     quotes: '“”‘’',
                     typographer: true,
+                    // This is on for quotes/dashes only.
+                    // Note: This typographer setting transforms things like (sm) (tm) into symbols too.
+                    // Nice, but SmartyPants in PHP does not do this.
                     langPrefix: 'lang-',
                     highlight: this.hljsCode,
                 }).use(markdownItAttrs)
@@ -644,7 +686,7 @@ var WpMarkdownExtraEditor;
                 else {
                     hljs.highlightBlock(obj);
                 }
-            });
+            }); // All `pre > code` in the node.
         };
         Editor.prototype.hljsCode = function (code, lang) {
             if (code && lang && $.inArray(lang, ['none', 'plain', 'text', 'txt']) === -1) {
@@ -655,6 +697,9 @@ var WpMarkdownExtraEditor;
                 code + '</code>' +
                 '</pre>';
         };
+        /*
+         * Scroll-lock routines.
+         */
         Editor.prototype.scrollLockingEnable = function () {
             var _this = this;
             this.scrollLockingDisable();
@@ -663,7 +708,8 @@ var WpMarkdownExtraEditor;
                 this.scrollLockHandler = function (e) {
                     var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollHeight = $sb_1.prop('scrollHeight'), innerHeight = $sb_1.innerHeight(), scrollTop = $sb_1.scrollTop();
                     if (scrollHeight - innerHeight <= 0) {
-                        return;
+                        return; // No reason to lock.
+                        //
                     }
                     else if ((direction === 'up' && scrollTop + deltaY <= 0) ||
                         (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)) {
@@ -678,7 +724,8 @@ var WpMarkdownExtraEditor;
                 this.scrollLockHandler = function (e) {
                     var deltaY = e.originalEvent.deltaY, direction = deltaY < 0 ? 'up' : 'down', scrollHeight = $ta_1.prop('scrollHeight'), innerHeight = $ta_1.innerHeight(), scrollTop = $ta_1.scrollTop();
                     if (scrollHeight - innerHeight <= 0) {
-                        return;
+                        return; // No reason to lock.
+                        //
                     }
                     else if ((direction === 'up' && scrollTop + deltaY <= 0) ||
                         (direction === 'down' && scrollTop + deltaY >= scrollHeight - innerHeight)) {
@@ -691,7 +738,7 @@ var WpMarkdownExtraEditor;
         };
         Editor.prototype.scrollLockingDisable = function () {
             if (!this.scrollLockHandler)
-                return;
+                return; // Nothing to do.
             if (this.ide) {
                 var $ct = this.$ide.find('> .ace_scroller > .ace_content');
                 $ct.off('wheel' + this.ens + '-scroll-lock', this.scrollLockHandler);
@@ -700,6 +747,9 @@ var WpMarkdownExtraEditor;
                 this.$textarea.off('wheel' + this.ens + '-scroll-lock', this.scrollLockHandler);
             }
         };
+        /*
+         * Scroll-sync routines.
+         */
         Editor.prototype.previewScrollSyncEnable = function () {
             this.previewScrollSyncDisable();
             this.$previewBody.scrollTop(0);
@@ -709,22 +759,22 @@ var WpMarkdownExtraEditor;
                 this.previewScrollSyncHandler = (function () {
                     var percentage = $sb_2.scrollTop() / ($sb_2.prop('scrollHeight') - $sb_2.outerHeight());
                     $pw_1[0].scrollTo(0, Math.round(percentage * ($pb_1.prop('scrollHeight') - $pb_1.outerHeight())));
-                }).bind(this);
+                }).bind(this); // Bind callback handler.
                 this.ide.session.on('changeScrollTop', this.previewScrollSyncHandler);
             }
             else {
                 this.$textarea.scrollTop(0);
-                var $pw_2 = this.$previewWindow, $pb_2 = this.$previewBody, $ta_2 = this.$textarea;
+                var $pw_2 = this.$previewWindow, $pb_2 = this.$previewBody, $ta_2 = this.$textarea; // Just a simple textarea.
                 this.previewScrollSyncHandler = (function () {
                     var percentage = $ta_2.scrollTop() / ($ta_2.prop('scrollHeight') - $ta_2.outerHeight());
                     $pw_2[0].scrollTo(0, Math.round(percentage * ($pb_2.prop('scrollHeight') - $pb_2.outerHeight())));
-                }).bind(this);
+                }).bind(this); // Bind callback handler.
                 this.$textarea.on('scroll' + this.ens + this.ens + '-preview-scroll-sync', this.previewScrollSyncHandler);
             }
         };
         Editor.prototype.previewScrollSyncDisable = function () {
             if (!this.previewScrollSyncHandler)
-                return;
+                return; // Nothing to do.
             if (this.ide) {
                 this.ide.session.removeListener('changeScrollTop', this.previewScrollSyncHandler);
             }
@@ -732,11 +782,14 @@ var WpMarkdownExtraEditor;
                 this.$textarea.off('scroll' + this.ens + this.ens + '-preview-scroll-sync', this.previewScrollSyncHandler);
             }
         };
+        /*
+         * Scroll-expand routines.
+         */
         Editor.prototype.automaticScrollExpand = function (e) {
             if (this.ide)
-                return;
+                return; // Not applicable.
             if (e.which !== 13)
-                return;
+                return; // Not enter key.
             if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey)
                 return;
             var start = this.$textarea.prop('selectionStart'), end = this.$textarea.prop('selectionEnd');
@@ -744,24 +797,30 @@ var WpMarkdownExtraEditor;
                 this.$textarea.scrollTop(this.$textarea.prop('scrollHeight'));
         };
         Object.defineProperty(Editor.prototype, "scrollbarWidth", {
+            /*
+             * Scrollbar width property.
+             */
             get: function () {
                 if (this._scrollbarWidth !== undefined) {
                     return this._scrollbarWidth;
-                }
+                } // Already determined this.
                 var $div = $('<div></div>');
                 $div.css({
                     overflow: 'scroll',
                     width: '100px', height: '100px',
                     position: 'absolute', top: '-9999px',
                 });
-                this.$body.append($div);
+                this.$body.append($div); // Add to DOM temporarily.
                 this._scrollbarWidth = $div.outerWidth() - $div.prop('clientWidth');
-                $div.remove();
+                $div.remove(); // We can cleanup temporary div now.
                 return this._scrollbarWidth;
             },
             enumerable: true,
             configurable: true
         });
+        /*
+         * Debug routines.
+         */
         Editor.prototype.log = function () {
             var _this = this;
             var log = [];
@@ -774,4 +833,9 @@ var WpMarkdownExtraEditor;
     }());
     WpMarkdownExtraEditor.Editor = Editor;
     WpMarkdownExtraEditor.WpMarkdownExtraEditorInstance = new Editor();
+})(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));
+"use strict";
+var WpMarkdownExtraEditor;
+(function (WpMarkdownExtraEditor) {
+    ;
 })(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));

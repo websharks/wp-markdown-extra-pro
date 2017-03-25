@@ -10,6 +10,7 @@
 - Bug fix. Improve handling of empty content and avoid showing a marker when editing empty content.
 - Enhancing comment marker handling by automatically stripping the marker from raw HTML output by a theme.
 - Enhancing PHP full preview option by applying all content filters after the Markdown transform.
+- Enhancing filter associated with theme integration, which allows a theme to set custom preview styles.
 
 ## v170221.4504
 
