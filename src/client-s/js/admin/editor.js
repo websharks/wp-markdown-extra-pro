@@ -636,7 +636,7 @@ var WpMarkdownExtraEditor;
                 return this.$previewDiv.html('');
             if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
                 this.previewTypekitLoaded = true; // Only need to do this one time.
-                this.$previewBody.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
+                this.$previewWindow.Typekit.load({ async: true });
             }
             if (this.data.settings.previewMethod === 'php') {
                 if (this.previewXhr) {
