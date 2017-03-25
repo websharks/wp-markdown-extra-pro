@@ -248,9 +248,6 @@ var WpMarkdownExtraEditor;
                     if (_this.data.settings.previewTypekitId) {
                         var previewTypekitId = _this.data.settings.previewTypekitId, $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
                         $html.addClass('wf-loading'); // Loading below.
-                        $typekit.on('load', function (e) {
-                            $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
-                        });
                         $body.append($typekit),
                             $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
                     }
@@ -637,6 +634,10 @@ var WpMarkdownExtraEditor;
                 md = this.docValue();
             if (!md)
                 return this.$previewDiv.html('');
+            if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
+                this.previewTypekitLoaded = true; // Only need to do this one time.
+                this.$previewBody.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
+            }
             if (this.data.settings.previewMethod === 'php') {
                 if (this.previewXhr) {
                     this.previewXhr.abort();

@@ -67,6 +67,7 @@ namespace WpMarkdownExtraEditor {
     protected _scrollbarWidth: number;
     protected scrollLockHandler: (_: any) => any;
     protected previewScrollSyncHandler: (_: any) => any;
+    protected previewTypekitLoaded: boolean;
     protected previewXhr: XMLHttpRequest;
 
     public currentMode: string;
@@ -231,10 +232,6 @@ namespace WpMarkdownExtraEditor {
               $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
 
             $html.addClass('wf-loading'); // Loading below.
-
-            $typekit.on('load', (e) => { // When Typekit is ready.
-              $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
-            });
             $body.append($typekit), // Executes Typekit JS so it's available for use.
               $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
           }
@@ -702,6 +699,10 @@ namespace WpMarkdownExtraEditor {
       if (!md) // Nothing to preview.
         return this.$previewDiv.html('');
 
+      if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
+        this.previewTypekitLoaded = true; // Only need to do this one time.
+        this.$previewBody.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
+      }
       if (this.data.settings.previewMethod === 'php') {
         if (this.previewXhr) {
           this.previewXhr.abort();
