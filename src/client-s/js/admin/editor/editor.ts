@@ -231,10 +231,10 @@ namespace WpMarkdownExtraEditor {
             $html.addClass('wf-loading'); // Loading below.
 
             $typekit.on('load', (e) => { // When Typekit is ready.
-              $body.append($typekit); // Executes Typekit JS so it's available for use.
               $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
             });
-            $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
+            $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
+              $body.append($typekit); // Executes Typekit JS so it's available for use.
           }
           if (this.data.settings.customPreviewScripts) {
             let customPreviewScripts = this.data.settings.customPreviewScripts;

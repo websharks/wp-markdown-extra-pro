@@ -245,13 +245,13 @@ var WpMarkdownExtraEditor;
                         $body.append('<style>' + customPreviewStyles + '</style>');
                     }
                     if (_this.data.settings.previewTypekitId) {
-                        var previewTypekitId = _this.data.settings.previewTypekitId, $typekit_1 = $('<scr' + 'ipt></scr' + 'ipt>');
+                        var previewTypekitId = _this.data.settings.previewTypekitId, $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
                         $html.addClass('wf-loading'); // Loading below.
-                        $typekit_1.on('load', function (e) {
-                            $body.append($typekit_1); // Executes Typekit JS so it's available for use.
+                        $typekit.on('load', function (e) {
                             $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
                         });
-                        $typekit_1.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
+                        $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
+                            $body.append($typekit); // Executes Typekit JS so it's available for use.
                     }
                     if (_this.data.settings.customPreviewScripts) {
                         var customPreviewScripts = _this.data.settings.customPreviewScripts;
