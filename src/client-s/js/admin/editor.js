@@ -246,9 +246,11 @@ var WpMarkdownExtraEditor;
                     }
                     if (_this.data.settings.previewTypekitId) {
                         var previewTypekitId = _this.data.settings.previewTypekitId, $typekit = $('<scr' + 'ipt></scr' + 'ipt>');
-                        $body.append($typekit), $typekit.on('load', function (e) {
+                        $typekit.on('load', function (e) {
                             $body.append('<scr' + 'ipt>try{Typekit.load({ async: true });}catch(e){}</scr' + 'ipt>');
-                        }), $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js');
+                        });
+                        $typekit.attr('src', '//use.typekit.net/' + encodeURIComponent(previewTypekitId) + '.js'),
+                            $body.append($typekit); // Begin loading.
                     }
                     if (_this.data.settings.customPreviewScripts) {
                         var customPreviewScripts = _this.data.settings.customPreviewScripts;
