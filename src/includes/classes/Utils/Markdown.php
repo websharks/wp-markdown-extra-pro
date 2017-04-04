@@ -36,6 +36,15 @@ use function get_defined_vars as vars;
 class Markdown extends SCoreClasses\SCore\Base\Core
 {
     /**
+     * Raw tag.
+     *
+     * @since 17xxxx
+     *
+     * @type string
+     */
+    protected $raw_tag;
+
+    /**
      * Marker.
      *
      * @since 17xxxx
@@ -68,6 +77,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         // different when `wp_slash()` is applied. That would add unnecessary complexity.
         // No single quote ('), double quote ("), backslash (\) or NUL (NULL byte).
 
+        $this->raw_tag        = '<!--raw-->'; // MD bypass.
         $this->marker         = '<!--'.$this->App->Config->©brand['©slug'].'.html-->';
         $this->csp_Tokenizers = []; // Initialize tokenizers.
     }
@@ -85,6 +95,11 @@ class Markdown extends SCoreClasses\SCore\Base\Core
      */
     public function __invoke(string $md, int $post_id = 0, array $args = []): string
     {
+        if (!($md = c::mbTrim($md))) {
+            return $md; // Nothing to do.
+        } elseif (mb_stripos($md, $this->raw_tag) !== false) {
+            return $md; // Raw, leave it as-is.
+        }
         $default_args = [
             'cache'               => false,
             'cache_expires_after' => '30 days',
@@ -99,9 +114,6 @@ class Markdown extends SCoreClasses\SCore\Base\Core
         $cache_expires_after = (string) $args['cache_expires_after'];
         $cache_expires_after = $cache_expires_after ?: $default_args['cache_expires_after'];
 
-        if (!($md = c::mbTrim($md))) {
-            return $md; // Nothing to do.
-        }
         if ($cache) { // Cache markdown?
             $cache_sha1          = sha1($md.$post_id.serialize($args));
             $cache_sha1_shard_id = c::sha1ModShardId($cache_sha1, true);

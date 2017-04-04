@@ -12,6 +12,7 @@
 - Enhancing PHP full preview option by applying all content filters after the Markdown transform.
 - Enhancing filter associated with theme integration, which allows a theme to set custom preview styles.
 - Adding compatibility with TypeKit for custom previews integrated by themes.
+- Adding support for `<!--raw-->` MD bypass tag.
 
 ## v170221.4504
 
