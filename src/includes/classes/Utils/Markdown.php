@@ -97,8 +97,9 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     {
         if (!($md = c::mbTrim($md))) {
             return $md; // Nothing to do.
-        } elseif (mb_stripos($md, $this->raw_tag) !== false) {
-            return $md; // Raw, leave it as-is.
+        } elseif (mb_stripos($md, $this->raw_tag) === 0) {
+            $md        = mb_substr($md, mb_strlen($this->raw_tag));
+            return $md = c::mbTrim($md); // Trim again.
         }
         $default_args = [
             'cache'               => false,
