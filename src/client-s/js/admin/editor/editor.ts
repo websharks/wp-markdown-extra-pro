@@ -64,6 +64,8 @@ namespace WpMarkdownExtraEditor {
     public $previewBody: JQuery;
     public $previewDiv: JQuery;
 
+    protected mdIt: any;
+
     protected _scrollbarWidth: number;
     protected scrollLockHandler: (_: any) => any;
     protected previewScrollSyncHandler: (_: any) => any;
@@ -77,9 +79,7 @@ namespace WpMarkdownExtraEditor {
      */
 
     constructor() {
-      // This long global comes from PHP.
-      // It contains instance-specific config data.
-      this.data = sxz4aq7w68twt86g8ye5m3np7nrtguw8EditorData;
+      this.data = wpMarkdownExtraEditorData;
 
       this.cns = this.data.brand.slug + '-editor',
         this.ens = '.' + this.data.brand.slug + '-editor';
@@ -721,59 +721,75 @@ namespace WpMarkdownExtraEditor {
             let html = r.html; // Response.
             let $div = $('<div>' + html + '</div>');
 
-            this.hljsNode($div);
+            this.hljsInHtmlNode($div);
             this.$previewDiv.html($div.html());
           },
           error: (e) => this.log('error', e)
         });
       } else {
-        let mdIt = markdownit({
-          html: true,
-          xhtmlOut: true,
-          breaks: true,
+        if (!this.mdIt) {
+          this.mdIt = markdownit({
+            html: true,
+            xhtmlOut: true,
+            breaks: true,
 
-          linkify: false,
-          // Do not auto linkify URLs.
-          // This is off by default in PHP also.
+            linkify: false,
+            // Do not auto linkify URLs.
+            // This is off by default in PHP also.
 
-          quotes: '“”‘’',
-          typographer: true,
-          // This is on for quotes/dashes only.
-          // Note: This typographer setting transforms things like (sm) (tm) into symbols too.
-          // Nice, but SmartyPants in PHP does not do this.
+            quotes: '“”‘’',
+            typographer: true,
+            // This is on for quotes/dashes only.
+            // Note: This typographer setting transforms things like (sm) (tm) into symbols too.
+            // Nice, but SmartyPants in PHP does not do this.
 
-          langPrefix: 'lang-',
-          highlight: this.hljsCode,
+            langPrefix: 'lang-',
+            highlight: this.mdItTransformHljs,
 
-          // Now add extensions.
-        }).use(markdownItAttrs)
-          .use(markdownitDeflist)
-          .use(markdownitAbbr)
-          .use(markdownitFootnote);
+            // Now add extensions.
+          }).use(markdownItAttrs)
+            .use(markdownitDeflist)
+            .use(markdownitAbbr)
+            .use(markdownitFootnote);
 
-        mdIt.renderer.rules.heading_open = function (tokens: any, idx: number, options: any, env: any, slf: any) {
-          let raw = tokens[ idx + 1 ].children.reduce((a: string, t: any) => a + t.content, '');
+          this.mdIt.renderer.rules.heading_open = function (tokens: any, idx: number, options: any, env: any, slf: any) {
+            let token = tokens[ idx ],
+              nextToken = tokens[ idx + 1 ];
 
-          let id = raw.toLowerCase();
-          id = id.replace(/[^\w]+/g, '-');
-          id = 'j2h.' + id.replace(/(?:^[\s\-]+|[\s\-]+$)/g, '');
+            let raw = nextToken.children.reduce((a: string, t: any) => a + t.content, ''),
+              id = raw.toLowerCase(); // Based on raw heading value.
 
-          tokens[ idx ].attrs = tokens[ idx ].attrs || [],
-            tokens[ idx ].attrs.push([ 'id', id ]);
+            id = id.replace(/[^\w]+/g, '-'),
+              id = 'j2h.' + id.replace(/(?:^[\s\-]+|[\s\-]+$)/g, '');
 
-          return slf.renderToken.apply(slf, arguments);
-        };
-        let html = mdIt.render(md);
+            token.attrs = token.attrs || [],
+              token.attrs.push([ 'id', id ]);
+
+            return slf.renderToken.apply(slf, arguments);
+          };
+
+          this.mdIt.renderer.rules.code_block = function (tokens: any, idx: number, options: any, env: any, slf: any) {
+            let token = tokens[ idx ],
+              lang = $.trim(token.info || '').split(/\s+/g)[ 0 ],
+              attrs = slf.renderAttrs(token);
+
+            return options.highlight(token.content, lang, attrs);
+          };
+          this.mdIt.renderer.rules.fence = this.mdIt.renderer.rules.code_block;
+        }
+        let html = this.mdIt.render(md);
         this.$previewDiv.html(html);
       }
     }
 
-    protected hljsNode($node: JQuery) {
+    protected hljsInHtmlNode($node: JQuery) {
       let exclusions = '.no-hljs, .no-highlight, .nohighlight',
         plainText = '.lang-none, .lang-plain, .lang-text, .lang-txt, .none, .plain, .text, .txt';
 
       $node.find('pre > code').not(exclusions).each((i, obj) => {
-        let $obj = $(obj), $parent = $obj.parent();
+        let $obj = $(obj),
+          $parent = $obj.parent();
+
         $parent.addClass('hljs-pre');
 
         if ($obj.is(plainText)) {
@@ -784,14 +800,30 @@ namespace WpMarkdownExtraEditor {
       }); // All `pre > code` in the node.
     }
 
-    protected hljsCode(code: string, lang: string) {
-      if (code && lang && $.inArray(lang, [ 'none', 'plain', 'text', 'txt' ]) === -1) {
-        code = hljs.highlightAuto(code, lang ? [ lang ] : undefined).value;
+    protected mdItTransformHljs(code: string, lang: string, attrs?: string) {
+      let preAttrs = ' class="hljs-pre code"',
+        codeAttrs = attrs || '';
+
+      lang = lang || 'none'; // Set language.
+
+      if (/\sclass\="([^"]*)"/i.test(codeAttrs)) {
+        codeAttrs = codeAttrs.replace(/\sclass\="([^"]*)"/i, (m: string, p1: string) => {
+          return ' class="hljs lang-' + _.escape(lang) + p1 + '"';
+        });
+      } else { // Prepend `class=""` to existing attributes.
+        codeAttrs = ' class="hljs lang-' + _.escape(lang) + '"' + codeAttrs;
       }
-      return '<pre class="hljs-pre">' +
-        '<code class="hljs ' + _.escape(lang || 'none') + '">' +
-        code + '</code>' +
-        '</pre>';
+      if (/\stitle\="([^"]*)"/i.test(codeAttrs)) {
+        codeAttrs = codeAttrs.replace(/\stitle\="([^"]*)"/i, (m: string, p1: string) => {
+          preAttrs += ' title="' + p1 + '"'; // Add `title=""` to `<pre>`.
+          return ''; // Remove it from `<code>`.
+        });
+      } // `title=""` is reference by CSS for various reasons.
+
+      if (code && $.inArray(lang, [ 'none', 'plain', 'text', 'txt' ]) === -1) {
+        code = hljs.highlightAuto(code, [ lang ]).value;
+      }
+      return '<pre' + preAttrs + '><code' + codeAttrs + '>' + code + '</code></pre>';
     }
 
     /*

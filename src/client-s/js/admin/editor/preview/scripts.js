@@ -25,8 +25,8 @@
       if (!$target.length) {
         return; // Nothing to do.
       }
-      $('html, body').animate({ scrollTop: $target.offset().top }, 500);
       e.preventDefault(), e.stopImmediatePropagation();
+      $('html, body').animate({ scrollTop: $target.offset().top }, 500);
     });
   });
 })(jQuery);

@@ -59,7 +59,10 @@ class Editor extends SCoreClasses\SCore\Base\Core
         } elseif (!($settings = $this->applicableSettings())) {
             return; // Not applicable.
         }
-        $deps   = [ // Always.
+        $brand_slug = $this->App->Config->©brand['©slug'];
+        $brand_var  = $this->App->Config->©brand['©var'];
+
+        $deps = [ // Always.
             'jquery',
             'underscore',
             'highlight-js',
@@ -88,27 +91,24 @@ class Editor extends SCoreClasses\SCore\Base\Core
             s::enqueueMarkdownItLibs();
             $deps[] = 'markdown-it';
         }
-        $slug = $this->App->Config->©brand['©slug'];
-        $var  = $this->App->Config->©brand['©var'];
-
         s::enqueueLibs(__METHOD__, [
             'styles' => [
-                $slug.'-editor' => [
+                $brand_slug.'-editor' => [
                     'ver' => $this->App::VERSION,
                     'url' => c::appUrl('/client-s/css/admin/editor.min.css'),
                 ],
             ],
             'scripts' => [
-                $slug.'-editor' => [
+                $brand_slug.'-editor' => [
                     'deps'     => $deps,
                     'ver'      => $this->App::VERSION,
                     'url'      => c::appUrl('/client-s/js/admin/editor.min.js'),
                     'localize' => [
-                        'key'  => 'sxz4aq7w68twt86g8ye5m3np7nrtguw8EditorData',
+                        'key'  => c::varToCamelCase($brand_var).'EditorData',
                         'data' => [
                             'brand'    => [
-                                'slug' => $slug,
-                                'var'  => $var,
+                                'slug' => $brand_slug,
+                                'var'  => $brand_var,
                             ],
                             'settings' => $settings, // Filterable.
                             // See filter below in `applicableSettings()`.
@@ -272,8 +272,8 @@ class Editor extends SCoreClasses\SCore\Base\Core
         } elseif ($editor_id !== 'content') {
             return $settings; // Not applicable.
         }
-        $slug = $this->App->Config->©brand['©slug'];
-        $cns  = $slug.'-editor'; // Class namespace.
+        $brand_slug = $this->App->Config->©brand['©slug'];
+        $cns        = $brand_slug.'-editor'; // Class namespace.
 
         return s::applyFilters('wp_editor_settings', [
             'media_buttons' => true,

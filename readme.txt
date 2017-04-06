@@ -1,6 +1,6 @@
 === WP Markdown Extra Pro ===
 
-Stable tag: 170404.22156
+Stable tag: 170406.19248
 
 Tested up to: 4.8-alpha
 Requires at least: 4.7

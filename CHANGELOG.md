@@ -13,6 +13,7 @@
 - Enhancing filter associated with theme integration, which allows a theme to set custom preview styles.
 - Adding compatibility with TypeKit for custom previews integrated by themes.
 - Adding support for `<!--raw-->` MD bypass tag.
+- Enhancing Markdown parsing in previews.
 
 ## v170221.4504
 

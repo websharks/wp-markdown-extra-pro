@@ -126,9 +126,7 @@ var WpMarkdownExtraEditor;
          */
         function Editor() {
             var _this = this;
-            // This long global comes from PHP.
-            // It contains instance-specific config data.
-            this.data = sxz4aq7w68twt86g8ye5m3np7nrtguw8EditorData;
+            this.data = wpMarkdownExtraEditorData;
             this.cns = this.data.brand.slug + '-editor',
                 this.ens = '.' + this.data.brand.slug + '-editor';
             this.mediaHtml = new WpMarkdownExtraEditor.MediaHtml(this);
@@ -652,45 +650,52 @@ var WpMarkdownExtraEditor;
                     success: function (r) {
                         var html = r.html; // Response.
                         var $div = $('<div>' + html + '</div>');
-                        _this.hljsNode($div);
+                        _this.hljsInHtmlNode($div);
                         _this.$previewDiv.html($div.html());
                     },
                     error: function (e) { return _this.log('error', e); }
                 });
             }
             else {
-                var mdIt = markdownit({
-                    html: true,
-                    xhtmlOut: true,
-                    breaks: true,
-                    linkify: false,
-                    // Do not auto linkify URLs.
-                    // This is off by default in PHP also.
-                    quotes: '“”‘’',
-                    typographer: true,
-                    // This is on for quotes/dashes only.
-                    // Note: This typographer setting transforms things like (sm) (tm) into symbols too.
-                    // Nice, but SmartyPants in PHP does not do this.
-                    langPrefix: 'lang-',
-                    highlight: this.hljsCode,
-                }).use(markdownItAttrs)
-                    .use(markdownitDeflist)
-                    .use(markdownitAbbr)
-                    .use(markdownitFootnote);
-                mdIt.renderer.rules.heading_open = function (tokens, idx, options, env, slf) {
-                    var raw = tokens[idx + 1].children.reduce(function (a, t) { return a + t.content; }, '');
-                    var id = raw.toLowerCase();
-                    id = id.replace(/[^\w]+/g, '-');
-                    id = 'j2h.' + id.replace(/(?:^[\s\-]+|[\s\-]+$)/g, '');
-                    tokens[idx].attrs = tokens[idx].attrs || [],
-                        tokens[idx].attrs.push(['id', id]);
-                    return slf.renderToken.apply(slf, arguments);
-                };
-                var html = mdIt.render(md);
+                if (!this.mdIt) {
+                    this.mdIt = markdownit({
+                        html: true,
+                        xhtmlOut: true,
+                        breaks: true,
+                        linkify: false,
+                        // Do not auto linkify URLs.
+                        // This is off by default in PHP also.
+                        quotes: '“”‘’',
+                        typographer: true,
+                        // This is on for quotes/dashes only.
+                        // Note: This typographer setting transforms things like (sm) (tm) into symbols too.
+                        // Nice, but SmartyPants in PHP does not do this.
+                        langPrefix: 'lang-',
+                        highlight: this.mdItTransformHljs,
+                    }).use(markdownItAttrs)
+                        .use(markdownitDeflist)
+                        .use(markdownitAbbr)
+                        .use(markdownitFootnote);
+                    this.mdIt.renderer.rules.heading_open = function (tokens, idx, options, env, slf) {
+                        var token = tokens[idx], nextToken = tokens[idx + 1];
+                        var raw = nextToken.children.reduce(function (a, t) { return a + t.content; }, ''), id = raw.toLowerCase(); // Based on raw heading value.
+                        id = id.replace(/[^\w]+/g, '-'),
+                            id = 'j2h.' + id.replace(/(?:^[\s\-]+|[\s\-]+$)/g, '');
+                        token.attrs = token.attrs || [],
+                            token.attrs.push(['id', id]);
+                        return slf.renderToken.apply(slf, arguments);
+                    };
+                    this.mdIt.renderer.rules.code_block = function (tokens, idx, options, env, slf) {
+                        var token = tokens[idx], lang = $.trim(token.info || '').split(/\s+/g)[0], attrs = slf.renderAttrs(token);
+                        return options.highlight(token.content, lang, attrs);
+                    };
+                    this.mdIt.renderer.rules.fence = this.mdIt.renderer.rules.code_block;
+                }
+                var html = this.mdIt.render(md);
                 this.$previewDiv.html(html);
             }
         };
-        Editor.prototype.hljsNode = function ($node) {
+        Editor.prototype.hljsInHtmlNode = function ($node) {
             var exclusions = '.no-hljs, .no-highlight, .nohighlight', plainText = '.lang-none, .lang-plain, .lang-text, .lang-txt, .none, .plain, .text, .txt';
             $node.find('pre > code').not(exclusions).each(function (i, obj) {
                 var $obj = $(obj), $parent = $obj.parent();
@@ -703,14 +708,27 @@ var WpMarkdownExtraEditor;
                 }
             }); // All `pre > code` in the node.
         };
-        Editor.prototype.hljsCode = function (code, lang) {
-            if (code && lang && $.inArray(lang, ['none', 'plain', 'text', 'txt']) === -1) {
-                code = hljs.highlightAuto(code, lang ? [lang] : undefined).value;
+        Editor.prototype.mdItTransformHljs = function (code, lang, attrs) {
+            var preAttrs = ' class="hljs-pre code"', codeAttrs = attrs || '';
+            lang = lang || 'none'; // Set language.
+            if (/\sclass\="([^"]*)"/i.test(codeAttrs)) {
+                codeAttrs = codeAttrs.replace(/\sclass\="([^"]*)"/i, function (m, p1) {
+                    return ' class="hljs lang-' + _.escape(lang) + p1 + '"';
+                });
             }
-            return '<pre class="hljs-pre">' +
-                '<code class="hljs ' + _.escape(lang || 'none') + '">' +
-                code + '</code>' +
-                '</pre>';
+            else {
+                codeAttrs = ' class="hljs lang-' + _.escape(lang) + '"' + codeAttrs;
+            }
+            if (/\stitle\="([^"]*)"/i.test(codeAttrs)) {
+                codeAttrs = codeAttrs.replace(/\stitle\="([^"]*)"/i, function (m, p1) {
+                    preAttrs += ' title="' + p1 + '"'; // Add `title=""` to `<pre>`.
+                    return ''; // Remove it from `<code>`.
+                });
+            } // `title=""` is reference by CSS for various reasons.
+            if (code && $.inArray(lang, ['none', 'plain', 'text', 'txt']) === -1) {
+                code = hljs.highlightAuto(code, [lang]).value;
+            }
+            return '<pre' + preAttrs + '><code' + codeAttrs + '>' + code + '</code></pre>';
         };
         /*
          * Scroll-lock routines.
