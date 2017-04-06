@@ -82,10 +82,11 @@ $Form = $this->s::menuPageForm('§save-options');
         <?= $Form->inputRow([
             'if'    => 'editor_enable',
 
-            'type'  => 'text',
-            'label' => __('Font Family', 'wp-markdown-extra'),
-            'tip'   => __('Controls the containing element font family.', 'wp-markdown-extra'),
-            'note'  => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
+            'type'        => 'text',
+            'placeholder' => "'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace",
+            'label'       => __('Font Family Override', 'wp-markdown-extra'),
+            'tip'         => __('Controls the containing element font family.', 'wp-markdown-extra'),
+            'note'        => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
 
             'name'  => 'hljs_font_family',
             'value' => s::getOption('hljs_font_family'),
