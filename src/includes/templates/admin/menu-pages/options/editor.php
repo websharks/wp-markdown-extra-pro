@@ -73,10 +73,11 @@ $Form = $this->s::menuPageForm('§save-options');
         <?= $Form->inputRow([
             'if'    => 'editor_enable',
 
-            'type'  => 'text',
-            'label' => __('Font Size', 'wp-markdown-extra'),
-            'tip'   => __('Controls the CSS font size used while editing.<hr />The <code>em</code> unit is suggested. However, if you want to force a constant pixel size, just use <code>px</code> instead of <code>em</code>.', 'wp-markdown-extra'),
-            'note'  => __('The <tt>em</tt> unit is suggested so it scales automatically in fullscreen mode. The baseline font size is <tt><strong>14px</strong></tt>. Therefore, <tt>0.857em = 12px</tt>, <tt>1em = <strong>14px</strong></tt>, <tt>1.143em = 16px</tt>. In fullscreen mode (if you\'re on a large screen) the baseline jumps from <tt>14px</tt> to <tt><strong>16px</strong></tt> automatically, which results in all calculations being slightly larger in fullscreen mode.', 'wp-markdown-extra'),
+            'type'        => 'text',
+            'placeholder' => '1em',
+            'label'       => __('Font Size', 'wp-markdown-extra'),
+            'tip'         => __('Controls the CSS font size used while editing.<hr />The <code>em</code> unit is suggested. However, if you want to force a constant pixel size, just use <code>px</code> instead of <code>em</code>.', 'wp-markdown-extra'),
+            'note'        => __('The <tt>em</tt> unit is suggested so it scales automatically in fullscreen mode. The baseline font size is <tt><strong>14px</strong></tt>. Therefore, <tt>0.857em = 12px</tt>, <tt>1em = <strong>14px</strong></tt>, <tt>1.143em = 16px</tt>. In fullscreen mode (if you\'re on a large screen) the baseline jumps from <tt>14px</tt> to <tt><strong>16px</strong></tt> automatically, which results in all calculations being slightly larger in fullscreen mode.', 'wp-markdown-extra'),
 
             'name'  => 'editor_font_size',
             'value' => s::getOption('editor_font_size'),
@@ -85,10 +86,11 @@ $Form = $this->s::menuPageForm('§save-options');
         <?= $Form->inputRow([
             'if'    => 'editor_enable',
 
-            'type'  => 'text',
-            'label' => __('Font Family', 'wp-markdown-extra'),
-            'tip'   => __('Controls the font family used while editing.', 'wp-markdown-extra'),
-            'note'  => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
+            'type'        => 'text',
+            'placeholder' => "'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace",
+            'label'       => __('Font Family', 'wp-markdown-extra'),
+            'tip'         => __('Controls the font family used while editing.', 'wp-markdown-extra'),
+            'note'        => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
 
             'name'  => 'editor_font_family',
             'value' => s::getOption('editor_font_family'),

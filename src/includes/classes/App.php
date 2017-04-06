@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170406.19248'; //v//
+    const VERSION = '170406.21473'; //v//
 
     /**
      * Constructor.
@@ -112,7 +112,7 @@ class App extends SCoreClasses\App
 
                 'hljs_style'       => 'github',
                 'hljs_bg_color'    => '',
-                'hljs_font_family' => $monospace,
+                'hljs_font_family' => '',
 
                 'filter_tweaks_enable' => true,
                 'texturizer'           => 'smartypants',

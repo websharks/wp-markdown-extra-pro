@@ -73,7 +73,7 @@ $Form = $this->s::menuPageForm('§save-options');
             'placeholder' => __('e.g., #f8f8f8', 'wp-markdown-extra'),
             'label'       => __('BG Color Override', 'wp-markdown-extra'),
             'tip'         => __('Hex color code; e.g., <code>#f8f8f8</code>, <code>#000</code>, <code>#ccc</code><hr />If empty, the background color is defined by the style you selected above.', 'wp-markdown-extra'),
-            'note'        => __('If empty, the background color is simply defined by the Highlight.js style.', 'wp-markdown-extra'),
+            'note'        => __('If empty, the background color is defined by the Highlight.js style.', 'wp-markdown-extra'),
 
             'name'  => 'hljs_bg_color',
             'value' => s::getOption('hljs_bg_color'),
@@ -86,7 +86,7 @@ $Form = $this->s::menuPageForm('§save-options');
             'placeholder' => "'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace",
             'label'       => __('Font Family Override', 'wp-markdown-extra'),
             'tip'         => __('Controls the containing element font family.', 'wp-markdown-extra'),
-            'note'        => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
+            'note'        => __('Comma-delimited monospace fonts used in CSS. If empty, a default monospace family is used.', 'wp-markdown-extra'),
 
             'name'  => 'hljs_font_family',
             'value' => s::getOption('hljs_font_family'),

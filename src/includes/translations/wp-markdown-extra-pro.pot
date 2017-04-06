@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Markdown Extra Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Markdown Extra Pro 170406.19248\n"
+"Project-Id-Version: WP Markdown Extra Pro 170406.21473\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-markdown-extra-pro\n"
-"POT-Creation-Date: 2017-04-06 05:20:51+00:00\n"
+"POT-Creation-Date: 2017-04-06 05:57:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -97,14 +97,14 @@ msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:50
 #: src/includes/templates/admin/menu-pages/options/default.php:86
-#: src/includes/templates/admin/menu-pages/options/editor.php:107
+#: src/includes/templates/admin/menu-pages/options/editor.php:109
 msgid "Yes"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:51
 #: src/includes/templates/admin/menu-pages/options/default.php:87
 #: src/includes/templates/admin/menu-pages/options/editor.php:53
-#: src/includes/templates/admin/menu-pages/options/editor.php:108
+#: src/includes/templates/admin/menu-pages/options/editor.php:110
 msgid "No"
 msgstr ""
 
@@ -156,81 +156,79 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:77
+#: src/includes/templates/admin/menu-pages/options/editor.php:78
 msgid "Font Size"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:78
+#: src/includes/templates/admin/menu-pages/options/editor.php:79
 msgid "Controls the CSS font size used while editing.<hr />The <code>em</code> unit is suggested. However, if you want to force a constant pixel size, just use <code>px</code> instead of <code>em</code>."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:79
+#: src/includes/templates/admin/menu-pages/options/editor.php:80
 msgid "The <tt>em</tt> unit is suggested so it scales automatically in fullscreen mode. The baseline font size is <tt><strong>14px</strong></tt>. Therefore, <tt>0.857em = 12px</tt>, <tt>1em = <strong>14px</strong></tt>, <tt>1.143em = 16px</tt>. In fullscreen mode (if you're on a large screen) the baseline jumps from <tt>14px</tt> to <tt><strong>16px</strong></tt> automatically, which results in all calculations being slightly larger in fullscreen mode."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:89
-#: src/includes/templates/admin/menu-pages/options/preview.php:86
+#: src/includes/templates/admin/menu-pages/options/editor.php:91
 msgid "Font Family"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:90
+#: src/includes/templates/admin/menu-pages/options/editor.php:92
 msgid "Controls the font family used while editing."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:91
-#: src/includes/templates/admin/menu-pages/options/preview.php:88
+#: src/includes/templates/admin/menu-pages/options/editor.php:93
 msgid "Comma-delimited monospace fonts used in CSS declaration."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:100
+#: src/includes/templates/admin/menu-pages/options/editor.php:102
 msgid "Enable Enhanced IDE?"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:101
+#: src/includes/templates/admin/menu-pages/options/editor.php:103
 msgid "Enables highlighting, line numbers, auto-indent, auto-brackets, tabs, and more."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:102
+#: src/includes/templates/admin/menu-pages/options/editor.php:104
 msgid "This enables a powerful IDE  that includes highlighting, line numbers, auto-indent, brackets, tabs, and more."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:115
+#: src/includes/templates/admin/menu-pages/options/editor.php:117
 msgid "Quick Preview Method"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:116
+#: src/includes/templates/admin/menu-pages/options/editor.php:118
 msgid "Go with JavaScript for instant feedback in split preview mode. It's a little inaccurate at times, but much faster!<hr />If you use a lot of advanced Markdown syntax and need accurate previews of the <em>actual</em> Markdown render, go with PHP/AJAX instead."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:117
+#: src/includes/templates/admin/menu-pages/options/editor.php:119
 msgid "%1$s can do previews in pure JavaScript, giving you instant feedback in split preview mode. Or, it can do previews via PHP/AJAX for improved accuracy; i.e., giving you a preview of the <em>actual</em> Markdown render."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:122
+#: src/includes/templates/admin/menu-pages/options/editor.php:124
 msgid "JavaScript (99% accurate, lightning fast)"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:123
+#: src/includes/templates/admin/menu-pages/options/editor.php:125
 msgid "PHP via AJAX (100% accurate, slightly slower)"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:130
+#: src/includes/templates/admin/menu-pages/options/editor.php:132
 msgid "Media Inserts"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:131
+#: src/includes/templates/admin/menu-pages/options/editor.php:133
 msgid "Either way works just fine. This is simply a matter of personal preference."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:132
+#: src/includes/templates/admin/menu-pages/options/editor.php:134
 msgid "Markdown image example: <code>![My Image](image.png){.alignright width=128}</code>"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:137
+#: src/includes/templates/admin/menu-pages/options/editor.php:139
 msgid "Markdown; e.g., ![alt](image.png)"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/editor.php:138
+#: src/includes/templates/admin/menu-pages/options/editor.php:140
 msgid "HTML; e.g., &lt;img src=\"image.png\" /&gt;"
 msgstr ""
 
@@ -275,27 +273,35 @@ msgid "Hex color code; e.g., <code>#f8f8f8</code>, <code>#000</code>, <code>#ccc
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/preview.php:76
-msgid "If empty, the background color is simply defined by the Highlight.js style."
+msgid "If empty, the background color is defined by the Highlight.js style."
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/preview.php:87
+msgid "Font Family Override"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:88
 msgid "Controls the containing element font family."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:97
-#: src/includes/templates/admin/menu-pages/options/preview.php:104
-msgid "Custom Preview Styles"
+#: src/includes/templates/admin/menu-pages/options/preview.php:89
+msgid "Comma-delimited monospace fonts used in CSS. If empty, a default monospace family is used."
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/preview.php:98
+#: src/includes/templates/admin/menu-pages/options/preview.php:105
+msgid "Custom Preview Styles"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:99
 msgid "This allows you to include CSS of your own that may override some defaults, or perhaps style elements in previews in a way that more closely resembles the final output in your WordPress theme. Keep in mind there are already a number of built-in preview styles, so this is completely optional."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:106
+#: src/includes/templates/admin/menu-pages/options/preview.php:107
 msgid "Custom styles are injected into Markdown previews, right after all of the default styles."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:107
+#: src/includes/templates/admin/menu-pages/options/preview.php:108
 msgid "<strong>Tip:</strong> You can choose to use a CSS <code>@import</code> rule if you'd like; i.e., so you can maintain custom styles in a separate file. For example: <code>@import url('/wp-content/my-theme/md-preview-styles.css');</code>"
 msgstr ""
 
