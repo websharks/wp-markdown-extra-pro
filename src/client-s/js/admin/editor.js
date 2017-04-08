@@ -221,7 +221,7 @@ var WpMarkdownExtraEditor;
                     _this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
                     _this.$previewHtml = _this.$previewDocument.find('html');
                     _this.$previewBody = _this.$previewDocument.find('body');
-                    _this.$previewDiv = _this.$previewBody.find('#___div');
+                    _this.$previewDiv = _this.$previewBody.find('#md-preview-div');
                     var $html = _this.$previewHtml, $body = _this.$previewBody; // Shorter.
                     if (_this.data.settings.hljsStyleUrl) {
                         var href = _this.data.settings.hljsStyleUrl, integrity = _this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(_this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';

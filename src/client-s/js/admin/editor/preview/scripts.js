@@ -1,6 +1,6 @@
 (function ($) {
   $(window).on('load', function () {
-    var $div = $('#___div');
+    var $div = $('#md-preview-div');
 
     var locHostname = location.hostname.toLowerCase(),
       locPathname = location.pathname.replace(/^\//, '');

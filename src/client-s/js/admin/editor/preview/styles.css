@@ -53,6 +53,9 @@
  * Fancy HR tags.
  */
 /*
+ * Fancy labels.
+ */
+/*
  * Fancy link targets.
  */
 /*
@@ -161,6 +164,9 @@
  * Font utils.
  */
 /*
+ * Heading utils.
+ */
+/*
  * Height utils.
  */
 /*
@@ -210,6 +216,9 @@
  */
 /*
  * Fancy HR tags.
+ */
+/*
+ * Fancy labels.
  */
 /*
  * Fancy link targets.
@@ -434,8 +443,9 @@ a code {
 pre {
   white-space: pre-wrap;
   padding: 1em;
-  color: #000;
-  background: #f8f8f8;
+  overflow: visible;
+  color: #fff;
+  background: #222;
   border-radius: .25em;
   /*
      * `<pre><code>`.
@@ -486,6 +496,9 @@ pre.code {
   /*
        * Databases.
        */
+  /*
+       * URLs/methods.
+       */
 }
 
 pre.code > code {
@@ -497,17 +510,24 @@ pre.code > code {
   overflow: auto;
   font-size: 1em;
   line-height: 1.3;
-  color: #000;
-  background: #f8f8f8;
   text-shadow: none;
   border: 0;
   border-radius: .25em;
+}
+
+pre.code > code:not(.hljs) {
+  color: #fff;
+  background: #222;
 }
 
 pre.code > code._no[class*='_no _scroll'] {
   max-height: none !important;
   overflow: visible !important;
   white-space: pre-wrap !important;
+}
+
+pre.code[title] {
+  overflow: hidden;
 }
 
 pre.code[title]::before {
@@ -521,7 +541,7 @@ pre.code[title]::before {
 }
 
 pre.code[title]::after {
-  top: -.18em;
+  top: -.185em;
   right: .125em;
   position: absolute;
   max-height: .8em;
@@ -554,7 +574,6 @@ pre.code[title^='CSS']::before {
 }
 
 pre.code[title^='CSS']::after {
-  padding-top: .025em;
   content: '\e679';
   font-family: devicon;
   color: #243a49;
@@ -592,14 +611,14 @@ pre.code[title^='JavaScript']::after {
 }
 
 pre.code[title^='TypeScript']::before {
-  background: #204852;
+  background: #4682b4;
 }
 
 pre.code[title^='TypeScript']::after {
   line-height: .85em;
   content: '\e920';
   font-family: devicon;
-  color: black;
+  color: #224058;
 }
 
 pre.code[title^='CoffeeScript']::before {
@@ -617,6 +636,9 @@ pre.code[title^='Node']::before {
 }
 
 pre.code[title^='Node']::after {
+  right: .5em;
+  top: -.275em;
+  transform: scale(1.75);
   content: '\eb69';
   font-family: devicon;
   color: #13271a;
@@ -707,7 +729,6 @@ pre.code[title^='Ruby']::before {
 }
 
 pre.code[title^='Ruby']::after {
-  padding-top: .075em;
   content: '\ebca';
   font-family: devicon;
   color: #250e0a;
@@ -720,38 +741,49 @@ pre.code[title^='Apache']::before {
 pre.code[title^='Apache']::after {
   content: '\e627';
   font-family: devicon;
-  color: #2e1515;
+  color: #fff;
 }
 
-pre.code[title^='Nginx']::before {
+pre.code[title^='Nginx']::before, pre.code[title^='NGINX']::before {
   background: #4f7942;
 }
 
-pre.code[title^='Nginx']::after {
+pre.code[title^='Nginx']::after, pre.code[title^='NGINX']::after {
   content: '\e615';
   font-family: devicon;
   color: #192715;
 }
 
-pre.code[title^='Linux']::before, pre.code[title^='Command-Line']::before {
-  background: #434c59;
+pre.code[title^='Zsh']::before, pre.code[title^='Bash']::before, pre.code[title^='Shell']::before, pre.code[title^='Terminal']::before, pre.code[title^='Command-Line']::before {
+  background: #6d92a1;
 }
 
-pre.code[title^='Linux']::after, pre.code[title^='Command-Line']::after {
-  padding-top: .05em;
-  content: '\eb1c';
-  font-family: devicon;
-  color: #0c0e10;
+pre.code[title^='Zsh']::after, pre.code[title^='Bash']::after, pre.code[title^='Shell']::after, pre.code[title^='Terminal']::after, pre.code[title^='Command-Line']::after {
+  content: '\f120';
+  transform: scale(0.65);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  color: #384e57;
+}
+
+pre.code[title^='Nix']::before, pre.code[title^='Unix']::before, pre.code[title^='Linux']::before {
+  background: #747d83;
+}
+
+pre.code[title^='Nix']::after, pre.code[title^='Unix']::after, pre.code[title^='Linux']::after {
+  padding-top: .15em;
+  content: '\f17c';
+  color: #2c3032;
 }
 
 pre.code[title^='macOS']::before, pre.code[title^='Apple']::before {
-  background: #4a4244;
+  background: #7a7a7a;
 }
 
 pre.code[title^='macOS']::after, pre.code[title^='Apple']::after {
   content: '\e622';
   font-family: devicon;
-  color: #070606;
+  color: #3a3a3a;
 }
 
 pre.code[title^='Ubuntu']::before {
@@ -759,7 +791,6 @@ pre.code[title^='Ubuntu']::before {
 }
 
 pre.code[title^='Ubuntu']::after {
-  padding-top: .05em;
   content: '\ebd1';
   font-family: devicon;
   color: #562b15;
@@ -770,7 +801,6 @@ pre.code[title^='Windows']::before {
 }
 
 pre.code[title^='Windows']::after {
-  padding-top: .05em;
   content: '\ebf5';
   font-family: devicon;
   color: #002d48;
@@ -821,7 +851,6 @@ pre.code[title^='PostgreSQL']::before {
 }
 
 pre.code[title^='PostgreSQL']::after {
-  padding-top: .15em;
   content: '\eb7d';
   font-family: devicon;
   color: #000808;
@@ -842,10 +871,45 @@ pre.code[title^='Redis']::before {
 }
 
 pre.code[title^='Redis']::after {
-  padding-top: .05em;
   content: '\e607';
   font-family: devicon;
   color: #250e0a;
+}
+
+pre.code[title^='Feed']::after, pre.code[title^='URL']::after, pre.code[title^='HEAD']::after, pre.code[title^='GET']::after, pre.code[title^='POST']::after, pre.code[title^='PUT']::after, pre.code[title^='PATCH']::after, pre.code[title^='DELETE']::after {
+  content: '\f0c1';
+}
+
+pre.code[title^='Feed']::before {
+  background: #b87333;
+}
+
+pre.code[title^='Feed']::after {
+  color: #543517;
+}
+
+pre.code[title^='URL']::before, pre.code[title^='HEAD']::before, pre.code[title^='GET']::before {
+  background: #7ba05b;
+}
+
+pre.code[title^='URL']::after, pre.code[title^='HEAD']::after, pre.code[title^='GET']::after {
+  color: #3d4f2d;
+}
+
+pre.code[title^='POST']::before, pre.code[title^='PUT']::before, pre.code[title^='PATCH']::before {
+  background: #7a89b8;
+}
+
+pre.code[title^='POST']::after, pre.code[title^='PUT']::after, pre.code[title^='PATCH']::after {
+  color: #3e4b74;
+}
+
+pre.code[title^='DELETE']::before {
+  background: #944747;
+}
+
+pre.code[title^='DELETE']::after {
+  color: #3e1e1e;
 }
 
 nav > .menu .dropdown.item:not(a):not(.link),
@@ -949,6 +1013,9 @@ sub {
  */
 /*
  * Font utils.
+ */
+/*
+ * Heading utils.
  */
 /*
  * Height utils.
@@ -1760,6 +1827,10 @@ img[align='right'],
   font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
 }
 
+._content .ui.label {
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+}
+
 ._content > p:first-of-type:not([class]) {
   font-size: 1.25em;
   font-family: "Georgia", "Cambria", "Times New Roman", "Times", serif;
@@ -2086,6 +2157,56 @@ img[align='right'],
 
 ._f.ui.list[class*='_f _serif'] > .item, ._f.ui.list[class*='_f _sans_serif'] > .item, ._f.ui.list[class*='_f _alt'] > .item, ._f.ui.list[class*='_f _monospace'] > .item, ._f.ui.list[class*='_f _cnt'] > .item, ._f.ui.list[class*='_f _georgia'] > .item, ._f.ui.list[class*='_f _helvetica'] > .item, ._f.ui.list[class*='_f _lucida'] > .item, ._f.ui.list[class*='_f _verdana'] > .item {
   font-family: inherit;
+}
+
+h1._block,
+h2._block,
+h3._block,
+h4._block,
+h5._block,
+h6._block {
+  margin-left: -.5em;
+  margin-right: -.5em;
+  padding: .6em .75em .5em;
+  line-height: 1em;
+  color: #000;
+  background: #edf6ff;
+  border-radius: .25em;
+  border: 1px solid #000;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.25);
+}
+
+h1._block > code,
+h2._block > code,
+h3._block > code,
+h4._block > code,
+h5._block > code,
+h6._block > code {
+  display: inline;
+  white-space: normal;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  background: none;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+h1._block > label,
+h2._block > label,
+h3._block > label,
+h4._block > label,
+h5._block > label,
+h6._block > label {
+  float: right;
+  margin-left: 1em;
+  font-size: .75em;
+  font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+  color: #00376e;
 }
 
 /*
@@ -3275,6 +3396,31 @@ img[align='right'],
   padding-bottom: 30em !important;
 }
 
+._z {
+  position: relative;
+}
+
+._z[class*='_z _1u'] {
+  z-index: 1 !important;
+}
+
+._z[class*='_z _2u'] {
+  z-index: 2 !important;
+}
+
+._z[class*='_z _3u'] {
+  z-index: 3 !important;
+}
+
+._position[class*='_position _offscreen'] {
+  position: fixed !important;
+  top: -99999px !important;
+  left: -99999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
 @media only screen and (max-width: 767px) {
   .only[class*='tablet only'], .only[class*='computer only'], .only[class*='large screen only'], .only[class*='widescreen only'] {
     display: none !important;
@@ -3606,6 +3752,9 @@ img[align='right'],
  * Fancy HR tags.
  */
 /*
+ * Fancy labels.
+ */
+/*
  * Fancy link targets.
  */
 /*
@@ -3714,6 +3863,9 @@ img[align='right'],
  * Font utils.
  */
 /*
+ * Heading utils.
+ */
+/*
  * Height utils.
  */
 /*
@@ -3752,7 +3904,7 @@ img[align='right'],
 /*
  * Preview styles.
  */
-#___div .hljs-pre {
+#md-preview-div .hljs-pre {
   display: block;
   white-space: normal;
   max-height: none;
@@ -3765,7 +3917,7 @@ img[align='right'],
   border-radius: 0;
 }
 
-#___div .hljs-pre > .hljs {
+#md-preview-div .hljs-pre > .hljs {
   display: block;
   white-space: pre;
   margin: 0;
@@ -3781,7 +3933,7 @@ img[align='right'],
   border-radius: .25em;
 }
 
-#___div abbr[title] {
+#md-preview-div abbr[title] {
   cursor: help;
   border-bottom: 1px dotted;
 }

@@ -200,7 +200,7 @@ namespace WpMarkdownExtraEditor {
           this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
           this.$previewHtml = this.$previewDocument.find('html');
           this.$previewBody = this.$previewDocument.find('body');
-          this.$previewDiv = this.$previewBody.find('#___div');
+          this.$previewDiv = this.$previewBody.find('#md-preview-div');
 
           let $html = this.$previewHtml,
             $body = this.$previewBody; // Shorter.
