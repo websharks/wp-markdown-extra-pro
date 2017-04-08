@@ -5,7 +5,7 @@
  * Requires a local copy of the WebSharks Core.
  */
 /*
- * Semantic colors.
+ * General colors.
  */
 /*
  * Fancy blockquotes.
@@ -14,20 +14,50 @@
  * Fancy monospace tags.
  */
 /*
- * Social network colors.
+ * Named colors.
  */
 /*
- * Our own named colors.
+ * Social networks.
+ */
+/*
+ * Our own names.
  */
 /*
  * Name that color!
  * <http://chir.ag/projects/name-that-color>
  */
 /*
+ * Font variables.
+ */
+/*
+ * Content font variables.
+ */
+/*
  * Pixels to rem.
  */
 /*
+ * Better inversions.
+ */
+/*
  * Fancy blockquotes.
+ */
+/*
+ * Fancy checkboxes.
+ */
+/*
+ * Fancy definitions.
+ */
+/*
+ * Fancy HR tags.
+ */
+/*
+ * Fancy labels.
+ */
+/*
+ * Fancy link targets.
+ */
+/*
+ * Fancy messages.
  */
 /*
  * Fancy monospace tags.
@@ -42,16 +72,25 @@
  * Fancy placeholders.
  */
 /*
+ * Font events.
+ */
+/*
+ * Font features.
+ */
+/*
  * Pixels to rem.
  */
 /*
- * Mixins for responsive tweaks.
- * See: <http://semantic-ui.com/elements/container.html>
- * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
- * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
  */
 /*
- * Larger fonts.
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
+ */
+/*
+ * Responsive fonts.
  */
 /*
  * Responsive images.
@@ -60,13 +99,37 @@
  * Highlight.js <pre><code>.
  */
 /*
- * Position utils.
+ * Box shadow tools.
  */
 /*
- * Mixins for responsive tweaks.
- * See: <http://semantic-ui.com/elements/container.html>
- * See: <http://semantic-ui.com/collections/grid.html#device-visibility>
- * See: <http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css>
+ * Centered tools.
+ */
+/*
+ * Text shadow tools.
+ */
+/*
+ * Position tools.
+ */
+/*
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
+ */
+/*
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
+ */
+/*
+ * Text shadow tools.
+ */
+/*
+ * Device breakpoints.
+ * Following Semantic UI breakpoints.
+ */
+/*
+ * Responsive utils.
+ * Following Semantic UI breakpoints.
+ * + custom `handheld` & `small screen` breakpoints.
  */
 /*
  * Align utils.
@@ -75,19 +138,52 @@
  * Blurred utils.
  */
 /*
- * Box shadow utilities.
+ * Border utils.
+ */
+/*
+ * Box shadow utils.
+ */
+/*
+ * Color utils.
  */
 /*
  * Content utils.
  */
 /*
+ * Disabled utils.
+ */
+/*
  * Display utils.
  */
 /*
- * Line clamp utils.
+ * Filter shadow utilities.
  */
 /*
- * Muted utils.
+ * Font utils.
+ */
+/*
+ * Heading utils.
+ */
+/*
+ * Height utils.
+ */
+/*
+ * Inset utils.
+ */
+/*
+ * Line utils.
+ */
+/*
+ * List utils.
+ */
+/*
+ * Margin utils.
+ */
+/*
+ * Opacity utils.
+ */
+/*
+ * Padding utils.
  */
 /*
  * Position utils.
@@ -99,7 +195,10 @@
  * Text shadow utilities.
  */
 /*
- * WP align utils.
+ * Visibility utils.
+ */
+/*
+ * Width utils.
  */
 /*
  * Brand configuration.
@@ -196,12 +295,12 @@
  * Area styles.
  */
 .wp-markdown-extra-editor-area:not(#x) .-position-offscreen {
-  top: -99999px !important;
-  left: -99999px !important;
-  position: fixed !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
+  position: fixed;
+  top: -99999px;
+  left: -99999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 /*
@@ -216,8 +315,8 @@
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0 auto;
   background: none;
 }
 
@@ -246,7 +345,7 @@
   height: auto;
   box-sizing: border-box;
   padding: 0;
-  margin: 2em 0 .25em;
+  margin: 2em auto .25em;
   background: none;
 }
 
@@ -311,9 +410,11 @@
 
 /*
  * Container styles.
+ * See also: `previewFrameSide` in `editor.ts`.
  */
 .wp-markdown-extra-editor-container:not(#x) {
   display: flex;
+  flex-direction: row;
   align-items: stretch;
   top: 0;
   left: 0;
@@ -321,8 +422,8 @@
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  margin: 0;
   padding: 0;
+  margin: 0 auto;
   font-size: 14px;
   line-height: 1.2;
 }
@@ -343,7 +444,7 @@
   min-height: calc(100vh - 275px);
   box-sizing: border-box;
   border: 0;
-  margin: 0;
+  margin: 0 auto;
   font-size: inherit;
   line-height: inherit;
   font-style: normal;
@@ -419,8 +520,8 @@
   display: none;
   flex: 1 1 auto;
   border: 0;
-  margin: 0;
   padding: 0;
+  margin: 0 auto;
   width: 100%;
   height: auto;
   min-height: calc(100vh - 275px);
@@ -431,12 +532,12 @@
  * Standard preview mode.
  */
 .wp-markdown-extra-editor-preview-mode:not(#x) .wp-markdown-extra-editor-textarea {
-  top: -99999px !important;
-  left: -99999px !important;
-  position: fixed !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
+  position: fixed;
+  top: -99999px;
+  left: -99999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .wp-markdown-extra-editor-preview-mode:not(#x) .wp-markdown-extra-editor-ide {
@@ -468,8 +569,8 @@
 .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-toolbar,
 .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar,
 .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar {
-  margin: 0;
   padding: .5em;
+  margin: 0 auto;
 }
 
 .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-container,
@@ -512,14 +613,15 @@
 
 /*
  * Fullscreen preview mode styles.
+ * See also: `previewFrameWidth` in `editor.ts`.
  */
 .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-textarea {
-  top: -99999px !important;
-  left: -99999px !important;
-  position: fixed !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
+  position: fixed;
+  top: -99999px;
+  left: -99999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-ide {
@@ -545,6 +647,7 @@
 
 /*
  * Fullscreen split preview styles.
+ * See also: `previewFrameWidth` in `editor.ts`.
  */
 .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-textarea,
 .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-ide,

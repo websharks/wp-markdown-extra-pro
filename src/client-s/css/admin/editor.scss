@@ -163,8 +163,8 @@ $brand-cns: '#{$brand-slug}-editor';
   box-sizing:                 border-box;
 
   //
-  margin:                     0;
   padding:                    0;
+  margin:                     0 auto;
 
   //
   background:                 none;
@@ -207,7 +207,7 @@ $brand-cns: '#{$brand-slug}-editor';
 
   //
   padding:                    0;
-  margin:                     2em 0 .25em;
+  margin:                     2em auto .25em;
 
   //
   background:                 none;
@@ -281,9 +281,11 @@ $brand-cns: '#{$brand-slug}-editor';
 
 /*
  * Container styles.
+ * See also: `previewFrameSide` in `editor.ts`.
  */
 .#{$brand-cns}-container:not(#x) {
   display:                    flex;
+  flex-direction:             row;
   align-items:                stretch;
 
   //
@@ -297,8 +299,8 @@ $brand-cns: '#{$brand-slug}-editor';
   box-sizing:                 border-box;
 
   //
-  margin:                     0;
   padding:                    0;
+  margin:                     0 auto;
 
   // Baseline font size.
   font-size:                  14px;
@@ -329,7 +331,7 @@ $brand-cns: '#{$brand-slug}-editor';
 
   //
   border:                     0;
-  margin:                     0;
+  margin:                     0 auto;
 
   //
   font-size:                  inherit;
@@ -430,8 +432,8 @@ $brand-cns: '#{$brand-slug}-editor';
 
   //
   border:                     0;
-  margin:                     0;
   padding:                    0;
+  margin:                     0 auto;
 
   //
   width:                      100%;
@@ -486,8 +488,8 @@ $brand-cns: '#{$brand-slug}-editor';
   }
 
   .#{$brand-cns}-toolbar {
-    margin:                   0;
     padding:                 .5em;
+    margin:                   0 auto;
   }
 
   .#{$brand-cns}-container {
@@ -527,6 +529,7 @@ $brand-cns: '#{$brand-slug}-editor';
 
 /*
  * Fullscreen preview mode styles.
+ * See also: `previewFrameWidth` in `editor.ts`.
  */
 @at-root .#{$brand-cns}-fullscreen-preview-mode:not(#x) {
   .#{$brand-cns}-textarea {
@@ -558,6 +561,7 @@ $brand-cns: '#{$brand-slug}-editor';
 
 /*
  * Fullscreen split preview styles.
+ * See also: `previewFrameWidth` in `editor.ts`.
  */
 @at-root .#{$brand-cns}-fullscreen-split-preview-mode:not(#x) {
   .#{$brand-cns}-textarea,

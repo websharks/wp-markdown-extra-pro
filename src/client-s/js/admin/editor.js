@@ -164,7 +164,7 @@ var WpMarkdownExtraEditor;
         };
         Editor.prototype.initElements = function () {
             this.$win = $(window), this.$doc = $(document);
-            this.$html = $('html'), this.$body = $('body'),
+            this.$html = $('html'), this.$body = $('body'), this.$head = $('head'),
                 this.$html.addClass(this.themeClass);
             if (this.data.settings.ideEnable) {
                 this.$html.addClass(this.cns + '-has-ide');
@@ -223,12 +223,38 @@ var WpMarkdownExtraEditor;
                     _this.$previewBody = _this.$previewDocument.find('body');
                     _this.$previewDiv = _this.$previewBody.find('#md-preview-div');
                     var $html = _this.$previewHtml, $body = _this.$previewBody; // Shorter.
+                    if (_this.data.settings.previewFrameSide === 'left') {
+                        var s = ''; // Initialize styles.
+                        s += '.' + _this.cns + '-fullscreen-split-preview-mode:not(#x) .' + _this.cns + '-container {';
+                        s += '   flex-direction: row-reverse;';
+                        s += '}';
+                        _this.$head.append('<style>' + s + '</style>');
+                    }
+                    if (_this.data.settings.previewFrameWidth) {
+                        var s = ''; // Initialize styles.
+                        s += '@media only screen and (min-width: 1200px) {';
+                        s += '  .' + _this.cns + '-fullscreen-preview-mode:not(#x) .' + _this.cns + '-toolbar {';
+                        s += '    width: ' + _this.data.settings.previewFrameWidth + ';';
+                        s += '    margin-left: calc((100% - ' + _this.data.settings.previewFrameWidth + ') / 2);';
+                        s += '    margin-right: calc((100% - ' + _this.data.settings.previewFrameWidth + ') / 2);';
+                        s += '  }';
+                        s += '  .' + _this.cns + '-fullscreen-preview-mode:not(#x) .' + _this.cns + '-preview {';
+                        s += '    flex: 1 1 ' + _this.data.settings.previewFrameWidth + ';';
+                        s += '    margin-left: calc((100% - ' + _this.data.settings.previewFrameWidth + ') / 2);';
+                        s += '    margin-right: calc((100% - ' + _this.data.settings.previewFrameWidth + ') / 2);';
+                        s += '  }';
+                        s += '}';
+                        s += '.' + _this.cns + '-fullscreen-split-preview-mode:not(#x) .' + _this.cns + '-textarea,';
+                        s += '.' + _this.cns + '-fullscreen-split-preview-mode:not(#x) .' + _this.cns + '-ide {';
+                        s += '   flex: 1 1 calc(100% - ' + _this.data.settings.previewFrameWidth + ');';
+                        s += '}';
+                        s += '.' + _this.cns + '-fullscreen-split-preview-mode:not(#x) .' + _this.cns + '-preview {';
+                        s += '   flex: 1 1 ' + _this.data.settings.previewFrameWidth + ';';
+                        s += '}';
+                        _this.$head.append('<style>' + s + '</style>');
+                    }
                     if (_this.data.settings.hljsStyleUrl) {
                         var href = _this.data.settings.hljsStyleUrl, integrity = _this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(_this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';
-                        $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
-                    }
-                    if (_this.data.settings.previewStylesUrl) {
-                        var href = _this.data.settings.previewStylesUrl, integrity = _this.data.settings.previewStylesSri ? ' integrity="' + _.escape(_this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
                         $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
                     }
                     if (_this.data.settings.hljsBgColor) {
@@ -238,6 +264,10 @@ var WpMarkdownExtraEditor;
                     if (_this.data.settings.hljsFontFamily) {
                         var fontFamily = _this.data.settings.hljsFontFamily;
                         $body.append('<style>.hljs-pre > .hljs { font-family: ' + fontFamily.replace(/[<&>]/g, '') + ' !important; }</style>');
+                    }
+                    if (_this.data.settings.previewStylesUrl) {
+                        var href = _this.data.settings.previewStylesUrl, integrity = _this.data.settings.previewStylesSri ? ' integrity="' + _.escape(_this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
+                        $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
                     }
                     if (_this.data.settings.customPreviewStyles) {
                         var customPreviewStyles = _this.data.settings.customPreviewStyles;

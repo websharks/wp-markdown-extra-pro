@@ -14,6 +14,8 @@
 - Adding compatibility with TypeKit for custom previews integrated by themes.
 - Adding support for `<!--raw-->` MD bypass tag.
 - Enhancing Markdown parsing in previews.
+- New configuration option that allows the preview frame to be moved to the right or left side of the screen in split preview mode.
+- New configuration option that allows the preview frame width to be defined when previewing in fullscreen mode.
 
 ## v170221.4504
 

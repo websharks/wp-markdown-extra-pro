@@ -239,6 +239,8 @@ class Editor extends SCoreClasses\SCore\Base\Core
             'hljsFontFamily' => s::getOption('hljs_font_family'),
 
             'previewMethod'            => s::getOption('editor_preview'),
+            'previewFrameSide'         => s::getOption('editor_preview_frame_side'),
+            'previewFrameWidth'        => s::getOption('editor_preview_frame_width'),
             'ajaxRestActionPreviewUrl' => s::restActionUrl('ajax.preview', ['post_id' => $post_id]),
 
             'previewStylesUrl' => $preview_styles_url,

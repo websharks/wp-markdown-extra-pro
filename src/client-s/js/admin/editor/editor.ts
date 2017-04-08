@@ -21,6 +21,7 @@ namespace WpMarkdownExtraEditor {
 
     public $html: JQuery;
     public $body: JQuery;
+    public $head: JQuery;
 
     public $form: JQuery;
     public $area: JQuery;
@@ -127,7 +128,7 @@ namespace WpMarkdownExtraEditor {
     protected initElements() {
       this.$win = $(window), this.$doc = $(document);
 
-      this.$html = $('html'), this.$body = $('body'),
+      this.$html = $('html'), this.$body = $('body'), this.$head = $('head'),
         this.$html.addClass(this.themeClass);
 
       if (this.data.settings.ideEnable) {
@@ -205,14 +206,39 @@ namespace WpMarkdownExtraEditor {
           let $html = this.$previewHtml,
             $body = this.$previewBody; // Shorter.
 
+          if (this.data.settings.previewFrameSide === 'left') {
+            let s = ''; // Initialize styles.
+            s += '.' + this.cns + '-fullscreen-split-preview-mode:not(#x) .' + this.cns + '-container {';
+            s += '   flex-direction: row-reverse;';
+            s += '}';
+            this.$head.append('<style>' + s + '</style>');
+          }
+          if (this.data.settings.previewFrameWidth) {
+            let s = ''; // Initialize styles.
+            s += '@media only screen and (min-width: 1200px) {';
+            s += '  .' + this.cns + '-fullscreen-preview-mode:not(#x) .' + this.cns + '-toolbar {';
+            s += '    width: ' + this.data.settings.previewFrameWidth + ';';
+            s += '    margin-left: calc((100% - ' + this.data.settings.previewFrameWidth + ') / 2);';
+            s += '    margin-right: calc((100% - ' + this.data.settings.previewFrameWidth + ') / 2);';
+            s += '  }';
+            s += '  .' + this.cns + '-fullscreen-preview-mode:not(#x) .' + this.cns + '-preview {';
+            s += '    flex: 1 1 ' + this.data.settings.previewFrameWidth + ';';
+            s += '    margin-left: calc((100% - ' + this.data.settings.previewFrameWidth + ') / 2);';
+            s += '    margin-right: calc((100% - ' + this.data.settings.previewFrameWidth + ') / 2);';
+            s += '  }';
+            s += '}';
+            s += '.' + this.cns + '-fullscreen-split-preview-mode:not(#x) .' + this.cns + '-textarea,';
+            s += '.' + this.cns + '-fullscreen-split-preview-mode:not(#x) .' + this.cns + '-ide {';
+            s += '   flex: 1 1 calc(100% - ' + this.data.settings.previewFrameWidth + ');';
+            s += '}';
+            s += '.' + this.cns + '-fullscreen-split-preview-mode:not(#x) .' + this.cns + '-preview {';
+            s += '   flex: 1 1 ' + this.data.settings.previewFrameWidth + ';';
+            s += '}';
+            this.$head.append('<style>' + s + '</style>');
+          }
           if (this.data.settings.hljsStyleUrl) {
             let href = this.data.settings.hljsStyleUrl,
               integrity = this.data.settings.hljsStyleSri ? ' integrity="' + _.escape(this.data.settings.hljsStyleSri) + '" crossorigin="anonymous"' : '';
-            $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
-          }
-          if (this.data.settings.previewStylesUrl) {
-            let href = this.data.settings.previewStylesUrl,
-              integrity = this.data.settings.previewStylesSri ? ' integrity="' + _.escape(this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
             $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
           }
           if (this.data.settings.hljsBgColor) {
@@ -222,6 +248,11 @@ namespace WpMarkdownExtraEditor {
           if (this.data.settings.hljsFontFamily) {
             let fontFamily = this.data.settings.hljsFontFamily;
             $body.append('<style>.hljs-pre > .hljs { font-family: ' + fontFamily.replace(/[<&>]/g, '') + ' !important; }</style>');
+          }
+          if (this.data.settings.previewStylesUrl) {
+            let href = this.data.settings.previewStylesUrl,
+              integrity = this.data.settings.previewStylesSri ? ' integrity="' + _.escape(this.data.settings.previewStylesSri) + '" crossorigin="anonymous"' : '';
+            $body.append('<link type="text/css" rel="stylesheet" href="' + _.escape(href) + '"' + integrity + ' />');
           }
           if (this.data.settings.customPreviewStyles) {
             let customPreviewStyles = this.data.settings.customPreviewStyles;

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Markdown Extra Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Markdown Extra Pro 170408.14124\n"
+"Project-Id-Version: WP Markdown Extra Pro 170408.19934\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-markdown-extra-pro\n"
-"POT-Creation-Date: 2017-04-08 03:55:27+00:00\n"
+"POT-Creation-Date: 2017-04-08 05:32:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,15 +12,15 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: src/includes/classes/App.php:126
+#: src/includes/classes/App.php:128
 msgid "Disable Jetpack Markdown"
 msgstr ""
 
-#: src/includes/classes/App.php:127
+#: src/includes/classes/App.php:129
 msgid "that Jetpack Markdown be disabled"
 msgstr ""
 
-#: src/includes/classes/App.php:132
+#: src/includes/classes/App.php:134
 msgid "<a href=\"%1$s\">change your Jetpack Settings</a> (disable Jetpack Markdown)"
 msgstr ""
 
@@ -240,68 +240,109 @@ msgstr ""
 msgid "<em><strong>Note:</strong> Preview options are applicable only when you've enabled the Markdown Editor.</em>"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:47
-msgid "Highlight.js Preview Options"
+#: src/includes/templates/admin/menu-pages/options/preview.php:46
+msgid "General Preview Options"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:48
-msgid "These control syntax highlighting for fenced coded blocks, when previewing Markdown."
+#: src/includes/templates/admin/menu-pages/options/preview.php:51
+msgid "50%"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:61
-msgid "Highlight.js Style"
+#: src/includes/templates/admin/menu-pages/options/preview.php:52
+msgid "Fullscreen Preview Width"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:62
-msgid "Powered by Highlight.js.<hr />This option controls the Highlight.js colors used in fenced code blocks.<hr />Review CDN resources and enter a <code>[style]</code>.min.css file basename w/o extension.<hr />e.g., <code>github</code>, <code>atom-one-dark</code>, <code>ir-black</code>, <code>hybrid</code>"
+#: src/includes/templates/admin/menu-pages/options/preview.php:53
+msgid "This determines the width of the preview frame in fullscreen mode."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:54
+msgid "Width of the preview in fullscreen mode; e.g., px, em, %. Default: <code>50%</code>"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/preview.php:63
+#: src/includes/templates/admin/menu-pages/options/preview.php:71
+msgid "right"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:64
+msgid "Fullscreen Split Preview Side"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:65
+msgid "When editing in fullscreen split preview mode, on which side of the screen should the preview frame be shown?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:66
+msgid "In fullscreen split preview mode, show preview frame on which side of the screen?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:72
+msgid "left"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:79
+msgid "Highlight.js Preview Options"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:80
+msgid "These control syntax highlighting for fenced coded blocks, when previewing Markdown."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:93
+msgid "Highlight.js Style"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:94
+msgid "Powered by Highlight.js.<hr />This option controls the Highlight.js colors used in fenced code blocks.<hr />Review CDN resources and enter a <code>[style]</code>.min.css file basename w/o extension.<hr />e.g., <code>github</code>, <code>atom-one-dark</code>, <code>ir-black</code>, <code>hybrid</code>"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/preview.php:95
 msgid "Review the list of <a href=\"%1$s\" target=\"_blank\">CDN resources</a> and choose a <code>[style]</code>.min.css. See also: <a href=\"%2$s\" target=\"_blank\">style demos</a>"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:73
+#: src/includes/templates/admin/menu-pages/options/preview.php:105
 msgid "e.g., #f8f8f8"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:74
+#: src/includes/templates/admin/menu-pages/options/preview.php:106
 msgid "BG Color Override"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:75
+#: src/includes/templates/admin/menu-pages/options/preview.php:107
 msgid "Hex color code; e.g., <code>#f8f8f8</code>, <code>#000</code>, <code>#ccc</code><hr />If empty, the background color is defined by the style you selected above."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:76
+#: src/includes/templates/admin/menu-pages/options/preview.php:108
 msgid "If empty, the background color is defined by the Highlight.js style."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:87
+#: src/includes/templates/admin/menu-pages/options/preview.php:119
 msgid "Font Family Override"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:88
+#: src/includes/templates/admin/menu-pages/options/preview.php:120
 msgid "Controls the containing element font family."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:89
+#: src/includes/templates/admin/menu-pages/options/preview.php:121
 msgid "Comma-delimited monospace fonts used in CSS. If empty, a default monospace family is used."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:98
-#: src/includes/templates/admin/menu-pages/options/preview.php:105
+#: src/includes/templates/admin/menu-pages/options/preview.php:130
+#: src/includes/templates/admin/menu-pages/options/preview.php:137
 msgid "Custom Preview Styles"
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:99
+#: src/includes/templates/admin/menu-pages/options/preview.php:131
 msgid "This allows you to include CSS of your own that may override some defaults, or perhaps style elements in previews in a way that more closely resembles the final output in your WordPress theme. Keep in mind there are already a number of built-in preview styles, so this is completely optional."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:107
+#: src/includes/templates/admin/menu-pages/options/preview.php:139
 msgid "Custom styles are injected into Markdown previews, right after all of the default styles."
 msgstr ""
 
-#: src/includes/templates/admin/menu-pages/options/preview.php:108
+#: src/includes/templates/admin/menu-pages/options/preview.php:140
 msgid "<strong>Tip:</strong> You can choose to use a CSS <code>@import</code> rule if you'd like; i.e., so you can maintain custom styles in a separate file. For example: <code>@import url('/wp-content/my-theme/md-preview-styles.css');</code>"
 msgstr ""
 

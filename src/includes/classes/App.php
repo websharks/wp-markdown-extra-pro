@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170408.14124'; //v//
+    const VERSION = '170408.19934'; //v//
 
     /**
      * Constructor.
@@ -100,15 +100,17 @@ class App extends SCoreClasses\App
                     'kb_article',
                     'snippet',
                 ],
-                'editor_enable'          => false,
-                'editor_theme'           => 'light',
-                'editor_font_size'       => '1em',
-                'editor_font_family'     => $monospace,
-                'editor_media_inserts'   => 'md',
-                'editor_ide_enable'      => false,
-                'editor_preview'         => 'js',
-                'editor_preview_styles'  => '',
-                'editor_preview_scripts' => '',
+                'editor_enable'              => false,
+                'editor_theme'               => 'light',
+                'editor_font_size'           => '1em',
+                'editor_font_family'         => $monospace,
+                'editor_media_inserts'       => 'md',
+                'editor_ide_enable'          => false,
+                'editor_preview'             => 'js',
+                'editor_preview_frame_side'  => 'right',
+                'editor_preview_frame_width' => '',
+                'editor_preview_styles'      => '',
+                'editor_preview_scripts'     => '',
 
                 'hljs_style'       => 'github',
                 'hljs_bg_color'    => '',

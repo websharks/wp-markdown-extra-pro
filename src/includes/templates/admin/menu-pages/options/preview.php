@@ -43,6 +43,38 @@ $Form = $this->s::menuPageForm('§save-options');
         <?= $Form->closeTable(); ?>
     <?php endif; ?>
 
+    <?= $Form->openTable(__('General Preview Options', 'wp-markdown-extra')); ?>
+
+        <?= $Form->inputRow([
+            'if' => 'editor_enable',
+
+            'placeholder' => __('50%', 'wp-markdown-extra'),
+            'label'       => __('Fullscreen Preview Width', 'wp-markdown-extra'),
+            'tip'         => __('This determines the width of the preview frame in fullscreen mode.', 'wp-markdown-extra'),
+            'note'        => __('Width of the preview in fullscreen mode; e.g., px, em, %. Default: <code>50%</code>', 'wp-markdown-extra'),
+
+            'name'  => 'editor_preview_frame_width',
+            'value' => s::getOption('editor_preview_frame_width'),
+        ]); ?>
+
+        <?= $Form->selectRow([
+            'if' => 'editor_enable',
+
+            'placeholder' => __('right', 'wp-markdown-extra'),
+            'label'       => __('Fullscreen Split Preview Side', 'wp-markdown-extra'),
+            'tip'         => __('When editing in fullscreen split preview mode, on which side of the screen should the preview frame be shown?', 'wp-markdown-extra'),
+            'note'        => __('In fullscreen split preview mode, show preview frame on which side of the screen?', 'wp-markdown-extra'),
+
+            'name'    => 'editor_preview_frame_side',
+            'value'   => s::getOption('editor_preview_frame_side'),
+            'options' => [
+                ''     => __('right', 'wp-markdown-extra'),
+                'left' => __('left', 'wp-markdown-extra'),
+            ],
+        ]); ?>
+
+    <?= $Form->closeTable(); ?>
+
     <?= $Form->openTable(
         __('Highlight.js Preview Options', 'wp-markdown-extra'),
         __('These control syntax highlighting for fenced coded blocks, when previewing Markdown.', 'wp-markdown-extra')
