@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Markdown Extra Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Markdown Extra Pro 170408.19934\n"
+"Project-Id-Version: WP Markdown Extra Pro 170408.19959\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-markdown-extra-pro\n"
-"POT-Creation-Date: 2017-04-08 05:32:16+00:00\n"
+"POT-Creation-Date: 2017-04-08 05:32:51+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

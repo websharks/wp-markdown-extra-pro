@@ -31,14 +31,14 @@ use function get_defined_vars as vars;
 /**
  * Shortcode utils.
  *
- * @since 17xxxx Initial release.
+ * @since 170408.19959 Initial release.
  */
 class Shortcode extends SCoreClasses\SCore\Base\Core
 {
     /**
      * Shortcode.
      *
-     * @since 17xxxx Initial release.
+     * @since 170408.19959 Initial release.
      *
      * @param array|string $atts      Shortcode attributes.
      * @param string|null  $content   Shortcode content.
@@ -73,7 +73,7 @@ class Shortcode extends SCoreClasses\SCore\Base\Core
     /**
      * Get URL contents.
      *
-     * @since 17xxxx Initial release.
+     * @since 170408.19959 Initial release.
      *
      * @param string $url  URL to get contents of.
      * @param array  $args Behavioral args.

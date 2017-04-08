@@ -384,7 +384,7 @@ class Editor extends SCoreClasses\SCore\Base\Core
     /**
      * On `edit_user_profile` hook.
      *
-     * @since 17xxxx Initial release.
+     * @since 170408.19959 Initial release.
      *
      * @param \WP_User User associated w/ profile.
      */

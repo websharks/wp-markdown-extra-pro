@@ -38,7 +38,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * Raw tag.
      *
-     * @since 17xxxx
+     * @since 170408.19959
      *
      * @type string
      */
@@ -47,7 +47,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * Marker.
      *
-     * @since 17xxxx
+     * @since 170408.19959
      *
      * @type string
      */
@@ -65,7 +65,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * Class constructor.
      *
-     * @since 17xxxx Initial release.
+     * @since 170408.19959 Initial release.
      *
      * @param Classes\App $App Instance.
      */
@@ -403,7 +403,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * On `the_content` filter.
      *
-     * @since 17xxxx Initial release.
+     * @since 170408.19959 Initial release.
      *
      * @param string|scalar $content Markup.
      *
@@ -528,7 +528,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * Add marker to string.
      *
-     * @since 17xxxx Enhanced marker handling.
+     * @since 170408.19959 Enhanced marker handling.
      *
      * @param string $string String to mark.
      *
@@ -543,7 +543,7 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     /**
      * Strip marker from string.
      *
-     * @since 17xxxx Enhanced marker handling.
+     * @since 170408.19959 Enhanced marker handling.
      *
      * @param string $string String to strip from.
      *
