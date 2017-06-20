@@ -726,10 +726,10 @@ var WpMarkdownExtraEditor;
             }
         };
         Editor.prototype.hljsInHtmlNode = function ($node) {
-            var exclusions = '.no-hljs, .no-highlight, .nohighlight', plainText = '.lang-none, .lang-plain, .lang-text, .lang-txt, .none, .plain, .text, .txt';
+            var exclusions = '.\\!\\~hljs, .no-hljs, .no-highlight, .nohighlight', plainText = '.lang-none, .lang-plain, .lang-text, .lang-txt, .none, .plain, .text, .txt';
             $node.find('pre > code').not(exclusions).each(function (i, obj) {
                 var $obj = $(obj), $parent = $obj.parent();
-                $parent.addClass('hljs-pre');
+                $parent.addClass('hljs-pre code');
                 if ($obj.is(plainText)) {
                     $obj.addClass('hljs lang-none');
                 }

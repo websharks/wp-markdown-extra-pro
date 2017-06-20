@@ -1,3 +1,7 @@
+## $v
+
+- Adding Hash CSS framework compatibility.
+
 ## v170408.19959
 
 - Bug fix. On bulk edit PHP warning.

@@ -814,14 +814,14 @@ namespace WpMarkdownExtraEditor {
     }
 
     protected hljsInHtmlNode($node: JQuery) {
-      let exclusions = '.no-hljs, .no-highlight, .nohighlight',
+      let exclusions = '.\\!\\~hljs, .no-hljs, .no-highlight, .nohighlight',
         plainText = '.lang-none, .lang-plain, .lang-text, .lang-txt, .none, .plain, .text, .txt';
 
       $node.find('pre > code').not(exclusions).each((i, obj) => {
         let $obj = $(obj),
           $parent = $obj.parent();
 
-        $parent.addClass('hljs-pre');
+        $parent.addClass('hljs-pre code');
 
         if ($obj.is(plainText)) {
           $obj.addClass('hljs lang-none');
