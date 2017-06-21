@@ -78,7 +78,7 @@ $Form = $this->s::menuPageForm('§save-options');
 
         <?= $Form->selectRow([
             'label' => __('Enable for Text Widgets?', 'wp-markdown-extra'),
-            'tip'   => __('This allows Markdown in Text Widgets.', 'wp-markdown-extra'),
+            'tip'   => __('This allows you to use Markdown in Text Widgets.', 'wp-markdown-extra'),
 
             'name'     => 'widgets_enable',
             'value'    => s::getOption('widgets_enable'),
