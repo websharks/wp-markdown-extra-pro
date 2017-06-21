@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170621.19514'; //v//
+    const VERSION = '170621.20044'; //v//
 
     /**
      * Constructor.
@@ -200,6 +200,8 @@ class App extends SCoreClasses\App
             add_filter('woocommerce_short_description', [$this->Utils->Markdown, 'onWcShortDescription'], -10000);
         }
         add_filter('widget_text_content', [$this->Utils->Markdown, 'onWidgetTextContent'], -10000);
+        add_filter('widget_html_code_content', [$this->Utils->Markdown, 'onWidgetHtmlCodeContent'], -10001);
+
         add_filter('pre_comment_content', [$this->Utils->Markdown, 'onPreCommentContent'], -10000);
 
         s::registerRestAction('ajax.preview', 'Preview', 'onAjaxRestActionPreview');

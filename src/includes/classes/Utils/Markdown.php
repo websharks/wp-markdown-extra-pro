@@ -501,6 +501,21 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
+     * On `widget_html_code_content` filter.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param string|scalar $content Markup.
+     *
+     * @return string Transformed content markup.
+     */
+    public function onWidgetHtmlCodeContent($content): string
+    {
+        $content        = (string) $content;
+        return $content = $this->stripMarker($content);
+    }
+
+    /**
      * On `pre_comment_content` filter.
      *
      * @since 170126.30913 Initial release.
