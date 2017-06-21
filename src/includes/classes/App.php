@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170620.35711'; //v//
+    const VERSION = '170621.19514'; //v//
 
     /**
      * Constructor.
@@ -92,6 +92,7 @@ class App extends SCoreClasses\App
 
             '§default_options' => [
                 'posts_enable'    => true,
+                'widgets_enable'  => true,
                 'comments_enable' => true,
                 'post_types'      => [
                     'post',
@@ -198,11 +199,13 @@ class App extends SCoreClasses\App
             // The same thing, except this time look for priority `-10000` (e.g., set by <Pre>serve plugin).
             add_filter('woocommerce_short_description', [$this->Utils->Markdown, 'onWcShortDescription'], -10000);
         }
+        add_filter('widget_text_content', [$this->Utils->Markdown, 'onWidgetTextContent'], -10000);
         add_filter('pre_comment_content', [$this->Utils->Markdown, 'onPreCommentContent'], -10000);
 
         s::registerRestAction('ajax.preview', 'Preview', 'onAjaxRestActionPreview');
 
         add_shortcode('md', [$this->Utils->Shortcode, 'onShortcode']);
+
         /*
          * Content filter tweaks based on a multitude of configurable options.
          */
@@ -215,6 +218,11 @@ class App extends SCoreClasses\App
                 remove_filter('woocommerce_short_description', 'wptexturize');
             }
         }
+        if ($options['widgets_enable']) {
+            if ($options['texturizer'] !== 'wptexturize') {
+                remove_filter('widget_text_content', 'wptexturize');
+            }
+        }
         if ($options['comments_enable']) {
             if ($options['texturizer'] !== 'wptexturize') {
                 remove_filter('comment_text', 'wptexturize');
@@ -222,33 +230,39 @@ class App extends SCoreClasses\App
         }
         if ($options['filter_tweaks_enable']) {
             if ($options['posts_enable']) {
-                // `convert_chars` not on `the_content`.
-                // There is no need to remove that filter.
                 remove_filter('the_content', 'wpautop');
                 remove_filter('the_content', 'shortcode_unautop');
+                remove_filter('the_content', 'convert_chars');
                 remove_filter('the_content', 'capital_P_dangit', 11);
                 remove_filter('the_content', 'convert_smilies', 20);
 
-                remove_filter('the_excerpt', 'convert_smilies');
-                remove_filter('the_excerpt', 'convert_chars');
                 remove_filter('the_excerpt', 'wpautop');
                 remove_filter('the_excerpt', 'shortcode_unautop');
+                remove_filter('the_excerpt', 'convert_chars');
+                remove_filter('the_excerpt', 'convert_smilies');
                 remove_filter('the_excerpt', 'capital_P_dangit', 11);
 
-                remove_filter('woocommerce_short_description', 'convert_smilies');
-                remove_filter('woocommerce_short_description', 'convert_chars');
                 remove_filter('woocommerce_short_description', 'wpautop');
                 remove_filter('woocommerce_short_description', 'shortcode_unautop');
+                remove_filter('woocommerce_short_description', 'convert_chars');
+                remove_filter('woocommerce_short_description', 'convert_smilies');
+            }
+            if ($options['widgets_enable']) {
+                add_filter('widget_text', 'do_shortcode');
+                remove_filter('widget_text_content', 'balanceTags');
+                remove_filter('widget_text_content', 'wpautop');
+                remove_filter('widget_text_content', 'shortcode_unautop');
+                remove_filter('widget_text_content', 'capital_P_dangit', 11);
+                remove_filter('widget_text_content', 'convert_smilies', 20);
+                remove_filter('widget_html_code_content', 'balanceTags');
             }
             if ($options['comments_enable']) {
                 remove_filter('comment_text', 'convert_chars');
+                remove_filter('comment_excerpt', 'convert_chars');
                 remove_filter('comment_text', 'convert_smilies', 20);
                 remove_filter('comment_text', 'wpautop', 30);
                 remove_filter('comment_text', 'capital_P_dangit', 31);
-                // This filter in core can be removed also.
-                remove_filter('comment_excerpt', 'convert_chars');
             }
-            add_filter('widget_text', 'do_shortcode'); // Shortcodes in text widgets.
         }
     }
 }

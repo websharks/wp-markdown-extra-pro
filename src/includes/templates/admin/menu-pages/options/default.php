@@ -77,6 +77,18 @@ $Form = $this->s::menuPageForm('§save-options');
         ]); ?>
 
         <?= $Form->selectRow([
+            'label' => __('Enable for Text Widgets?', 'wp-markdown-extra'),
+            'tip'   => __('This allows Markdown in Text Widgets.', 'wp-markdown-extra'),
+
+            'name'     => 'widgets_enable',
+            'value'    => s::getOption('widgets_enable'),
+            'options'  => [
+                '1' => __('Yes', 'wp-markdown-extra'),
+                '0' => __('No', 'wp-markdown-extra'),
+            ],
+        ]); ?>
+
+        <?= $Form->selectRow([
             'label' => __('Enable for Comments?', 'wp-markdown-extra'),
             'tip'   => __('This allows all users to comment in Markdown.', 'wp-markdown-extra'),
 

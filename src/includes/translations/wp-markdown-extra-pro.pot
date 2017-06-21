@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP Markdown Extra Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Markdown Extra Pro 170620.35711\n"
+"Project-Id-Version: WP Markdown Extra Pro 170621.19514\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-markdown-extra-pro\n"
-"POT-Creation-Date: 2017-06-20 09:55:13+00:00\n"
+"POT-Creation-Date: 2017-06-21 05:25:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,15 +12,15 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: src/includes/classes/App.php:128
+#: src/includes/classes/App.php:129
 msgid "Disable Jetpack Markdown"
 msgstr ""
 
-#: src/includes/classes/App.php:129
+#: src/includes/classes/App.php:130
 msgid "that Jetpack Markdown be disabled"
 msgstr ""
 
-#: src/includes/classes/App.php:134
+#: src/includes/classes/App.php:135
 msgid "<a href=\"%1$s\">change your Jetpack Settings</a> (disable Jetpack Markdown)"
 msgstr ""
 
@@ -97,12 +97,14 @@ msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:50
 #: src/includes/templates/admin/menu-pages/options/default.php:86
+#: src/includes/templates/admin/menu-pages/options/default.php:98
 #: src/includes/templates/admin/menu-pages/options/editor.php:109
 msgid "Yes"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:51
 #: src/includes/templates/admin/menu-pages/options/default.php:87
+#: src/includes/templates/admin/menu-pages/options/default.php:99
 #: src/includes/templates/admin/menu-pages/options/editor.php:53
 #: src/includes/templates/admin/menu-pages/options/editor.php:110
 msgid "No"
@@ -117,10 +119,18 @@ msgid "Select the Post Types that are written in Markdown."
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:80
-msgid "Enable for Comments?"
+msgid "Enable for Text Widgets?"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/default.php:81
+msgid "This allows Markdown in Text Widgets."
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/default.php:92
+msgid "Enable for Comments?"
+msgstr ""
+
+#: src/includes/templates/admin/menu-pages/options/default.php:93
 msgid "This allows all users to comment in Markdown."
 msgstr ""
 
@@ -363,7 +373,7 @@ msgid "If you don't like surprises, please enable this option.<hr />Why? Because
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/tweaks.php:46
-msgid "A mixed set of helpful tweaks for the professional Markdowner. This disables the <code>convert_smilies</code>, <code>convert_chars</code>, <code>wpautop</code>, <code>shortcode_unautop</code>, and <code>capital_P_dangit</code> filters in WordPress core; i.e., filters that can lead to quirky surprises. It also enables Shortcodes in Text Widgets.<br /><br /><em><strong>Note:</strong> With this option enabled, the filters mentioned above are removed globally, for all content &amp; excerpts, whether they are written in Markdown or not. However, they are only removed if you have Markdown enabled for Posts. The filters are also removed globally for comments, but only if you have Markdown enabled for Comments.</em>"
+msgid "A mixed set of helpful tweaks for the professional Markdowner. This disables the <code>convert_smilies</code>, <code>convert_chars</code>, <code>wpautop</code>, <code>shortcode_unautop</code>, and <code>capital_P_dangit</code> filters in WordPress core; i.e., filters that can, at times, lead to quirky surprises when written in Markdown or raw HTML. This also enables Shortcodes in Text Widgets.<br /><br /><em><strong>Note:</strong> With this option enabled, the filters mentioned above are adjusted globally, for all content, excerpts &amp; text widgets, whether they're written in Markdown or not. However, they're only removed for Posts if you have Markdown enabled for Posts. The same for Text Widgets and Comments; i.e., filters are only removed globally for content types with Markdown enabled.</em>"
 msgstr ""
 
 #: src/includes/templates/admin/menu-pages/options/tweaks.php:51

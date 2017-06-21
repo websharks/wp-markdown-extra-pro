@@ -476,6 +476,31 @@ class Markdown extends SCoreClasses\SCore\Base\Core
     }
 
     /**
+     * On `widget_text_content` filter.
+     *
+     * @since 17xxxx Initial release.
+     *
+     * @param string|scalar $content Markup.
+     *
+     * @return string Transformed content markup.
+     */
+    public function onWidgetTextContent($content): string
+    {
+        $content = (string) $content;
+
+        if (!$content) {
+            return $content; // Empty.
+        } elseif (!s::getOption('widgets_enable')) {
+            return $content; // Not applicable.
+        }
+        $sha1_f8        = mb_substr(sha1($content), 0, 8);
+        return $content = $this->__invoke($content, 0, [
+            'cache'        => false, // Never.
+            'fn_id_prefix' => 'w-'.$sha1_f8.'-',
+        ]);
+    }
+
+    /**
      * On `pre_comment_content` filter.
      *
      * @since 170126.30913 Initial release.
