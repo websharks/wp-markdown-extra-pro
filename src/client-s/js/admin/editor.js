@@ -221,7 +221,7 @@ var WpMarkdownExtraEditor;
                     _this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
                     _this.$previewHtml = _this.$previewDocument.find('html');
                     _this.$previewBody = _this.$previewDocument.find('body');
-                    _this.$previewDiv = _this.$previewBody.find('#md-preview-div');
+                    _this.$previewObj = _this.$previewBody.find('#md-preview');
                     var $html = _this.$previewHtml, $body = _this.$previewBody; // Shorter.
                     if (_this.data.settings.previewFrameSide === 'left') {
                         var s = ''; // Initialize styles.
@@ -653,7 +653,7 @@ var WpMarkdownExtraEditor;
         Editor.prototype.previewRender = function (md) {
             var _this = this;
             if (md === '')
-                return this.$previewDiv.html('');
+                return this.$previewObj.html('');
             // Otherwise, only if visible.
             if (!this.$preview.is(':visible'))
                 return; // Not applicable.
@@ -661,7 +661,7 @@ var WpMarkdownExtraEditor;
             if (md === undefined)
                 md = this.docValue();
             if (!md)
-                return this.$previewDiv.html('');
+                return this.$previewObj.html('');
             if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
                 this.previewTypekitLoaded = true; // Only need to do this one time.
                 this.$previewWindow[0].Typekit.load({ async: true });
@@ -681,7 +681,7 @@ var WpMarkdownExtraEditor;
                         var html = r.html; // Response.
                         var $div = $('<div>' + html + '</div>');
                         _this.hljsInHtmlNode($div);
-                        _this.$previewDiv.html($div.html());
+                        _this.$previewObj.html($div.html());
                     },
                     error: function (e) { return _this.log('error', e); }
                 });
@@ -722,7 +722,7 @@ var WpMarkdownExtraEditor;
                     this.mdIt.renderer.rules.fence = this.mdIt.renderer.rules.code_block;
                 }
                 var html = this.mdIt.render(md);
-                this.$previewDiv.html(html);
+                this.$previewObj.html(html);
             }
         };
         Editor.prototype.hljsInHtmlNode = function ($node) {

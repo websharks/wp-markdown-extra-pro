@@ -63,7 +63,7 @@ namespace WpMarkdownExtraEditor {
     public $previewDocument: JQuery;
     public $previewHtml: JQuery;
     public $previewBody: JQuery;
-    public $previewDiv: JQuery;
+    public $previewObj: JQuery;
 
     protected mdIt: any;
 
@@ -201,7 +201,7 @@ namespace WpMarkdownExtraEditor {
           this.$previewDocument = $(iframe.contentDocument || iframe.contentWindow.document);
           this.$previewHtml = this.$previewDocument.find('html');
           this.$previewBody = this.$previewDocument.find('body');
-          this.$previewDiv = this.$previewBody.find('#md-preview-div');
+          this.$previewObj = this.$previewBody.find('#md-preview');
 
           let $html = this.$previewHtml,
             $body = this.$previewBody; // Shorter.
@@ -718,7 +718,7 @@ namespace WpMarkdownExtraEditor {
 
     protected previewRender(md?: string) {
       if (md === '') // Explicitly.
-        return this.$previewDiv.html('');
+        return this.$previewObj.html('');
 
       // Otherwise, only if visible.
       if (!this.$preview.is(':visible'))
@@ -728,7 +728,7 @@ namespace WpMarkdownExtraEditor {
       if (md === undefined) md = this.docValue();
 
       if (!md) // Nothing to preview.
-        return this.$previewDiv.html('');
+        return this.$previewObj.html('');
 
       if (this.data.settings.previewTypekitId && !this.previewTypekitLoaded) {
         this.previewTypekitLoaded = true; // Only need to do this one time.
@@ -753,7 +753,7 @@ namespace WpMarkdownExtraEditor {
             let $div = $('<div>' + html + '</div>');
 
             this.hljsInHtmlNode($div);
-            this.$previewDiv.html($div.html());
+            this.$previewObj.html($div.html());
           },
           error: (e) => this.log('error', e)
         });
@@ -809,7 +809,7 @@ namespace WpMarkdownExtraEditor {
           this.mdIt.renderer.rules.fence = this.mdIt.renderer.rules.code_block;
         }
         let html = this.mdIt.render(md);
-        this.$previewDiv.html(html);
+        this.$previewObj.html(html);
       }
     }
 
