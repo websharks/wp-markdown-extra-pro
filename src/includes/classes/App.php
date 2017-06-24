@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170623.27203'; //v//
+    const VERSION = '170624.81060'; //v//
 
     /**
      * Constructor.
@@ -53,9 +53,7 @@ class App extends SCoreClasses\App
      */
     public function __construct(array $instance = [])
     {
-        $monospace = "'hack', 'menlo', 'monaco',".
-            " 'consolas', 'andale mono', 'dejavu sans mono',".
-            ' monospace'; // Needed below.
+        $monospace = "'menlo', 'consolas', monospace";
 
         $instance_base = [
             '©di' => [

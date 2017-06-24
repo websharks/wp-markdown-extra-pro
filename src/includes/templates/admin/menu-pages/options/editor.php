@@ -87,7 +87,7 @@ $Form = $this->s::menuPageForm('§save-options');
             'if'    => 'editor_enable',
 
             'type'        => 'text',
-            'placeholder' => "'Hack', 'Menlo', 'Monaco', 'Consolas', 'Andale Mono', 'DejaVu Sans Mono', monospace",
+            'placeholder' => "'menlo', 'consolas', monospace",
             'label'       => __('Font Family', 'wp-markdown-extra'),
             'tip'         => __('Controls the font family used while editing.', 'wp-markdown-extra'),
             'note'        => __('Comma-delimited monospace fonts used in CSS declaration.', 'wp-markdown-extra'),
