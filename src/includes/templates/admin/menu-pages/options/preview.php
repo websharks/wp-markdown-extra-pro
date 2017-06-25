@@ -87,7 +87,7 @@ $Form = $this->s::menuPageForm('§save-options');
         ]); ?>
 
         <?= $Form->inputRow([
-            'if'    => 'editor_enable',
+            'if' => 'editor_enable',
 
             'type'  => 'text',
             'label' => __('Highlight.js Style', 'wp-markdown-extra'),
@@ -99,7 +99,20 @@ $Form = $this->s::menuPageForm('§save-options');
         ]); ?>
 
         <?= $Form->inputRow([
-            'if'    => 'editor_enable',
+            'if' => 'editor_enable',
+
+            'type'        => 'text',
+            'placeholder' => 'wp, typescript, scss',
+            'label'       => __('Additional Highlight.js Langs', 'wp-syntax-highlight'),
+            'tip'         => __('Powered by Highlight.js.<hr />This option controls the additional languages Highlight.js will understand; i.e., above and beyond those it already supports by default.<hr />Review CDN resources and enter comma-delimited <code>[lang]</code>.min.js file basenames w/o extension.<hr />e.g., <code>wp, typescript, scss</code>', 'wp-markdown-extra'),
+            'note'        => sprintf(__('Review the list of <a href="%1$s" target="_blank">CDN resources</a> and enter comma-delimited <code>[lang]</code>.min.js file basenames w/o extension.', 'wp-markdown-extra'), esc_url($this->App->Config->hljs['cdn_files_list_url'])),
+
+            'name'  => 'hljs_langs',
+            'value' => s::getOption('hljs_langs'),
+        ]); ?>
+
+        <?= $Form->inputRow([
+            'if' => 'editor_enable',
 
             'type'        => 'text',
             'placeholder' => __('e.g., #f8f8f8', 'wp-markdown-extra'),
@@ -112,10 +125,10 @@ $Form = $this->s::menuPageForm('§save-options');
         ]); ?>
 
         <?= $Form->inputRow([
-            'if'    => 'editor_enable',
+            'if' => 'editor_enable',
 
             'type'        => 'text',
-            'placeholder' => "'menlo', 'consolas', monospace",
+            'placeholder' => "'fira code', 'menlo', 'consolas', monospace",
             'label'       => __('Font Family Override', 'wp-markdown-extra'),
             'tip'         => __('Controls the containing element font family.', 'wp-markdown-extra'),
             'note'        => __('Comma-delimited monospace fonts used in CSS. If empty, a default monospace family is used.', 'wp-markdown-extra'),
@@ -132,7 +145,7 @@ $Form = $this->s::menuPageForm('§save-options');
     ); ?>
 
         <?= $Form->textareaRow([
-            'if'    => 'editor_enable',
+            'if' => 'editor_enable',
 
             'label'       => __('Custom Preview Styles', 'wp-markdown-extra'),
             'placeholder' => '@import url(\'/wp-content/my-theme/md-preview-styles.css\');',

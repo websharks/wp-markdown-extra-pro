@@ -66,10 +66,9 @@ class Editor extends SCoreClasses\SCore\Base\Core
             'jquery',
             'underscore',
             'highlight-js',
-            'highlight-js-lang-wp',
             'media-upload',
         ];
-        s::enqueueHighlightJsLibs(null);
+        s::enqueueHighlightJsLibs(null, $settings['hljsLangs']);
 
         if ($settings['ideEnable']) {
             $ace_mode  = basename($settings['ide']['mode']);
@@ -156,8 +155,11 @@ class Editor extends SCoreClasses\SCore\Base\Core
         if ($is_applicable_filter === false) {
             return $settings = []; // Nope.
         }
-        $post_id            = (int) ($_REQUEST['post'] ?? 0);
-        $hljs_style_data    = s::highlightJsStyleData(s::getOption('hljs_style'));
+        $post_id = (int) ($_REQUEST['post'] ?? 0);
+
+        $hljs_style_data = s::highlightJsStyleData(s::getOption('hljs_style'));
+        $hljs_langs      = preg_split('/[,\s]+/u', s::getOption('hljs_style'), -1, PREG_SPLIT_NO_EMPTY);
+
         $hljs_style_url     = sprintf($hljs_style_data['url'], urlencode($hljs_style_data['version']));
         $preview_styles_url = c::appUrl('/client-s/js/admin/editor/preview/styles.min.css?v='.urlencode($this->App::VERSION));
 
@@ -234,6 +236,7 @@ class Editor extends SCoreClasses\SCore\Base\Core
             ],
             'hljsStyleUrl' => $hljs_style_url,
             'hljsStyleSri' => c::sri($hljs_style_url),
+            'hljsLangs'    => $hljs_langs,
 
             'hljsBgColor'    => s::getOption('hljs_bg_color'),
             'hljsFontFamily' => s::getOption('hljs_font_family'),

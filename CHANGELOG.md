@@ -3,6 +3,7 @@
 - Adding support for Markdown in Text Widgets starting with WordPress v4.8, via the new `widget_text_content` filter.
 - Adding Hash CSS framework compatibility.
 - Enhancing preview styles.
+- Adding support for additional custom Highlight.js languages.
 
 ## v170408.19959
 

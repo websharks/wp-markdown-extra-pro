@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170624.81060'; //v//
+    const VERSION = '170625.85955'; //v//
 
     /**
      * Constructor.
@@ -53,8 +53,6 @@ class App extends SCoreClasses\App
      */
     public function __construct(array $instance = [])
     {
-        $monospace = "'menlo', 'consolas', monospace";
-
         $instance_base = [
             '©di' => [
                 '©default_rule' => [
@@ -102,7 +100,7 @@ class App extends SCoreClasses\App
                 'editor_enable'              => false,
                 'editor_theme'               => 'light',
                 'editor_font_size'           => '1em',
-                'editor_font_family'         => $monospace,
+                'editor_font_family'         => "'fira code', 'menlo', 'consolas', monospace",
                 'editor_media_inserts'       => 'md',
                 'editor_ide_enable'          => false,
                 'editor_preview'             => 'js',
@@ -111,7 +109,9 @@ class App extends SCoreClasses\App
                 'editor_preview_styles'      => '',
                 'editor_preview_scripts'     => '',
 
-                'hljs_style'       => 'github',
+                'hljs_style' => 'github',
+                'hljs_langs' => 'wp, typescript, scss',
+
                 'hljs_bg_color'    => '',
                 'hljs_font_family' => '',
 
