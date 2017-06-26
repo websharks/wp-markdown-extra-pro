@@ -158,7 +158,7 @@ class Editor extends SCoreClasses\SCore\Base\Core
         $post_id = (int) ($_REQUEST['post'] ?? 0);
 
         $hljs_style_data = s::highlightJsStyleData(s::getOption('hljs_style'));
-        $hljs_langs      = preg_split('/[,\s]+/u', s::getOption('hljs_style'), -1, PREG_SPLIT_NO_EMPTY);
+        $hljs_langs      = preg_split('/[,\s]+/u', s::getOption('hljs_langs'), -1, PREG_SPLIT_NO_EMPTY);
 
         $hljs_style_url     = sprintf($hljs_style_data['url'], urlencode($hljs_style_data['version']));
         $preview_styles_url = c::appUrl('/client-s/js/admin/editor/preview/styles.min.css?v='.urlencode($this->App::VERSION));
