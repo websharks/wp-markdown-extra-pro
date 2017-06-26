@@ -188,7 +188,7 @@ namespace WpMarkdownExtraEditor {
       this.ide.$blockScrolling = Infinity;
 
       this.docValue(this.$textarea.val());
-      this.$textarea.addClass('-position-offscreen');
+      this.$textarea.addClass('-offscreen');
       this.$ide = this.$container.find('.' + this.cns + '-ide');
     }
 

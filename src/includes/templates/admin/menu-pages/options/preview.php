@@ -128,7 +128,7 @@ $Form = $this->s::menuPageForm('§save-options');
             'if' => 'editor_enable',
 
             'type'        => 'text',
-            'placeholder' => "'fira code', 'menlo', 'consolas', monospace",
+            'placeholder' => "'operator mono', 'monaco', monospace",
             'label'       => __('Font Family Override', 'wp-markdown-extra'),
             'tip'         => __('Controls the containing element font family.', 'wp-markdown-extra'),
             'note'        => __('Comma-delimited monospace fonts used in CSS. If empty, a default monospace family is used.', 'wp-markdown-extra'),

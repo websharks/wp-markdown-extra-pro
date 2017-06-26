@@ -42,7 +42,7 @@ class App extends SCoreClasses\App
      *
      * @type string Version.
      */
-    const VERSION = '170626.3247'; //v//
+    const VERSION = '170626.68147'; //v//
 
     /**
      * Constructor.
@@ -100,7 +100,7 @@ class App extends SCoreClasses\App
                 'editor_enable'              => false,
                 'editor_theme'               => 'light',
                 'editor_font_size'           => '1em',
-                'editor_font_family'         => "'fira code', 'menlo', 'consolas', monospace",
+                'editor_font_family'         => "'operator mono', 'monaco', monospace",
                 'editor_media_inserts'       => 'md',
                 'editor_ide_enable'          => false,
                 'editor_preview'             => 'js',

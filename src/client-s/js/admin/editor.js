@@ -116,7 +116,6 @@ var WpMarkdownExtraEditor;
     WpMarkdownExtraEditor.MediaHtml = MediaHtml;
 })(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));
 /// <reference path="./includes/media-html.ts" />
-"use strict";
 var WpMarkdownExtraEditor;
 (function (WpMarkdownExtraEditor) {
     var $ = jQuery;
@@ -209,7 +208,7 @@ var WpMarkdownExtraEditor;
             this.ide.setStyle(this.cns + '-ide');
             this.ide.$blockScrolling = Infinity;
             this.docValue(this.$textarea.val());
-            this.$textarea.addClass('-position-offscreen');
+            this.$textarea.addClass('-offscreen');
             this.$ide = this.$container.find('.' + this.cns + '-ide');
         };
         Editor.prototype.initPreview = function () {
@@ -897,7 +896,6 @@ var WpMarkdownExtraEditor;
     WpMarkdownExtraEditor.Editor = Editor;
     WpMarkdownExtraEditor.WpMarkdownExtraEditorInstance = new Editor();
 })(WpMarkdownExtraEditor || (WpMarkdownExtraEditor = {}));
-"use strict";
 var WpMarkdownExtraEditor;
 (function (WpMarkdownExtraEditor) {
     ;

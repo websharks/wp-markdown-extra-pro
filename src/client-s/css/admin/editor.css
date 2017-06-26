@@ -2,205 +2,6 @@
  * Requires a local copy of the WP Sharks Core.
  */
 /*
- * Requires a local copy of the WebSharks Core.
- */
-/*
- * General colors.
- */
-/*
- * Fancy blockquotes.
- */
-/*
- * Fancy monospace tags.
- */
-/*
- * Named colors.
- */
-/*
- * Social networks.
- */
-/*
- * Our own names.
- */
-/*
- * Name that color!
- * <http://chir.ag/projects/name-that-color>
- */
-/*
- * Font variables.
- */
-/*
- * Content font variables.
- */
-/*
- * Pixels to rem.
- */
-/*
- * Better inversions.
- */
-/*
- * Fancy blockquotes.
- */
-/*
- * Fancy checkboxes.
- */
-/*
- * Fancy definitions.
- */
-/*
- * Fancy HR tags.
- */
-/*
- * Fancy labels.
- */
-/*
- * Fancy link targets.
- */
-/*
- * Fancy messages.
- */
-/*
- * Fancy monospace tags.
- */
-/*
- * Fancy navigation menus.
- */
-/*
- * Fancy pagination menus.
- */
-/*
- * Fancy placeholders.
- */
-/*
- * Font events.
- */
-/*
- * Font features.
- */
-/*
- * Pixels to rem.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Responsive fonts.
- */
-/*
- * Responsive images.
- */
-/*
- * Highlight.js <pre><code>.
- */
-/*
- * Box shadow tools.
- */
-/*
- * Centered tools.
- */
-/*
- * Text shadow tools.
- */
-/*
- * Position tools.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Text shadow tools.
- */
-/*
- * Device breakpoints.
- * Following Semantic UI breakpoints.
- */
-/*
- * Responsive utils.
- * Following Semantic UI breakpoints.
- * + custom `handheld` & `small screen` breakpoints.
- */
-/*
- * Align utils.
- */
-/*
- * Blurred utils.
- */
-/*
- * Border utils.
- */
-/*
- * Box shadow utils.
- */
-/*
- * Color utils.
- */
-/*
- * Content utils.
- */
-/*
- * Disabled utils.
- */
-/*
- * Display utils.
- */
-/*
- * Filter shadow utilities.
- */
-/*
- * Font utils.
- */
-/*
- * Heading utils.
- */
-/*
- * Height utils.
- */
-/*
- * Inset utils.
- */
-/*
- * Line utils.
- */
-/*
- * List utils.
- */
-/*
- * Margin utils.
- */
-/*
- * Opacity utils.
- */
-/*
- * Padding utils.
- */
-/*
- * Position utils.
- */
-/*
- * Responsive utils.
- */
-/*
- * Text shadow utilities.
- */
-/*
- * Visibility utils.
- */
-/*
- * Width utils.
- */
-/*
  * Brand configuration.
  */
 /*
@@ -294,13 +95,13 @@
 /*
  * Area styles.
  */
-.wp-markdown-extra-editor-area:not(#x) .-position-offscreen {
-  position: fixed;
-  top: -99999px;
-  left: -99999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+.wp-markdown-extra-editor-area:not(#x) .-offscreen {
+  position: fixed ;
+  top: -99999px ;
+  left: -99999px ;
+  width: 1px ;
+  height: 1px ;
+  overflow: hidden ;
 }
 
 /*
@@ -368,15 +169,11 @@
 .wp-markdown-extra-editor-toolbar:not(#x) .button:hover {
   display: block;
   float: left;
+  transform: none;
   top: 0;
   left: 0;
   position: relative;
   margin: 0;
-  -webkit-transform: none;
-  -moz-transform: none;
-  -ms-transform: none;
-  -o-transform: none;
-  transform: none;
   color: #514649;
 }
 
@@ -449,9 +246,7 @@
   line-height: inherit;
   font-style: normal;
   font-weight: normal;
-  font-family: "Hack", "Menlo", "Monaco", "Consolas", "Andale Mono", "DejaVu Sans Mono", monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "operator mono", "monaco", monospace;
 }
 
 .wp-markdown-extra-editor-textarea:not(#x) {
@@ -532,12 +327,12 @@
  * Standard preview mode.
  */
 .wp-markdown-extra-editor-preview-mode:not(#x) .wp-markdown-extra-editor-textarea {
-  position: fixed;
-  top: -99999px;
-  left: -99999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  position: fixed ;
+  top: -99999px ;
+  left: -99999px ;
+  width: 1px ;
+  height: 1px ;
+  overflow: hidden ;
 }
 
 .wp-markdown-extra-editor-preview-mode:not(#x) .wp-markdown-extra-editor-ide {
@@ -557,54 +352,39 @@
 /*
  * Common fullscreen styles.
  */
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-wrapper,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-wrapper,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-wrapper {
+.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-wrapper, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-wrapper, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-wrapper {
   z-index: 159899;
   position: fixed;
   height: 100%;
   background: #f1f1f1;
 }
 
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-toolbar,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar {
+.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-toolbar, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar {
   padding: .5em;
   margin: 0 auto;
 }
 
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-container,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-container,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-container {
+.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-container, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-container, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-container {
   height: 100%;
 }
 
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-textarea,
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-ide,
-.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-preview,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-textarea,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-ide,
-.wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-preview,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-textarea,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-ide,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
+.wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-textarea, .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-ide, .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-preview, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-textarea, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-ide, .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-preview, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-textarea, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-ide, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
   min-height: auto;
 }
 
 /*
  * Fullscreen mode styles.
  */
-@media only screen and (min-width: 1200px) {
-  .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-toolbar {
+@media screen and (min-width: 1200px) {
+  html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-toolbar {
     width: 60%;
     margin-left: 20%;
     margin-right: 20%;
   }
-  .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-container {
+  html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-container {
     font-size: 16px;
   }
-  .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-textarea,
-  .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-ide {
+  html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-textarea, html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-mode:not(#x) .wp-markdown-extra-editor-ide {
     flex: 1 1 60%;
     margin-left: 20%;
     margin-right: 20%;
@@ -616,12 +396,12 @@
  * See also: `previewFrameWidth` in `editor.ts`.
  */
 .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-textarea {
-  position: fixed;
-  top: -99999px;
-  left: -99999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  position: fixed ;
+  top: -99999px ;
+  left: -99999px ;
+  width: 1px ;
+  height: 1px ;
+  overflow: hidden ;
 }
 
 .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-ide {
@@ -632,13 +412,13 @@
   display: block;
 }
 
-@media only screen and (min-width: 1200px) {
-  .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar {
+@media screen and (min-width: 1200px) {
+  html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-toolbar {
     width: 60%;
     margin-left: 20%;
     margin-right: 20%;
   }
-  .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
+  html:not(.\!\@) .wp-markdown-extra-editor-fullscreen-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
     flex: 1 1 60%;
     margin-left: 20%;
     margin-right: 20%;
@@ -649,9 +429,7 @@
  * Fullscreen split preview styles.
  * See also: `previewFrameWidth` in `editor.ts`.
  */
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-textarea,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-ide,
-.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
+.wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-textarea, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-ide, .wp-markdown-extra-editor-fullscreen-split-preview-mode:not(#x) .wp-markdown-extra-editor-preview {
   flex: 1 1 50%;
   display: block;
 }

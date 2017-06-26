@@ -140,8 +140,8 @@ $brand-cns: '#{$brand-slug}-editor';
 .#{$brand-cns}-area:not(#x) {
   // Utility classes.
 
-  .-position-offscreen {
-    @include position-offscreen;
+  .-offscreen {
+    @include offscreen;
   }
 }
 
@@ -237,6 +237,7 @@ $brand-cns: '#{$brand-slug}-editor';
   .button:hover {
     display:                  block;
     float:                    left;
+    transform:                none;
 
     //
     top:                      0;
@@ -245,8 +246,6 @@ $brand-cns: '#{$brand-slug}-editor';
 
     //
     margin:                   0;
-
-    @include transform(none);
 
     //
     color:                    $emperor-color;
@@ -340,11 +339,7 @@ $brand-cns: '#{$brand-slug}-editor';
   //
   font-style:                 normal;
   font-weight:                normal;
-  font-family:                $monospace;
-
-  //
-  -webkit-font-smoothing:     antialiased;
-  -moz-osx-font-smoothing:    grayscale;
+  font-family:                $mono;
 }
 
 .#{$brand-cns}-textarea:not(#x) {
@@ -447,7 +442,7 @@ $brand-cns: '#{$brand-slug}-editor';
  */
 @at-root .#{$brand-cns}-preview-mode:not(#x) {
   .#{$brand-cns}-textarea {
-    @include position-offscreen;
+    @include offscreen;
   }
 
   .#{$brand-cns}-ide {
@@ -507,7 +502,7 @@ $brand-cns: '#{$brand-slug}-editor';
  * Fullscreen mode styles.
  */
 @at-root .#{$brand-cns}-fullscreen-mode:not(#x) {
-  @include large-screen-only {
+  @include desktop {
     .#{$brand-cns}-toolbar {
       width:                  60%;
       margin-left:            20%;
@@ -533,7 +528,7 @@ $brand-cns: '#{$brand-slug}-editor';
  */
 @at-root .#{$brand-cns}-fullscreen-preview-mode:not(#x) {
   .#{$brand-cns}-textarea {
-    @include position-offscreen;
+    @include offscreen;
   }
 
   .#{$brand-cns}-ide {
@@ -544,7 +539,7 @@ $brand-cns: '#{$brand-slug}-editor';
     display:                  block;
   }
 
-  @include large-screen-only {
+  @include desktop {
     .#{$brand-cns}-toolbar {
       width:                  60%;
       margin-left:            20%;
